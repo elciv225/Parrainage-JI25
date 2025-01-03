@@ -60,7 +60,6 @@
                                placeholder="Veuillez  écrire ici">
                         <label for="inscription-confirm-mdp">Confirmer le mot de passe</label>
                         <!-- Conteneur du SVG “œil” pour toggler -->
-
                     </div>
 
                 </div>
@@ -101,7 +100,7 @@
         </div>
     </div>
 </div>
+nklmsscoiskfld
 <script type="module" src="private/client/assets/js/animations.js"></script>
-
 </body>
 </html>

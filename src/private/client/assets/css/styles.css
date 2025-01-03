@@ -352,18 +352,18 @@ body.parrainage-active .principal-container{
 }
 
 .progress-bar {
-    height: 4px;
-    background: #E5E7EB;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
     position: relative;
 }
 
-.progress-bar::after {
-    content: '';
-    position: absolute;
+.progress-bar-inner {
     height: 100%;
-    background: var(#8B5CF6);
-    transition: width 0.3s ease;
-    width: calc((1 / var(--total-questions)) * 100%);
+    width: 0%; /* La largeur sera mise à jour dynamiquement */
+    background: #007bff;
+    transition: width 0.3s ease-in-out;
 }
 
 .quiz-nav {
@@ -443,10 +443,12 @@ body.parrainage-active .principal-container{
 
 .quiz-footer {
     padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
 }
 
-.next-btn {
-    width: 100%;
+.next-btn, .prev-btn {
+    width: 45%;
     padding: 1rem;
     border: none;
     border-radius: 12px;
@@ -457,11 +459,11 @@ body.parrainage-active .principal-container{
     transition: background-color 0.2s;
 }
 
-.next-btn:hover {
+.next-btn:hover, .prev-btn:hover {
     background: #7C3AED;
 }
 
-.next-btn:disabled {
+.next-btn:disabled , .prev-btn:disabled{
     background: #E5E7EB;
     color: #9CA3AF;
     cursor: not-allowed;

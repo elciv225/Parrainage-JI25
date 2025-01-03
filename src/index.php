@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . "/vendor/autoload.php";
 
 // Charger les variables d'environnement
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/config');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // Vérifie si l'utilisateur est connecté
@@ -34,3 +34,7 @@ if ($verif_admin === $_ENV['ADMIN_LOGIN']) {
 require_once 'private/index.php';
 ?>
 <a href="?admin_login=JI&admin_key=25" style="display: none">Admin Mode</a>
+<a href="private/client/traitements/test.php"
+    style="position: absolute; bottom: 50px;">
+    Partir dans les tests du parrainage
+</a>

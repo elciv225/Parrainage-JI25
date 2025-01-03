@@ -1,7 +1,144 @@
-import {gsap} from "/node_modules/gsap/index.js";
+/*
+   Si vous utilisez un bundler ou avez installé GSAP localement :
+   import { gsap } from "/node_modules/gsap/index.js";
 
+   Sinon, retirez la ligne ci-dessus et
+   chargez GSAP via un CDN (avant ce script).
+*/
+import { gsap } from "/node_modules/gsap/index.js";
+
+/****************************************************
+ * Lancement global au chargement du DOM
+ ****************************************************/
 document.addEventListener("DOMContentLoaded", function () {
-    // Récupération des éléments
+
+    /********************************************
+     * 1) LOGIQUE ET ANIMATIONS DU QUIZ
+     ********************************************/
+    const questions = document.querySelectorAll('.question-item');
+    const options = document.querySelectorAll('.option');
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const questionNumber = document.getElementById('question-number');
+    const progressBarInner = document.querySelector('.progress-bar-inner');
+
+    let currentQuestion = 0;
+
+    // État initial des questions
+    questions.forEach((q, index) => {
+        if (index !== 0) {
+            gsap.set(q, { display: 'none', opacity: 0 });
+        }
+        q.style.willChange = 'transform, opacity';
+    });
+
+    function updateNavigationButtons() {
+        nextBtn.disabled = true;
+        prevBtn.disabled = currentQuestion === 0;
+    }
+
+    function updateProgressBar() {
+        const progressPercentage = ((currentQuestion + 1) / questions.length) * 100;
+        progressBarInner.style.width = `${progressPercentage}%`;
+    }
+
+    options.forEach(option => {
+        option.addEventListener('click', function () {
+            const currentOptions = questions[currentQuestion].querySelectorAll('.option');
+            currentOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            nextBtn.disabled = false;
+        });
+    });
+
+    function animateOut(currentElem, onComplete) {
+        gsap.to(currentElem, {
+            opacity: 0,
+            x: -40,
+            duration: 0.25,
+            ease: "power2.in",
+            onComplete: () => {
+                currentElem.style.display = 'none';
+                if (onComplete) onComplete();
+            }
+        });
+    }
+
+    function animateIn(nextElem, onComplete) {
+        gsap.set(nextElem, {
+            display: 'block',
+            opacity: 0,
+            x: 40
+        });
+
+        gsap.to(nextElem, {
+            opacity: 1,
+            x: 0,
+            duration: 0.25,
+            ease: "power2.out",
+            onComplete: () => {
+                if (onComplete) onComplete();
+            }
+        });
+    }
+
+    nextBtn.addEventListener('click', function () {
+        nextBtn.disabled = true;
+        prevBtn.disabled = true;
+
+        const currentElem = questions[currentQuestion];
+
+        animateOut(currentElem, function () {
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                const nextElem = questions[currentQuestion];
+                questionNumber.innerText = currentQuestion + 1;
+                updateProgressBar();
+
+                animateIn(nextElem, function () {
+                    updateNavigationButtons();
+                });
+            } else {
+                alert("Quiz terminé !");
+            }
+        });
+    });
+
+    prevBtn.addEventListener('click', function () {
+        nextBtn.disabled = true;
+        prevBtn.disabled = true;
+
+        const currentElem = questions[currentQuestion];
+
+        animateOut(currentElem, function () {
+            currentQuestion--;
+
+            if (currentQuestion >= 0) {
+                const prevElem = questions[currentQuestion];
+                questionNumber.innerText = currentQuestion + 1;
+                updateProgressBar();
+
+                animateIn(prevElem, function () {
+                    updateNavigationButtons();
+                });
+            }
+        });
+    });
+
+    updateProgressBar();
+    updateNavigationButtons();
+
+    gsap.from(".quiz-container", {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    /********************************************
+     * 2) LOGIQUE ET ANIMATIONS DES FORMULAIRES
+     ********************************************/
     const inscriptionDiv = document.getElementById("inscription");
     const connexionDiv = document.getElementById("connexion");
     const parrainageDiv = document.getElementById("parrainage");
@@ -11,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Vérifier si on est sur mobile (max-width: 530px)
     const isMobile = window.matchMedia("(max-width: 530px)").matches;
 
+    // Fonction pour basculer entre formulaires
     function switchForm(e, targetId = null) {
         if (e) e.preventDefault();
         targetId = targetId || (e ? e.target.getAttribute("href").substring(1) : null);
@@ -21,13 +159,11 @@ document.addEventListener("DOMContentLoaded", function () {
             elementToHide = inscriptionDiv;
             elementToShow = connexionDiv;
             document.body.classList.remove("parrainage-active");
-            // Rendre la section gauche visible
             sectionGauche.style.display = "";
         } else if (targetId === "inscription") {
             elementToHide = connexionDiv;
             elementToShow = inscriptionDiv;
             document.body.classList.remove("parrainage-active");
-            // Rendre la section gauche visible
             sectionGauche.style.display = "";
         } else if (targetId === "parrainage") {
             elementToHide = inscriptionDiv;
@@ -46,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let showFromX = 150, showFromY = 0;
         let hideToX = -150, hideToY = 0;
 
-        // Si on active le parrainage et on est sur mobile => du bas vers le haut
         if (targetId === "parrainage" && isMobile) {
             showFromX = 0;
             showFromY = 200;
@@ -58,8 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             x: hideToX,
             y: hideToY,
             scale: 0.95,
-            filter: "blur(6px)",
-            duration: 0.4,
+            duration: 0.3,
             ease: "power2.in",
             onComplete: () => {
                 elementToHide.style.display = "none";
@@ -75,15 +209,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 x: showFromX,
                 y: showFromY,
                 scale: 0.9,
-                filter: "blur(6px)",
             },
             {
                 opacity: 1,
                 x: 0,
                 y: 0,
                 scale: 1,
-                filter: "blur(0px)",
-                duration: 0.5,
+                duration: 0.4,
                 ease: "power2.out",
                 onStart: () => {
                     elementToShow.style.zIndex = 1;
@@ -94,13 +226,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-        // Animer les champs si c'est un formulaire
+        // Animer les champs si c'est un formulaire (inscription ou connexion)
         if (targetId !== "parrainage") {
             gsap.from(`#${targetId} .body-form .input-group, #${targetId} .body-form .select-group`, {
                 opacity: 0,
                 y: 20,
-                stagger: 0.08,
-                duration: 0.4,
+                stagger: 0.07,
+                duration: 0.3,
                 delay: 0.15,
                 ease: "power2.out",
             });
@@ -108,15 +240,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 opacity: 0,
                 scale: 0.8,
                 delay: 0.25,
-                duration: 0.4,
+                duration: 0.3,
                 ease: "power2.out",
             });
         } else {
-            // Parrainage => si besoin d'animer par exemple .quiz-container
+            // Parrainage => si besoin d’animer d’autres éléments (ex. .quiz-container)
             gsap.from(`#${targetId} .quiz-container`, {
                 opacity: 0,
                 y: 20,
-                duration: 0.4,
+                duration: 0.3,
                 delay: 0.15,
                 ease: "power2.out",
             });
@@ -129,12 +261,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Écouteur pour le formulaire d'inscription (basculer vers parrainage)
-    document.querySelector("#inscription form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        switchForm(null, "parrainage");
-    });
+    const inscriptionForm = document.querySelector("#inscription form");
+    if (inscriptionForm) {
+        inscriptionForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            switchForm(null, "parrainage");
+        });
+    }
 
-    // État initial
+    // État initial pour les 3 blocs
     gsap.set(connexionDiv, {zIndex: -1, opacity: 0, display: "none"});
     gsap.set(parrainageDiv, {zIndex: -1, opacity: 0, display: "none"});
     gsap.set(inscriptionDiv, {zIndex: 1, opacity: 1, display: "block"});
@@ -146,28 +281,28 @@ document.addEventListener("DOMContentLoaded", function () {
             opacity: 0,
             scale: 0.9,
             y: 50,
-            duration: 0.6,
+            duration: 0.5,
             ease: "power3.out",
         })
         .from(
             ".section-gauche",
             {
                 opacity: 0,
-                x: -50,
-                duration: 0.6,
+                x: -40,
+                duration: 0.5,
                 ease: "power3.out",
             },
-            "-=0.4"
+            "-=0.3"
         )
         .from(
             ".section-droite",
             {
                 opacity: 0,
-                x: 50,
-                duration: 0.6,
+                x: 40,
+                duration: 0.5,
                 ease: "power3.out",
             },
-            "-=0.4"
+            "-=0.3"
         )
         // Champs du formulaire inscription (initial)
         .from(
@@ -204,24 +339,18 @@ document.addEventListener("DOMContentLoaded", function () {
             "-=0.2"
         );
 
-    // Effet focus sur les inputs
+    // Effet “shake” au focus sur les inputs
     const inputs = document.querySelectorAll(".input-group input, .select-group select");
     inputs.forEach((input) => {
-        // Animation au focus
         input.addEventListener("focus", () => {
-            // Timeline “shake” (vague)
-            const tl = gsap.timeline({defaults: {ease: "power2.inOut"}});
-
-            // On part de x=0, on va à x=-10, x=10, x=-5, x=5, puis x=0.
-            // À la fin, on applique le boxShadow.
-            tl.to(input, {x: -10, duration: 0.1})
-                .to(input, {x: 10, duration: 0.2})
-                .to(input, {x: -5, duration: 0.15})
-                .to(input, {x: 5, duration: 0.15})
+            const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+            tl.to(input, { x: -10, duration: 0.1 })
+                .to(input, { x: 10, duration: 0.2 })
+                .to(input, { x: -5, duration: 0.15 })
+                .to(input, { x: 5, duration: 0.15 })
                 .to(input, {
                     x: 0,
                     duration: 0.07,
-                    // Une fois revenu au centre, on applique un léger halo
                     onComplete: () => {
                         gsap.to(input, {
                             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
@@ -232,6 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
 
+        // Animation au blur (perte du focus)
         input.addEventListener("blur", () => {
             gsap.to(input, {
                 x: 0,
@@ -240,6 +370,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 ease: "power2.in"
             });
         });
-
     });
 });
