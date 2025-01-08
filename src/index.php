@@ -1,5 +1,14 @@
 <?php
-session_start();
+// Démarrer une session sécurisée
+session_start([
+    'cookie_lifetime' => 0,            // Expire à la fermeture du navigateur
+    'cookie_httponly' => true,         // Rend les cookies accessibles uniquement par HTTP
+    'cookie_secure' => isset($_SERVER['HTTPS']), // Active les cookies sécurisés si HTTPS est activé
+    'use_strict_mode' => true,         // Empêche le vol d'ID de session
+    'use_only_cookies' => true,        // Utilise uniquement les cookies pour stocker les sessions
+    'sid_length' => 48,                // Longueur de l'ID de session
+    'sid_bits_per_character' => 6,     // Augmente l'entropie de l'ID de session
+]);
 
 require_once __DIR__ . "/vendor/autoload.php";
 
@@ -7,34 +16,69 @@ require_once __DIR__ . "/vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+// Protection contre les attaques CSRF (générer un token si nécessaire)
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Vérifie si l'utilisateur est connecté
 $_SESSION['isConnect'] = true; // Simule une connexion utilisateur
 
-// Récupération des paramètres GET
-$verif_admin = $_GET['admin_login'] ?? ""; // Par défaut, vide
-$admin_login = "JI";
-$admin_key = "25";
+// Récupération sécurisée des paramètres GET
+$verif_admin = isset($_GET['admin_login']) ? htmlspecialchars($_GET['admin_login'], ENT_QUOTES, 'UTF-8') : "";
+$key = isset($_GET['admin_key']) ? htmlspecialchars($_GET['admin_key'], ENT_QUOTES, 'UTF-8') : null;
 
-/* === Connexion à l'admin === */
+
+// Vérification des identifiants admin (via les variables d'environnement)
 if ($verif_admin === $_ENV['ADMIN_LOGIN']) {
-    $key = $_GET['admin_key'] ?? null; // Vérifie si la clé est fournie
-
-    // Si la clé est correcte
     if ($key !== $_ENV['ADMIN_KEY']) {
         http_response_code(403); // Accès interdit
-        echo "Tchrrr";
+        echo "Tchrrr"; // Message informatif
         require_once 'private/index.php'; // Charge la page par défaut
-    } else { // C'est l'admin
+        exit(); // Termine l'exécution
+    } else { // Redirection pour un admin valide
         header('Location: private/admin/index.php'); // Redirige vers l'admin
         exit();
     }
 }
 
-// Afficher la page de connexion classique
-require_once 'private/index.php';
+/* === Deconnexion de l'utilisateur === */
+if (isset($_POST['deconnexion'])){
+// Supprimer toutes les variables de session
+    $_SESSION = [];
+
+    // Supprimer le cookie de session s'il existe
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+
+    // Rediriger vers la page actuelle (ou une page spécifique)
+    $currentPage = $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
+    header('Location: ' . $currentPage);
+    // Détruire la session
+    session_destroy();
+}
+
+/* === Connexion de l'utilisateur === */
+if (empty($_SESSION['utilisateur'])) {
+    // Afficher la page de connexion classique
+    require_once 'private/index.php';
+} else {
+    // Afficher la page principale de l'utilisateur
+    require_once 'private/client/views/index.php';
+}
+
 ?>
+
+<!-- Lien vers le mode admin (affiché uniquement pour le test) -->
 <a href="?admin_login=JI&admin_key=25" style="display: none">Admin Mode</a>
-<a href="private/client/traitements/test.php"
-    style="position: absolute; bottom: 50px;">
+
+<!-- Lien pour les tests du parrainage -->
+<a href="private/client/traitements/test.php" style="position: absolute; bottom: 50px;">
     Partir dans les tests du parrainage
 </a>

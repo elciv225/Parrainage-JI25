@@ -5,7 +5,7 @@
    Sinon, retirez la ligne ci-dessus et
    chargez GSAP via un CDN (avant ce script).
 */
-import { gsap } from "/node_modules/gsap/index.js";
+import {gsap} from "/node_modules/gsap/index.js";
 
 /****************************************************
  * Lancement global au chargement du DOM
@@ -17,18 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
      ********************************************/
     const questions = document.querySelectorAll('.question-item');
     const options = document.querySelectorAll('.option');
-    const nextBtn = document.querySelector('.next-btn');
-    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
     const questionNumber = document.getElementById('question-number');
     const progressBarInner = document.querySelector('.progress-bar-inner');
+    const totalScoreInput = document.getElementById('total-score');
 
     let currentQuestion = 0;
+    let totalScore = 0;
+    const selectedOptions = []; // Stocke les réponses sélectionnées
 
-    // État initial des questions
+    // État initial des questions (sauf la première)
     questions.forEach((q, index) => {
         if (index !== 0) {
-            gsap.set(q, { display: 'none', opacity: 0 });
+            gsap.set(q, {display: 'none', opacity: 0});
         }
+        // Petite optimisation
         q.style.willChange = 'transform, opacity';
     });
 
@@ -42,11 +46,26 @@ document.addEventListener("DOMContentLoaded", function () {
         progressBarInner.style.width = `${progressPercentage}%`;
     }
 
+    // Gestion du clic sur les options
     options.forEach(option => {
         option.addEventListener('click', function () {
             const currentOptions = questions[currentQuestion].querySelectorAll('.option');
             currentOptions.forEach(opt => opt.classList.remove('selected'));
             this.classList.add('selected');
+
+            const score = parseInt(this.dataset.score, 10) || 0;
+
+            // Enregistrer la réponse et son score
+            selectedOptions[currentQuestion] = {
+                question: questions[currentQuestion].querySelector('.question').textContent.trim(),
+                response: this.textContent.trim(),
+                score: score
+            };
+
+            console.log(`Question: ${selectedOptions[currentQuestion].question}`);
+            console.log(`Réponse: ${selectedOptions[currentQuestion].response}`);
+            console.log(`Points: ${selectedOptions[currentQuestion].score}`);
+
             nextBtn.disabled = false;
         });
     });
@@ -70,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
             opacity: 0,
             x: 40
         });
-
         gsap.to(nextElem, {
             opacity: 1,
             x: 0,
@@ -82,7 +100,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Bouton "Suivant"
     nextBtn.addEventListener('click', function () {
+        const currentOption = selectedOptions[currentQuestion];
+        if (currentOption) {
+            totalScore += currentOption.score;
+        }
+
+        // Mettre à jour l'input caché
+        if (totalScoreInput) {
+            totalScoreInput.value = totalScore;
+        }
+
         nextBtn.disabled = true;
         prevBtn.disabled = true;
 
@@ -100,35 +129,53 @@ document.addEventListener("DOMContentLoaded", function () {
                     updateNavigationButtons();
                 });
             } else {
-                alert("Quiz terminé !");
+                // On affiche la zone photo
+                console.log(`Score total : ${totalScore}`);
+                switchForm(null, "ajout-photo");
             }
         });
     });
 
+    // Bouton "Précédent"
     prevBtn.addEventListener('click', function () {
-        nextBtn.disabled = true;
-        prevBtn.disabled = true;
-
-        const currentElem = questions[currentQuestion];
-
-        animateOut(currentElem, function () {
-            currentQuestion--;
-
-            if (currentQuestion >= 0) {
-                const prevElem = questions[currentQuestion];
-                questionNumber.innerText = currentQuestion + 1;
-                updateProgressBar();
-
-                animateIn(prevElem, function () {
-                    updateNavigationButtons();
-                });
+        if (currentQuestion > 0) {
+            const currentOption = selectedOptions[currentQuestion];
+            if (currentOption) {
+                totalScore -= currentOption.score; // Retirer le score de la réponse précédente
             }
-        });
+
+            // Mettre à jour l'input caché
+            if (totalScoreInput) {
+                totalScoreInput.value = totalScore;
+            }
+
+            console.log(`Score après retour : ${totalScore}`);
+
+            nextBtn.disabled = true;
+            prevBtn.disabled = true;
+
+            const currentElem = questions[currentQuestion];
+
+            animateOut(currentElem, function () {
+                currentQuestion--;
+
+                if (currentQuestion >= 0) {
+                    const prevElem = questions[currentQuestion];
+                    questionNumber.innerText = currentQuestion + 1;
+                    updateProgressBar();
+
+                    animateIn(prevElem, function () {
+                        updateNavigationButtons();
+                    });
+                }
+            });
+        }
     });
 
     updateProgressBar();
     updateNavigationButtons();
 
+    // Animation globale au chargement (pour le quiz-container)
     gsap.from(".quiz-container", {
         opacity: 0,
         scale: 0.95,
@@ -136,21 +183,25 @@ document.addEventListener("DOMContentLoaded", function () {
         ease: "power2.out"
     });
 
+
     /********************************************
      * 2) LOGIQUE ET ANIMATIONS DES FORMULAIRES
      ********************************************/
     const inscriptionDiv = document.getElementById("inscription");
     const connexionDiv = document.getElementById("connexion");
     const parrainageDiv = document.getElementById("parrainage");
+    const ajoutPhotoDiv = document.getElementById("ajout-photo"); // NOUVEAU
+
     const sectionGauche = document.querySelector(".section-gauche");
     const sectionDroite = document.querySelector(".section-droite");
 
     // Vérifier si on est sur mobile (max-width: 530px)
     const isMobile = window.matchMedia("(max-width: 530px)").matches;
 
-    // Fonction pour basculer entre formulaires
+    // Fonction switchForm : gère l'apparition/masquage
     function switchForm(e, targetId = null) {
         if (e) e.preventDefault();
+        // ex: targetId = "connexion", "inscription", "parrainage", "ajout-photo"
         targetId = targetId || (e ? e.target.getAttribute("href").substring(1) : null);
 
         let elementToHide, elementToShow;
@@ -172,22 +223,31 @@ document.addEventListener("DOMContentLoaded", function () {
             // Masquer la section gauche
             sectionGauche.style.display = "none";
         }
+        // NOUVEAU : si on veut aller de #parrainage → #ajout-photo
+        else if (targetId === "ajout-photo") {
+            elementToHide = parrainageDiv;
+            elementToShow = ajoutPhotoDiv;
+            // On reste en mode "parrainage-active" ou pas, selon vos besoins
+            document.body.classList.add("parrainage-active");
+            sectionGauche.style.display = "none";
+        }
 
-        // Masquer tous les éléments avant d'appliquer les animations
-        [inscriptionDiv, connexionDiv, parrainageDiv].forEach((div) => {
+        // Masquer tous les éléments avant d'appliquer l'animation
+        [inscriptionDiv, connexionDiv, parrainageDiv, ajoutPhotoDiv].forEach((div) => {
             gsap.set(div, {zIndex: -1, display: "none", opacity: 0});
         });
 
-        // Déterminer la direction (droite→gauche) ou (bas→haut) pour le parrainage sur mobile
+        // Déterminer la direction
         let showFromX = 150, showFromY = 0;
         let hideToX = -150, hideToY = 0;
 
-        if (targetId === "parrainage" && isMobile) {
+        if ((targetId === "parrainage" || targetId === "ajout-photo") && isMobile) {
+            // Sur mobile, on peut faire un effet bas→haut
             showFromX = 0;
             showFromY = 200;
         }
 
-        // Animation de sortie
+        // On anime la sortie
         gsap.to(elementToHide, {
             opacity: 0,
             x: hideToX,
@@ -200,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
 
-        // Animation d'entrée
+        // On anime l'entrée
         elementToShow.style.display = "block";
         gsap.fromTo(
             elementToShow,
@@ -225,56 +285,73 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             }
         );
-
-        // Animer les champs si c'est un formulaire (inscription ou connexion)
-        if (targetId !== "parrainage") {
-            gsap.from(`#${targetId} .body-form .input-group, #${targetId} .body-form .select-group`, {
-                opacity: 0,
-                y: 20,
-                stagger: 0.07,
-                duration: 0.3,
-                delay: 0.15,
-                ease: "power2.out",
-            });
-            gsap.from(`#${targetId} .footer-form button`, {
-                opacity: 0,
-                scale: 0.8,
-                delay: 0.25,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-        } else {
-            // Parrainage => si besoin d’animer d’autres éléments (ex. .quiz-container)
-            gsap.from(`#${targetId} .quiz-container`, {
-                opacity: 0,
-                y: 20,
-                duration: 0.3,
-                delay: 0.15,
-                ease: "power2.out",
-            });
-        }
     }
 
-    // Écouteurs pour les liens de navigation
+    // Liens #connexion / #inscription
     document.querySelectorAll('a[href="#connexion"], a[href="#inscription"]').forEach((link) => {
         link.addEventListener("click", switchForm);
     });
 
-    // Écouteur pour le formulaire d'inscription (basculer vers parrainage)
+    // Écouteur sur le formulaire inscription => On bascule vers parrainage si le input select est L1 ou L3
     const inscriptionForm = document.querySelector("#inscription form");
+    const ajoutPhotoForm = document.querySelector("#ajout-photo form");
+
     if (inscriptionForm) {
         inscriptionForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            switchForm(null, "parrainage");
+
+            // Récupération des données du formulaire
+            const formData = new FormData(inscriptionForm);
+
+            // Sauvegarder les données dans le localStorage
+            formData.forEach((value, key) => {
+                localStorage.setItem(key, value);
+            });
+
+            // Basculer vers "parrainage" si L1 ou L3
+            const niveau = formData.get("niveau");
+            if (niveau === "L1" || niveau === "L3") {
+                switchForm(null, "parrainage");
+            } else {
+                // Sinon, basculer vers "ajout-photo"
+                switchForm(null, "ajout-photo");
+            }
         });
     }
 
-    // État initial pour les 3 blocs
+    // Pré-remplir les champs dans "ajout-photo" avec les données sauvegardées
+    if (ajoutPhotoForm) {
+        const inputs = ajoutPhotoForm.querySelectorAll("input, select");
+        inputs.forEach((input) => {
+            const value = localStorage.getItem(input.name);
+            if (value) {
+                input.value = value;
+            }
+        });
+
+        // Remplir les champs cachés avant la soumission finale
+        ajoutPhotoForm.addEventListener("submit", function () {
+            const hiddenFields = ["nom", "prenoms", "niveau", "email", "motDePasse", "confirmMotDePasse"];
+            hiddenFields.forEach((name) => {
+                const value = localStorage.getItem(name);
+                if (value) {
+                    const hiddenInput = document.querySelector(`#hidden-${name}`);
+                    if (hiddenInput) {
+                        hiddenInput.value = value;
+                    }
+                }
+            });
+        });
+    }
+
+
+    // État initial : on masque tout sauf #inscription
     gsap.set(connexionDiv, {zIndex: -1, opacity: 0, display: "none"});
     gsap.set(parrainageDiv, {zIndex: -1, opacity: 0, display: "none"});
+    gsap.set(ajoutPhotoDiv, {zIndex: -1, opacity: 0, display: "none"});
     gsap.set(inscriptionDiv, {zIndex: 1, opacity: 1, display: "block"});
 
-    // Animation globale au chargement
+    // Animation globale au chargement (pour la partie "principal-container")
     const pageLoadTl = gsap.timeline();
     pageLoadTl
         .from(".principal-container", {
@@ -343,11 +420,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputs = document.querySelectorAll(".input-group input, .select-group select");
     inputs.forEach((input) => {
         input.addEventListener("focus", () => {
-            const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-            tl.to(input, { x: -10, duration: 0.1 })
-                .to(input, { x: 10, duration: 0.2 })
-                .to(input, { x: -5, duration: 0.15 })
-                .to(input, { x: 5, duration: 0.15 })
+            const tl = gsap.timeline({defaults: {ease: "power2.inOut"}});
+            tl.to(input, {x: -10, duration: 0.1})
+                .to(input, {x: 10, duration: 0.2})
+                .to(input, {x: -5, duration: 0.15})
+                .to(input, {x: 5, duration: 0.15})
                 .to(input, {
                     x: 0,
                     duration: 0.07,
@@ -370,5 +447,98 @@ document.addEventListener("DOMContentLoaded", function () {
                 ease: "power2.in"
             });
         });
+    });
+
+    /********************************************
+     * 3) INPUT FILE AVEC APERCUS
+     ********************************************/
+
+    const uploadZone = document.querySelector('.upload-zone');
+    const fileInput = document.getElementById('photo-profil');
+    const previewContainer = document.querySelector('.preview-container');
+    const previewImage = document.getElementById('preview-image');
+    const removeButton = document.querySelector('.remove-preview');
+    const errorMessage = document.querySelector('.error-message');
+
+    // Fonction pour vérifier le type de fichier
+    function isValidFileType(file) {
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        return validTypes.includes(file.type);
+    }
+
+    // Fonction pour gérer la prévisualisation
+    function handlePreview(file) {
+        if (!isValidFileType(file)) {
+            errorMessage.classList.add('active');
+            fileInput.value = '';
+            return;
+        }
+
+        errorMessage.classList.remove('active');
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewContainer.classList.add('active');
+
+            // Animation de la prévisualisation
+            gsap.from(previewContainer, {
+                opacity: 0,
+                y: 20,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+
+        reader.readAsDataURL(file);
+    }
+
+    // Événements de drag & drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+        uploadZone.classList.add('drag-over');
+    }
+
+    function unhighlight() {
+        uploadZone.classList.remove('drag-over');
+    }
+
+    // Gestion du drop
+    uploadZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const file = dt.files[0];
+        handlePreview(file);
+    }
+
+    // Gestion du changement de fichier via le bouton
+    fileInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            handlePreview(this.files[0]);
+        }
+    });
+
+    // Gestion du bouton de suppression
+    removeButton.addEventListener('click', function () {
+        fileInput.value = '';
+        previewContainer.classList.remove('active');
+        errorMessage.classList.remove('active');
     });
 });

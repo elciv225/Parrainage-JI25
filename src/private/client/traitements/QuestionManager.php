@@ -35,15 +35,6 @@ class QuestionManager
         }
     }
 
-    // Ajouter une question dans le tableau par catégorie
-    private function addQuestion(Question $question): void
-    {
-        $categoryId = $question->getCategoryId();
-        if (!isset($this->questionsByCategory[$categoryId])) {
-            $this->questionsByCategory[$categoryId] = [];
-        }
-        $this->questionsByCategory[$categoryId][] = $question;
-    }
 
     // Obtenir un ensemble équilibré de questions
     public function getBalancedQuestions(int $totalQuestions = 10): array

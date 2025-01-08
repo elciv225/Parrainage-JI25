@@ -18,7 +18,7 @@ try {
     $manager->loadQuestions();
 
     // Obtenir 10 questions équilibrées
-    $balancedQuestions = $manager->getBalancedQuestions(10);
+    $balancedQuestions = $manager->getBalancedQuestions(3);
 } catch (Exception $e) {
     // Gérer les exceptions potentielles
     echo '<div class="error">Erreur : ' . $e->getMessage() . '</div>';
@@ -61,7 +61,7 @@ try {
                             try {
                                 $responses = $question->getResponses($pdo);
                                 foreach ($responses as $responseIndex => $response) {
-                                    echo '<button class="option" data-index="' . $responseIndex . '">' . htmlspecialchars($response['texte_option']) . '</button>';
+                                    echo '<button class="option" data-index="' . $responseIndex . '" data-score="' . htmlspecialchars($response['scores_personnalite']) . '">' . htmlspecialchars($response['texte_option']) . '</button>';
                                 }
                             } catch (Exception $e) {
                                 echo '<div class="error">Aucune réponse trouvée.</div>';
@@ -75,97 +75,17 @@ try {
     </main>
 
     <footer class="quiz-footer">
-        <button class="prev-btn" disabled>← Précédent</button>
-        <button class="next-btn" disabled>Suivant →</button>
+        <button class="button-submit reverse" id="prev-btn" disabled>
+            <div class="arrow-wrapper">
+                <div class="arrow"></div>
+            </div>
+            Précédent
+        </button>
+        <button class="button-submit" id="next-btn" disabled>
+            Suivant
+            <div class="arrow-wrapper">
+                <div class="arrow"></div>
+            </div>
+        </button>
     </footer>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const questions = document.querySelectorAll('.question-item');
-        const options = document.querySelectorAll('.option');
-        const nextBtn = document.querySelector('.next-btn');
-        const prevBtn = document.querySelector('.prev-btn');
-        const questionNumber = document.getElementById('question-number');
-        const progressBarInner = document.querySelector('.progress-bar-inner');
-
-        let currentQuestion = 0;
-
-        // Fonction pour mettre à jour l'affichage des boutons suivant/précédent
-        function updateNavigationButtons() {
-            nextBtn.disabled = true; // Toujours désactivé tant qu'aucune réponse n'est sélectionnée
-            prevBtn.disabled = currentQuestion === 0; // Désactive "Précédent" si on est à la première question
-        }
-
-        // Fonction pour mettre à jour la barre de progression
-        function updateProgressBar() {
-            const totalQuestions = questions.length;
-            const progressPercentage = ((currentQuestion + 1) / totalQuestions) * 100; // Calcul de la progression
-            progressBarInner.style.width = `${progressPercentage}%`; // Mise à jour de la largeur
-        }
-
-        // Sélection de réponse
-        options.forEach(option => {
-            option.addEventListener('click', function () {
-                // Retirer la classe 'selected' des autres options de la même question
-                const currentOptions = questions[currentQuestion].querySelectorAll('.option');
-                currentOptions.forEach(opt => opt.classList.remove('selected'));
-
-                // Ajouter la classe 'selected' à l'option cliquée
-                this.classList.add('selected');
-                nextBtn.disabled = false;
-            });
-        });
-
-        // Gérer le bouton "Suivant"
-        nextBtn.addEventListener('click', function () {
-            // Cacher la question actuelle
-            questions[currentQuestion].style.display = 'none';
-
-            // Passer à la question suivante
-            currentQuestion++;
-
-            if (currentQuestion < questions.length) {
-                // Afficher la prochaine question
-                questions[currentQuestion].style.display = 'block';
-                questionNumber.innerText = currentQuestion + 1;
-
-                // Mettre à jour la barre de progression
-                updateProgressBar();
-
-                // Mettre à jour les états des boutons
-                updateNavigationButtons();
-            } else {
-                // Lorsque c'est la dernière question
-                alert("Quiz terminé !");
-            }
-        });
-
-        // Gérer le bouton "Précédent"
-        prevBtn.addEventListener('click', function () {
-            // Cacher la question actuelle
-            questions[currentQuestion].style.display = 'none';
-
-            // Revenir à la question précédente
-            currentQuestion--;
-
-            if (currentQuestion >= 0) {
-                // Afficher la question précédente
-                questions[currentQuestion].style.display = 'block';
-                questionNumber.innerText = currentQuestion + 1;
-
-                // Mettre à jour la barre de progression
-                updateProgressBar();
-
-                // Mettre à jour les états des boutons
-                updateNavigationButtons();
-            }
-        });
-
-        // Initialiser la barre de progression au chargement
-        updateProgressBar();
-        // Initialisation des boutons au chargement de la page
-        updateNavigationButtons();
-    });
-</script>
-c
