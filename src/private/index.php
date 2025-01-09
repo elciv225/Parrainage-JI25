@@ -64,8 +64,7 @@ if (isset($_POST['btn-inscription-complete'])) {
             'email' => $utilisateur->getEmail(),
         ];
         // Rediriger vers la page actuelle (ou une page spécifique)
-        $currentPage = $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
-        header('Location: ' . $currentPage);
+        echo "<script>window.location.href = window.location.href;</script>";
     }
 }
 
@@ -89,8 +88,7 @@ if (isset($_POST['btn-connexion'])) {
             'email' => $utilisateur->getEmail(),
         ];
         // Rediriger vers la page actuelle (ou une page spécifique)
-        $currentPage = $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
-        header('Location: ' . $currentPage);
+        echo "<script>window.location.href = window.location.href;</script>";
     }
 }
 
@@ -172,7 +170,7 @@ if (isset($_POST['btn-connexion'])) {
             <form method="post">
                 <div class="header-form">
                     <h3>Connectez-vous</h3>
-                    <h6>Vous n'avez pas de compte ? <a href="#inscription">Cliquez ici pour vous inscrire</a></h6>
+                    <h6>Vous n'avez pas de compte ? <a class="link" href="#inscription">Cliquez ici pour vous inscrire</a></h6>
                 </div>
 
                 <div class="body-form">
