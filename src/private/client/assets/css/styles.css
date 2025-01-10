@@ -253,12 +253,12 @@ body.parrainage-active {
             top: 0;
             height: 20%;
             width: 100%;
-
             display: flex;
             justify-content: center;
             flex-direction: column;
             text-align: center;
             gap: 5px;
+
 
             h3 {
                 font-size: 2rem;
@@ -297,6 +297,7 @@ body.parrainage-active {
         }
 
         .body-form {
+            margin-top: 20px;
             height: 65%;
             display: flex;
             flex-direction: column;

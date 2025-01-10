@@ -13,7 +13,7 @@ if (isset($_POST['btn-inscription-complete'])) {
         $photo = $_FILES['photo-profil']; // Récupérer les informations du fichier
 
         // Définir un chemin de stockage absolu
-        $uploadDir = __DIR__ . '/private/client/uploads/photos/'; // Répertoire absolu
+        $uploadDir = __DIR__ . '/client/uploads/photos/'; // Répertoire absolu
         if (!file_exists($uploadDir)) {
             mkdir($uploadDir, 0777, true); // Créer le répertoire si inexistant
         }
@@ -41,8 +41,8 @@ if (isset($_POST['btn-inscription-complete'])) {
         $_POST['email'],
         $_POST['motDePasse'],
         $photoPath,
-        $_POST['total_score'],
-        null,
+        '',
+        (int)$_POST['totalScore'],
         null
     );
 
@@ -62,6 +62,11 @@ if (isset($_POST['btn-inscription-complete'])) {
             'prenom' => $utilisateur->getPrenom(),
             'nom' => $utilisateur->getNom(),
             'email' => $utilisateur->getEmail(),
+            'niveau' => $utilisateur->getNiveau(),
+            'photo' => $utilisateur->getPhoto(),
+            'score_personnalite' => $utilisateur->getScorePersonnalite(),
+            'id_profil' => $utilisateur->getIdProfil(),
+            'date_creation' => $utilisateur->getDateCreation(),
         ];
         // Rediriger vers la page actuelle (ou une page spécifique)
         echo "<script>window.location.href = window.location.href;</script>";
@@ -86,6 +91,11 @@ if (isset($_POST['btn-connexion'])) {
             'prenom' => $utilisateur->getPrenom(),
             'nom' => $utilisateur->getNom(),
             'email' => $utilisateur->getEmail(),
+            'niveau' => $utilisateur->getNiveau(),
+            'photo' => $utilisateur->getPhoto(),
+            'score_personnalite' => $utilisateur->getScorePersonnalite(),
+            'id_profil' => $utilisateur->getIdProfil(),
+            'date_creation' => $utilisateur->getDateCreation(),
         ];
         // Rediriger vers la page actuelle (ou une page spécifique)
         echo "<script>window.location.href = window.location.href;</script>";
@@ -170,7 +180,8 @@ if (isset($_POST['btn-connexion'])) {
             <form method="post">
                 <div class="header-form">
                     <h3>Connectez-vous</h3>
-                    <h6>Vous n'avez pas de compte ? <a class="link" href="#inscription">Cliquez ici pour vous inscrire</a></h6>
+                    <h6>Vous n'avez pas de compte ? <a class="link" href="#inscription">Cliquez ici pour vous
+                            inscrire</a></h6>
                 </div>
 
                 <div class="body-form">
@@ -204,7 +215,7 @@ if (isset($_POST['btn-connexion'])) {
                     <input type="hidden" name="email" id="hidden-email">
                     <input type="hidden" name="motDePasse" id="hidden-mdp">
                     <input type="hidden" name="confirmMotDePasse" id="hidden-confirm-mdp">
-                    <input type="hidden" name="total_score" id="total-score">
+                    <input type="hidden" name="totalScore" id="total-score">
                     <div class="input-group photo">
                         <div class="upload-zone">
                             <div class="icon">📸</div>

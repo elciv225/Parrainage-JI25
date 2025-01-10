@@ -12,9 +12,9 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
@@ -27,10 +27,13 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie_question`
 --
 
-CREATE TABLE `categorie_question` (
-                                      `id_categorie` int UNSIGNED NOT NULL,
-                                      `titre_categorie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `categorie_question`
+(
+    `id_categorie`    int UNSIGNED NOT NULL,
+    `titre_categorie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -38,12 +41,15 @@ CREATE TABLE `categorie_question` (
 -- Structure de la table `options_questions`
 --
 
-CREATE TABLE `options_questions` (
-                                     `option_id` int UNSIGNED NOT NULL,
-                                     `question_id` smallint UNSIGNED NOT NULL,
-                                     `texte_option` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                     `scores_personnalite` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `options_questions`
+(
+    `option_id`           int UNSIGNED                                   NOT NULL,
+    `question_id`         smallint UNSIGNED                              NOT NULL,
+    `texte_option`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+    `scores_personnalite` double DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -51,13 +57,16 @@ CREATE TABLE `options_questions` (
 -- Structure de la table `profil_personnalite`
 --
 
-CREATE TABLE `profil_personnalite` (
-                                       `id_profil` smallint UNSIGNED NOT NULL,
-                                       `titre_profil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                                       `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-                                       `born_inf_score` double DEFAULT NULL,
-                                       `born_sup_score` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `profil_personnalite`
+(
+    `id_profil`      smallint UNSIGNED NOT NULL,
+    `titre_profil`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+    `description`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+    `born_inf_score` double                                                DEFAULT NULL,
+    `born_sup_score` double                                                DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -65,12 +74,15 @@ CREATE TABLE `profil_personnalite` (
 -- Structure de la table `questionnaire`
 --
 
-CREATE TABLE `questionnaire` (
-                                 `question_id` smallint UNSIGNED NOT NULL,
-                                 `texte_question` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                 `img_question` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-                                 `id_categorie` int UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `questionnaire`
+(
+    `question_id`    smallint UNSIGNED                              NOT NULL,
+    `texte_question` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+    `img_question`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+    `id_categorie`   int UNSIGNED DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -78,15 +90,18 @@ CREATE TABLE `questionnaire` (
 -- Structure de la table `relations_parrainage`
 --
 
-CREATE TABLE `relations_parrainage` (
-                                        `relation_id` int UNSIGNED NOT NULL,
-                                        `parrain_id` int UNSIGNED NOT NULL,
-                                        `filleul_id` int UNSIGNED NOT NULL,
-                                        `date_debut` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-                                        `date_fin` timestamp NULL DEFAULT NULL,
-                                        `statut` enum('ACTIF','TERMINE') CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT 'ACTIF',
-                                        `score_compatibilite` tinyint UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `relations_parrainage`
+(
+    `relation_id`         int UNSIGNED NOT NULL,
+    `parrain_id`          int UNSIGNED NOT NULL,
+    `filleul_id`          int UNSIGNED NOT NULL,
+    `date_debut`          timestamp    NULL                                                  DEFAULT CURRENT_TIMESTAMP,
+    `date_fin`            timestamp    NULL                                                  DEFAULT NULL,
+    `statut`              enum ('ACTIF','TERMINE') CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT 'ACTIF',
+    `score_compatibilite` tinyint UNSIGNED                                                   DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -94,13 +109,16 @@ CREATE TABLE `relations_parrainage` (
 -- Structure de la table `reponses_utilisateurs`
 --
 
-CREATE TABLE `reponses_utilisateurs` (
-                                         `reponse_id` int UNSIGNED NOT NULL,
-                                         `utilisateur_id` int UNSIGNED NOT NULL,
-                                         `question_id` smallint UNSIGNED NOT NULL,
-                                         `option_id` int UNSIGNED NOT NULL,
-                                         `date_reponse` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `reponses_utilisateurs`
+(
+    `reponse_id`     int UNSIGNED      NOT NULL,
+    `utilisateur_id` int UNSIGNED      NOT NULL,
+    `question_id`    smallint UNSIGNED NOT NULL,
+    `option_id`      int UNSIGNED      NOT NULL,
+    `date_reponse`   timestamp         NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -108,59 +126,81 @@ CREATE TABLE `reponses_utilisateurs` (
 -- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE `utilisateurs` (
-                                `utilisateur_id` int UNSIGNED NOT NULL,
-                                `prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                `niveau` varchar(3) COLLATE utf8mb4_bin DEFAULT NULL,
-                                `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                `mot_de_passe_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-                                `photo` text COLLATE utf8mb4_bin,
-                                `date_creation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-                                `score_personnalite` double DEFAULT NULL,
-                                `id_profil` smallint UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `utilisateurs`
+(
+    `utilisateur_id`     int UNSIGNED                                           NOT NULL,
+    `prenom`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL,
+    `nom`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL,
+    `niveau`             varchar(3) COLLATE utf8mb4_bin                              DEFAULT NULL,
+    `email`              varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+    `mot_de_passe_hash`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+    `photo`              text COLLATE utf8mb4_bin,
+    `date_creation`      timestamp                                              NULL DEFAULT CURRENT_TIMESTAMP,
+    `score_personnalite` double                                                      DEFAULT NULL,
+    `id_profil`          smallint UNSIGNED                                           DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin;
 
 --
 -- Déclencheurs `utilisateurs`
 --
 DELIMITER $$
-CREATE TRIGGER `assign_profil_after_insert` AFTER INSERT ON `utilisateurs` FOR EACH ROW BEGIN
-    DECLARE profil_id INT;
 
-    -- Trouver l'ID du profil correspondant au score_personnalite
-    SELECT id_profil INTO profil_id
-    FROM profil_personnalite
-    WHERE NEW.score_personnalite BETWEEN born_inf_score AND born_sup_score
-    LIMIT 1;
+CREATE TRIGGER `assign_profil_after_insert`
+    AFTER INSERT
+    ON `utilisateurs`
+    FOR EACH ROW
+BEGIN
+    DECLARE profil_id SMALLINT UNSIGNED;
 
-    -- Mettre à jour id_profil ou le laisser NULL si aucun profil ne correspond
-    IF profil_id IS NOT NULL THEN
-        UPDATE utilisateurs
-        SET id_profil = profil_id
-        WHERE utilisateur_id = NEW.utilisateur_id;
-    END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `assign_profil_after_update` AFTER UPDATE ON `utilisateurs` FOR EACH ROW BEGIN
-    DECLARE profil_id INT;
-
-    -- Si le score_personnalite a changé, trouver le profil correspondant
-    IF OLD.score_personnalite != NEW.score_personnalite THEN
-        SELECT id_profil INTO profil_id
+-- Vérifier si le score_personnalite n'est pas NULL
+    IF NEW.score_personnalite IS NOT NULL THEN
+        -- Trouver l'ID du profil correspondant au score_personnalite
+        SELECT id_profil
+        INTO profil_id
         FROM profil_personnalite
         WHERE NEW.score_personnalite BETWEEN born_inf_score AND born_sup_score
         LIMIT 1;
 
-        -- Mettre à jour id_profil ou le laisser NULL si aucun profil ne correspond
-        UPDATE utilisateurs
-        SET id_profil = profil_id
-        WHERE utilisateur_id = NEW.utilisateur_id;
+-- Mettre à jour id_profil si un profil valide a été trouvé
+        IF profil_id IS NOT NULL THEN
+            UPDATE utilisateurs
+            SET id_profil = profil_id
+            WHERE utilisateur_id = NEW.utilisateur_id
+              AND (id_profil IS NULL OR id_profil != profil_id);
+        END IF;
     END IF;
-END
-$$
+END $$
+
+CREATE TRIGGER `assign_profil_after_update`
+    AFTER UPDATE
+    ON `utilisateurs`
+    FOR EACH ROW
+BEGIN
+    DECLARE profil_id SMALLINT UNSIGNED;
+
+-- Vérifier si le score_personnalite a changé et n'est pas NULL
+    IF NEW.score_personnalite IS NOT NULL
+        AND (OLD.score_personnalite IS NULL OR OLD.score_personnalite != NEW.score_personnalite) THEN
+        -- Trouver l'ID du profil correspondant au score_personnalite
+        SELECT id_profil
+        INTO profil_id
+        FROM profil_personnalite
+        WHERE NEW.score_personnalite BETWEEN born_inf_score AND born_sup_score
+        LIMIT 1;
+
+-- Mettre à jour id_profil seulement si nécessaire
+        IF profil_id IS NOT NULL
+            AND (NEW.id_profil IS NULL OR NEW.id_profil != profil_id) THEN
+            UPDATE utilisateurs
+            SET id_profil = profil_id
+            WHERE utilisateur_id = NEW.utilisateur_id
+              AND (id_profil IS NULL OR id_profil != profil_id);
+        END IF;
+    END IF;
+END $$
+
 DELIMITER ;
 
 --
@@ -184,7 +224,9 @@ ALTER TABLE `options_questions`
 -- Index pour la table `profil_personnalite`
 --
 ALTER TABLE `profil_personnalite`
-    ADD PRIMARY KEY (`id_profil`);
+    ADD PRIMARY KEY (`id_profil`),
+    ADD CONSTRAINT `chk_born_values`
+        CHECK (born_inf_score < born_sup_score);
 
 --
 -- Index pour la table `questionnaire`
@@ -201,7 +243,7 @@ ALTER TABLE `relations_parrainage`
     ADD KEY `idx_parrain` (`parrain_id`),
     ADD KEY `idx_filleul` (`filleul_id`),
     ADD KEY `idx_statut` (`statut`),
-    ADD KEY `idx_dates` (`date_debut`,`date_fin`),
+    ADD KEY `idx_dates` (`date_debut`, `date_fin`),
     ADD KEY `idx_score` (`score_compatibilite`);
 
 --
@@ -209,7 +251,7 @@ ALTER TABLE `relations_parrainage`
 --
 ALTER TABLE `reponses_utilisateurs`
     ADD PRIMARY KEY (`reponse_id`),
-    ADD KEY `idx_utilisateur_question` (`utilisateur_id`,`question_id`),
+    ADD KEY `idx_utilisateur_question` (`utilisateur_id`, `question_id`),
     ADD KEY `question_id` (`question_id`),
     ADD KEY `option_id` (`option_id`),
     ADD KEY `idx_date` (`date_reponse`);
@@ -221,7 +263,7 @@ ALTER TABLE `utilisateurs`
     ADD PRIMARY KEY (`utilisateur_id`),
     ADD UNIQUE KEY `idx_email` (`email`),
     ADD UNIQUE KEY `unq_utilisateurs_id_profil` (`id_profil`),
-    ADD KEY `idx_nom_prenom` (`nom`,`prenom`),
+    ADD KEY `idx_nom_prenom` (`nom`, `prenom`),
     ADD KEY `idx_date_creation` (`date_creation`);
 
 --
@@ -232,25 +274,29 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `categorie_question`
 --
 ALTER TABLE `categorie_question`
-    MODIFY `id_categorie` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `id_categorie` int UNSIGNED NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 5;
 
 --
 -- AUTO_INCREMENT pour la table `options_questions`
 --
 ALTER TABLE `options_questions`
-    MODIFY `option_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+    MODIFY `option_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 125;
 
 --
 -- AUTO_INCREMENT pour la table `profil_personnalite`
 --
 ALTER TABLE `profil_personnalite`
-    MODIFY `id_profil` smallint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `id_profil` smallint UNSIGNED NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 6;
 
 --
 -- AUTO_INCREMENT pour la table `questionnaire`
 --
 ALTER TABLE `questionnaire`
-    MODIFY `question_id` smallint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+    MODIFY `question_id` smallint UNSIGNED NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 21;
 
 --
 -- AUTO_INCREMENT pour la table `relations_parrainage`
@@ -268,7 +314,8 @@ ALTER TABLE `reponses_utilisateurs`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-    MODIFY `utilisateur_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+    MODIFY `utilisateur_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 13;
 
 --
 -- Contraintes pour les tables déchargées
@@ -308,6 +355,6 @@ ALTER TABLE `reponses_utilisateurs`
     ADD CONSTRAINT `reponses_utilisateurs_ibfk_3` FOREIGN KEY (`option_id`) REFERENCES `options_questions` (`option_id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

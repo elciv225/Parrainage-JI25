@@ -63,7 +63,7 @@ class UtilisateurManager
             $stmt->bindValue(':niveau', $utilisateur->getNiveau(), PDO::PARAM_STR);
             $stmt->bindValue(':email', $utilisateur->getEmail(), PDO::PARAM_STR);
             $stmt->bindValue(':motDePasseHash', $utilisateur->getMotDePasseHash(), PDO::PARAM_STR);
-            $stmt->bindValue(':scorePersonnalite', $utilisateur->getScorePersonnalite(), PDO::PARAM_STR);
+            $stmt->bindValue(':scorePersonnalite', $utilisateur->getScorePersonnalite(), PDO::PARAM_INT);
             $stmt->bindValue(':idProfil', $utilisateur->getIdProfil(), PDO::PARAM_INT);
 
             // Exécution de la requête
