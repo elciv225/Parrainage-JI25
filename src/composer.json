@@ -6,7 +6,8 @@
   "autoload": {
     "psr-4": {
       "client\\traitements\\": "private/client/traitements/",
-      "config\\": "config/"
+      "config\\": "config/",
+      "views\\": "private/client/views/"
     }
   }
 }

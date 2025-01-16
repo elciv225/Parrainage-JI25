@@ -1,0 +1,154 @@
+{
+  "etudiants": [
+    {
+      "niveau": "L3",
+      "nom": "Assy",
+      "prenoms": "Eliel Onésime"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Adje",
+      "prenoms": "Aude-Esther Ablan"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Akandan",
+      "prenoms": "Aho Paul-Emmanuel Joan"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Allouko",
+      "prenoms": "Essigan Daniel Ange Nathanael"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Amani",
+      "prenoms": "Moillet Yves Emmanuel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Angbe",
+      "prenoms": "Charles Emmanuel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Ano",
+      "prenoms": "Josué"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Apata",
+      "prenoms": "Jean-Michel Hervé"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Bahou",
+      "prenoms": "Johan Stéphanie"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Berthe",
+      "prenoms": "Ibrahim"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Bindje",
+      "prenoms": "Mandah Celestin Wilfried"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Coulibaly",
+      "prenoms": "Kolotcholoman Sinaly"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Diakite",
+      "prenoms": "Mamadi"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Diby",
+      "prenoms": "Eunice Mienlié"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Fassinou",
+      "prenoms": "Mahougnon Jonas Dieudonné Aurel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Gomez",
+      "prenoms": "Ange Axel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Irie",
+      "prenoms": "Adjo Anne-Jemima"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Kanga",
+      "prenoms": "Agbalé Daniel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Kassy",
+      "prenoms": "Koffi Yannis Emmanuel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Krouma",
+      "prenoms": "Franck Adams"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Logbo",
+      "prenoms": "Zoukou Paula-Axel"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Monsan",
+      "prenoms": "Josué Emmanuel Junior"
+    },
+    {
+      "niveau": "L3",
+      "nom": "N'Guessan",
+      "prenoms": "Amah Abigaïl De Carmelle"
+    },
+    {
+      "niveau": "L3",
+      "nom": "N'Guessan",
+      "prenoms": "Kre Laken Desirée"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Ouattara",
+      "prenoms": "Katié Myriam"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Sokoty",
+      "prenoms": "Koua Othniel Junior"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Soro",
+      "prenoms": "Ouangboho"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Soro",
+      "prenoms": "Eméric Jamel Désiré Katanan"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Tizie",
+      "prenoms": "Bi Trazié Grâce David Isrël"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Tra",
+      "prenoms": "Lou Océane Noémie Emmanuella Gohi"
+    }
+  ]
+}

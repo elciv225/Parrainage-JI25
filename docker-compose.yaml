@@ -9,6 +9,8 @@ services:
     ports:
       - "8081:80"  # Port pour accéder à l'application PHP
     # Définition des volumes pour permettre la persistance des données
+    environment:
+      - APACHE_DISABLE_ACCESS_FILE=true
     volumes:
       # Le dossier ./php sur la machine hôte est mappé à /var/www/html dans le conteneur
       - ./src:/var/www/html

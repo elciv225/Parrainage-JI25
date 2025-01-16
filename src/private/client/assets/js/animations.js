@@ -449,8 +449,289 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    /*********************************************************
+     * LOGIQUE ET ANIMATIONS DES VERIFICATIONS DES INPUTS
+     ********************************************************/
+    const inputNom = document.getElementById('inscription-nom');
+    const inputPrenoms = document.getElementById('inscription-prenoms');
+    const suggestionsNom = document.createElement("ul");
+    const suggestionsPrenoms = document.createElement("ul");
+
+// Ajout des classes
+    suggestionsNom.className = 'suggestions-list';
+    suggestionsPrenoms.className = 'suggestions-list';
+
+// Ajout des suggestions aux conteneurs
+    inputNom.parentNode.appendChild(suggestionsNom);
+    inputPrenoms.parentNode.appendChild(suggestionsPrenoms);
+
+    let etudiants = {etudiants: []};
+
+// Charger le fichier JSON
+    fetch("/etudiants.json")
+        .then(reponse => {
+            if (!reponse.ok) throw new Error("Erreur lors du chargement du fichier JSON");
+            return reponse.json();
+        })
+        .then(jsonEtudiants => {
+            etudiants = jsonEtudiants;
+            console.log("Données chargées :", etudiants);
+        })
+        .catch(error => console.error("Erreur :", error));
+
+// Gestionnaire de clic global
+    document.addEventListener('click', (e) => {
+        const isClickInside = e.target.closest('.suggestions-list') || e.target.matches('input');
+        if (!isClickInside) {
+            [suggestionsNom, suggestionsPrenoms].forEach(list => {
+                if (list.style.display === 'block') {
+                    gsap.to(list, {
+                        opacity: 0,
+                        y: -10,
+                        duration: 0.2,
+                        onComplete: () => list.style.display = 'none'
+                    });
+                }
+            });
+        }
+    });
+
+    function rechercherEtudiants(query, type) {
+        if (!query) return [];
+        return etudiants.etudiants.filter(etudiant =>
+            etudiant[type].toLowerCase().includes(query.toLowerCase())
+        );
+    }
+
+    function afficherSuggestions(input, suggestionsContainer, matches) {
+        suggestionsContainer.innerHTML = "";
+
+        if (matches.length === 0) {
+            if (suggestionsContainer.style.display === 'block') {
+                gsap.to(suggestionsContainer, {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.2,
+                    onComplete: () => suggestionsContainer.style.display = 'none'
+                });
+            }
+            return;
+        }
+
+        matches.forEach(match => {
+            const li = document.createElement("li");
+            li.textContent = match;
+
+            li.addEventListener('mouseenter', () => {
+                gsap.to(li, {
+                    backgroundColor: 'var(--background-secondary)',
+                    duration: 0.2
+                });
+            });
+
+            li.addEventListener('mouseleave', () => {
+                gsap.to(li, {
+                    backgroundColor: 'var(--background-primary)',
+                    duration: 0.2
+                });
+            });
+
+            li.addEventListener("click", () => {
+                input.value = match;
+                gsap.to(suggestionsContainer, {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.2,
+                    onComplete: () => suggestionsContainer.style.display = 'none'
+                });
+            });
+
+            suggestionsContainer.appendChild(li);
+        });
+
+        suggestionsContainer.style.display = 'block';
+        suggestionsContainer.style.opacity = '0';
+        gsap.fromTo(suggestionsContainer,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.3 }
+        );
+
+        // Animation des éléments de la liste
+        gsap.fromTo(suggestionsContainer.children,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.3, stagger: 0.05 }
+        );
+    }
+
+    function afficherErreur(input, message) {
+        // Supprimer les erreurs existantes
+        const existingError = input.parentNode.querySelector('.erreur-message');
+        if (existingError) {
+            gsap.to(existingError, {
+                opacity: 0,
+                y: 10,
+                duration: 0.2,
+                onComplete: () => existingError.remove()
+            });
+        }
+
+        const erreur = document.createElement('span');
+        erreur.className = 'erreur-message';
+        erreur.textContent = message;
+        input.parentNode.appendChild(erreur);
+        input.classList.add('input-error');
+
+        // Animation de l'input
+        gsap.timeline()
+            .to(input, {x: -10, duration: 0.1})
+            .to(input, {x: 10, duration: 0.2})
+            .to(input, {x: -5, duration: 0.15})
+            .to(input, {x: 5, duration: 0.15})
+            .to(input, {
+                x: 0,
+                duration: 0.07,
+                onComplete: () => {
+                    gsap.to(input, {
+                        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
+                        duration: 0.2,
+                        ease: "power2.out",
+                    });
+                },
+            });
+
+        // Animation du message d'erreur
+        gsap.fromTo(erreur,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.3 }
+        );
+
+        // Disparition automatique
+        setTimeout(() => {
+            gsap.to(erreur, {
+                opacity: 0,
+                y: 10,
+                duration: 0.3,
+                onComplete: () => {
+                    erreur.remove();
+                    input.classList.remove('input-error');
+                }
+            });
+        }, 3000);
+    }
+
+// Gestionnaire d'événements pour les inputs
+    [
+        { input: inputNom, suggestions: suggestionsNom, type: "nom" },
+        { input: inputPrenoms, suggestions: suggestionsPrenoms, type: "prenoms" }
+    ].forEach(({ input, suggestions, type }) => {
+        input.addEventListener("input", () => {
+            const query = input.value;
+            const matches = rechercherEtudiants(query, type).map(etudiant => etudiant[type]);
+            afficherSuggestions(input, suggestions, matches);
+        });
+
+        input.addEventListener("focus", () => {
+            const query = input.value;
+            const matches = rechercherEtudiants(query, type).map(etudiant => etudiant[type]);
+            afficherSuggestions(input, suggestions, matches);
+        });
+
+        input.addEventListener("blur", () => {
+            setTimeout(() => {
+                const query = input.value;
+                const matches = rechercherEtudiants(query, type);
+                if (query && matches.length === 0) {
+                    input.setAttribute("invalid", "true");
+                    afficherErreur(input, "Cette donnée est inexistante");
+                } else {
+                    input.removeAttribute("invalid");
+                }
+            }, 200);
+        });
+    });
+
     /********************************************
-     * 3) INPUT FILE AVEC APERCUS
+     * Gestion du mot de passe
+     ********************************************/
+
+    const inputMotDePasse = document.getElementById('inscription-mdp');
+    const inputConfirmeMotDePasse = document.getElementById('inscription-confirm-mdp');
+
+    inputConfirmeMotDePasse.addEventListener("blur", ()=>{
+        setTimeout(()=>{
+            const valueConfirmeMdp = inputConfirmeMotDePasse.value;
+            const valutMdp = inputMotDePasse.value;
+
+            if (valutMdp !== valueConfirmeMdp){
+                inputConfirmeMotDePasse.setAttribute("invalid", "true");
+                afficherErreur(inputConfirmeMotDePasse, "Les mots de passe ne correspondent pas");
+            }else {
+                inputConfirmeMotDePasse.removeAttribute("invalid");
+            }
+        }, 200)
+    })
+
+    // Section voir ou non le mot de passe.
+    const inputGroups = document.querySelectorAll(".input-group");
+
+    inputGroups.forEach(group => {
+        const passwordInput = group.querySelector('input[type="password"], input[type="text"]');
+        const lordIcon = group.querySelector("lord-icon");
+
+        if (passwordInput && lordIcon) {
+            let isRevealed = false;
+
+            // Animation douce pour le lord-icon
+            const animateIcon = (reveal) => {
+                gsap.to(lordIcon, {
+                    duration: 0.5,
+                    scale: 1.1,
+                    blur: 15,
+                    ease: "elastic.out(1, 0.5)",
+                    onComplete: () => {
+                        gsap.to(lordIcon, {
+                            duration: 0.3,
+                            scale: 1,
+                            blur: 0,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+            };
+
+            // Animation fluide pour le texte
+            const animateTextTransition = (reveal) => {
+                gsap.to(passwordInput, {
+                    duration: 0.3,
+                    blur: 10,
+                    opacity: 0,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        passwordInput.type = reveal ? "text" : "password";
+                        lordIcon.setAttribute("state", reveal ? "morph-lashes" : "hover-lashes");
+
+                        gsap.to(passwordInput, {
+                            duration: 0.3,
+                            blur: 0,
+                            opacity: 1,
+                            ease: "power2.out",
+                            clearProps: "y" // Nettoie la propriété y après l'animation
+                        });
+                    }
+                });
+            };
+
+            // Gestionnaire de clic sur l'icône
+            lordIcon.addEventListener("click", () => {
+                animateIcon(isRevealed);
+                animateTextTransition(!isRevealed);
+                isRevealed = !isRevealed;
+            });
+        }
+    });
+
+    /********************************************
+     * 4) INPUT FILE AVEC APERCUS
      ********************************************/
 
     const uploadZone = document.querySelector('.upload-zone');

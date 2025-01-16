@@ -110,7 +110,8 @@ if (isset($_POST['btn-connexion'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="private/client/assets/css/styles.css">
-    <title>JI 2025</title>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <title><?= $title ?></title>
 </head>
 <body>
 
@@ -127,11 +128,11 @@ if (isset($_POST['btn-connexion'])) {
                     </h6>
                 </div>
                 <div class="body-form">
-                    <div class="input-group">
+                    <div class="input-group" style="position: relative; z-index: 1000;">
                         <input type="text" name="nom" id="inscription-nom" placeholder="Veuillez  écrire ici">
                         <label for="inscription-nom">Nom</label>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="position: relative; z-index: 999;">
                         <input type="text" name="nom" id="inscription-prenoms" placeholder="Veuillez  écrire ici">
                         <label for="inscription-prenoms">Prénoms</label>
                     </div>
@@ -156,13 +157,28 @@ if (isset($_POST['btn-connexion'])) {
                                placeholder="Veuillez  écrire ici">
                         <label for="inscription-mdp">Mot de Passe</label>
                         <!-- Conteneur du SVG “œil” pour toggler -->
-
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wepoiyzv.json"
+                            trigger="morph"
+                            stroke="bold"
+                            state="hover-lashes"
+                            colors="primary:#ffffff,secondary:#e8b730"
+                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                        </lord-icon>
                     </div>
                     <div class="input-group">
                         <input type="password" name="confirmMotDePasse" id="inscription-confirm-mdp"
                                placeholder="Veuillez  écrire ici">
                         <label for="inscription-confirm-mdp">Confirmer le mot de passe</label>
                         <!-- Conteneur du SVG “œil” pour toggler -->
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wepoiyzv.json"
+                            trigger="hover"
+                            stroke="bold"
+                            state="hover-lashes"
+                            colors="primary:#ffffff,secondary:#e8b730"
+                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                        </lord-icon>
                     </div>
 
                 </div>
@@ -192,6 +208,14 @@ if (isset($_POST['btn-connexion'])) {
                     <div class="input-group">
                         <input type="password" name="motDePasse" id="connexion-mdp" placeholder="Veuillez  écrire ici">
                         <label for="connexion-mdp">Mot de passe</label>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wepoiyzv.json"
+                            trigger="hover"
+                            stroke="bold"
+                            state="hover-lashes"
+                            colors="primary:#ffffff,secondary:#e8b730"
+                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                        </lord-icon>
                     </div>
                 </div>
                 <div class="footer-form">
@@ -200,13 +224,14 @@ if (isset($_POST['btn-connexion'])) {
             </form>
         </div>
         <div class="parrainage" id="parrainage">
-            <?php include "private/client/views/parrainage.php" ?>
+            <?php include "private/client/views/questionnaire.php" ?>
         </div>
         <div class="ajout-photo" id="ajout-photo">
 
             <form method="post" enctype="multipart/form-data">
                 <div class="header-form">
                     <h3>Ajouter votre photo de profil</h3>
+                    <p>Attention ! Cette image sera affichée lors du parrainage, alors choisissez une photo qui vous fait sourire, on ne sait jamais ! 😄</p>
                 </div>
                 <div class="body-form">
                     <input type="hidden" name="nom" id="hidden-nom">

@@ -1,0 +1,14 @@
+{
+  "etudiants": [
+    {
+      "niveau": "L1",
+      "nom": "Je ne sais pas",
+      "prenoms": "Roxanne"
+    },
+    {
+      "niveau": "L3",
+      "nom": "Assy",
+      "prenoms": "Eliel Onésime"
+    }
+  ]
+}

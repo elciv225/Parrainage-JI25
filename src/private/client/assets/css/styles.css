@@ -28,9 +28,9 @@
 
     /* États */
     --success: rgba(102, 187, 106, 0.55); /* Vert doux */
-    --warning: rgba(255, 193, 7, 0.55);  /* Jaune épuré */
-    --error: rgba(239, 83, 80, 0.55);    /* Rouge subtil */
-    --info: rgba(100, 181, 246, 0.55);   /* Bleu clair */
+    --warning: rgba(255, 193, 7, 0.55); /* Jaune épuré */
+    --error: rgba(239, 83, 80, 0.55); /* Rouge subtil */
+    --info: rgba(100, 181, 246, 0.55); /* Bleu clair */
 
     /* Bordures */
     --border-light: #87999A;
@@ -122,7 +122,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     min-width: 100vw;
-    background: var(--background-primary);
+    background: var(--background-secondary);
     transition: background-color 0.5s ease;
 }
 
@@ -163,6 +163,7 @@ body.parrainage-active {
         transition: all 0.5s;
         font-family: inherit;
         font-size: 1rem;
+        position: relative;
 
         &:focus, &:hover {
             border: 2px solid var(--input-border); /*Mettre du rouge dans le cas d'un problème*/
@@ -208,6 +209,7 @@ body.parrainage-active {
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
     backdrop-filter: blur(6px);
     background: rgba(255, 255, 255, 0.1);
+
     .section-gauche {
         width: 40%;
         border-radius: 12px;
@@ -321,6 +323,13 @@ body.parrainage-active {
     }
 }
 
+/* === Icone pour les mot de pasases */
+lord-icon {
+    position: absolute;
+    right: 10px;
+    top: 18%;
+}
+
 /* === Style des boutons === */
 .button-submit {
     --arrow-width: 10px;
@@ -328,7 +337,7 @@ body.parrainage-active {
     box-sizing: border-box;
     border: 0;
     border-radius: 20px;
-    color:#FFFFFF;
+    color: #FFFFFF;
     padding: 1em 1.8em;
     background: var(--primary-color);
     display: flex;
@@ -386,7 +395,7 @@ body.parrainage-active {
     box-sizing: border-box;
     border: 0;
     border-radius: 20px;
-    color:#FFFFFF;
+    color: #FFFFFF;
     padding: 1em 1.8em;
     background: var(--primary-color);
     display: flex;
@@ -438,6 +447,74 @@ body.parrainage-active {
 
 }
 
+/* gestion des input invalid */
+
+/* Style des listes de suggestions */
+.suggestions-list {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: var(--background-primary);
+    border: 1px solid var(--border-medium);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    margin-top: 4px;
+    display: none;
+
+    /* Style des éléments de suggestion */
+
+    li {
+        padding: 8px 12px;
+        cursor: pointer;
+        color: var(--text-primary);
+
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--border-light);
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--background-secondary);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--border-medium);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--border-dark);
+    }
+}
+
+/* Style des messages d'erreur */
+.erreur-message {
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    font-size: 0.8em;
+    color: var(--error);
+    background-color: var(--background-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 1;
+    white-space: nowrap;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+}
+
+/* Style des inputs en erreur */
+.input-error {
+    border-color: var(--error) !important;
+}
+
 /* === Questionnaire pour parrainage === */
 .parrainage {
     position: absolute;
@@ -452,11 +529,11 @@ body.parrainage-active {
 }
 
 body.parrainage-active .section-gauche {
-    display: none !important;  /* La section gauche n'est plus visible */
+    display: none !important; /* La section gauche n'est plus visible */
 }
 
 body.parrainage-active .section-droite {
-    width: 100% !important;    /* La section droite prend toute la largeur */
+    width: 100% !important; /* La section droite prend toute la largeur */
 }
 
 .back-button {
@@ -482,14 +559,15 @@ body.parrainage-active .section-droite {
     width: 20px;
     height: 20px;
 }
+
 /* Caché tout les éléments qd on est sur le parrainage */
 
 body.parrainage-active #connexion,
-body.parrainage-active #inscription{
+body.parrainage-active #inscription {
     display: none;
 }
 
-body.parrainage-active .principal-container{
+body.parrainage-active .principal-container {
     padding: 0;
 }
 
@@ -676,30 +754,31 @@ body.parrainage-active .principal-container{
     position: absolute;
     top: 0;
     left: 0;
-    width: 800px;        /* Même largeur que .principal-container */
+    width: 800px; /* Même largeur que .principal-container */
     height: 100%;
-    background: white;   /* Fond blanc (ou transparent si vous préférez) */
+    background: var(--background-primary); /* Fond blanc (ou transparent si vous préférez) */
     border-radius: 22px; /* Même border-radius que les autres sections */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
-    opacity: 0;          /* Démarre masquée */
-    z-index: -1;         /* Sera mis en avant lors de l'animation GSAP */
+    opacity: 0; /* Démarre masquée */
+    z-index: -1; /* Sera mis en avant lors de l'animation GSAP */
 }
 
-.input-group.photo{
+.input-group.photo {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
+
 /* Styles pour la zone de drop */
 .upload-zone {
-    width: 50%;
-    min-height: 50%;
+    width: 260px;
+    height: 260px;
     border: 2px dashed #e0e0e0;
     border-radius: 24px;
-
     text-align: center;
-    position: relative;
+    position: absolute;
+    top: 80px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.03);
     cursor: pointer;
@@ -725,6 +804,8 @@ body.parrainage-active .principal-container{
 
 .upload-zone .icon {
     width: 80px;
+
+
     height: 80px;
     background: #FFC107;
     border-radius: 20px;
@@ -767,9 +848,12 @@ body.parrainage-active .principal-container{
 /* Styles pour la prévisualisation */
 .preview-container {
     display: none;
-    max-width: 320px;
+    width: 265px;
+    height: 265px;
     text-align: center;
     position: absolute;
+    margin-bottom: 10px;
+    top: 80px;
 }
 
 .preview-container.active {
@@ -778,23 +862,23 @@ body.parrainage-active .principal-container{
 
 .preview-container img {
     width: 100%;
-    height: 320px;
+    height: 100%;
     object-fit: cover;
     border-radius: 20px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    margin-bottom: 16px;
-    border: 4px solid white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 4px solid var(--border-light);
 }
 
 /* Bouton de suppression */
 .remove-preview {
     background: transparent;
-    color: #ff4757;
-    border: 2px solid #ff4757;
+    color: var(--text-primary);
+    border: 2px solid var(--error);
     padding: 10px 24px;
-    border-radius: 12px;
+    border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
+    margin-top: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-flex;
@@ -803,7 +887,7 @@ body.parrainage-active .principal-container{
 }
 
 .remove-preview:hover {
-    background: #ff4757;
+    background: var(--error);
     color: white;
 }
 
@@ -814,7 +898,7 @@ body.parrainage-active .principal-container{
 
 /* Message d'erreur */
 .error-message {
-    color: #ff4757;
+    color: var(--error);
     font-size: 14px;
     margin-top: 12px;
     display: none;
@@ -830,10 +914,18 @@ body.parrainage-active .principal-container{
 }
 
 @keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
 
 /**
@@ -885,7 +977,7 @@ body.parrainage-active .principal-container{
 
         .section-droite {
             width: 100vw;
-            height:  100%;
+            height: 100%;
 
             .inscription, .connexion {
                 width: 100%;
@@ -915,18 +1007,22 @@ body.parrainage-active .principal-container{
                 position: relative;
             }
 
-            .footer-form{
+            .footer-form {
                 position: relative;
                 height: 25%;
             }
 
-
+            form {
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                justify-content: center;
+            }
         }
     }
 
     /* Parrainage **/
-
-    .parrainage{
+    .parrainage, .ajout-photo {
         width: 100%;
         padding: 0;
     }
@@ -944,6 +1040,9 @@ body.parrainage-active .principal-container{
         width: 100%;
     }
 
+    .preview-container, .upload-zone{
+        top: -120px;
+    }
 }
 
 
