@@ -68,8 +68,9 @@ if (isset($_POST['btn-inscription-complete'])) {
             'id_profil' => $utilisateur->getIdProfil(),
             'date_creation' => $utilisateur->getDateCreation(),
         ];
-        // Rediriger vers la page actuelle (ou une page spécifique)
-        echo "<script>window.location.href = window.location.href;</script>";
+        // Rediriger vers la page d'accueil
+        header('Location: /');
+        exit();
     }
 }
 
@@ -97,8 +98,9 @@ if (isset($_POST['btn-connexion'])) {
             'id_profil' => $utilisateur->getIdProfil(),
             'date_creation' => $utilisateur->getDateCreation(),
         ];
-        // Rediriger vers la page actuelle (ou une page spécifique)
-        echo "<script>window.location.href = window.location.href;</script>";
+        // Rediriger vers la page d'accueil
+        header('Location: /');
+        exit();
     }
 }
 

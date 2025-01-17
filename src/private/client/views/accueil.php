@@ -1,19 +1,15 @@
-<?php
-extract($data);
-echo $title;
-
-?>
 <!DOCTYPE html>
-<html lang="fr" class="theme-clair">
+<html lang="fr">
 <head>
     <!-- Métadonnées et informations de base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
-    <title><?= $title ?></title>
+    <meta name="description"
+          content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
+    <title>Journée d'Intégration</title>
 
     <!-- Feuille de style principale -->
-    <link rel="stylesheet" href="private/client/assets/css/acceuil.css">
+    <link rel="stylesheet" href="private/client/assets/css/accueil.css">
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -24,62 +20,48 @@ echo $title;
      L'en-tête contient la barre de navigation principale.
      On utilise des balises sémantiques et des noms de classes en français.
 -->
-<header class="entete" role="banner">
-    <div class="conteneur-entete">
-        <!-- Navigation principale -->
-        <nav class="barre-navigation" role="navigation" aria-label="Navigation principale">
-
-            <!-- Marque : logo et intitulé de l'événement -->
-            <a href="index.html" class="marque">
-                <img class="logo-ji" src="assets/images/logo-02.svg" alt="Logo Journée d'Intégration">
-                <div class="texte-marque">
-                    <div>JOURNÉE</div>
-                    <div>D'INTÉGRATION</div>
-                </div>
-            </a>
-
-            <!-- Liens de navigation (affichage bureau) -->
-            <ul class="liens-navigation">
-                <li><a href="#parrainage" class="lien">Parrainage</a></li>
-                <li><a href="#competition" class="lien">Compétition</a></li>
-                <li><a href="#evenement" class="lien">Évènement</a></li>
-                <li><a href="#collaboration" class="lien">Collaboration</a></li>
-                <li><a href="#apropos" class="lien">À propos</a></li>
-            </ul>
-
-            <!-- Boutons Connexion et Inscription -->
-            <div class="boutons-entete">
-                <a href="#" class="bouton-action connexion">Connexion</a>
-                <a href="#" class="bouton-action inscription">S'inscrire</a>
+<header class="header">
+    <nav class="nav-container">
+        <a href="index.html" class="marque">
+            <img class="logo-ji" src="assets/images/logo-02.svg" alt="Logo Journée d'Intégration">
+            <div class="texte-marque">
+                <div>JOURNÉE</div>
+                <div>D'INTÉGRATION</div>
             </div>
+        </a>
 
-            <!-- Bouton du menu hamburger pour mobile -->
-            <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </nav>
+        <ul class="liens-navigation">
+            <li><a href="#parrainage" class="lien">Parrainage</a></li>
+            <li><a href="#competition" class="lien">Compétition</a></li>
+            <li><a href="#evenement" class="lien">Évènement</a></li>
+            <li><a href="#collaboration" class="lien">Collaboration</a></li>
+            <li><a href="#apropos" class="lien">À propos</a></li>
+        </ul>
 
-        <!-- Menu mobile (affiché via le hamburger) -->
-        <nav class="menu-mobile" aria-label="Menu mobile">
-            <ul>
-                <li><a href="#parrainage" class="lien-mobile">Parrainage</a></li>
-                <li><a href="#competition" class="lien-mobile">Compétition</a></li>
-                <li><a href="#evenement" class="lien-mobile">Évènement</a></li>
-                <li><a href="#collaboration" class="lien-mobile">Collaboration</a></li>
-                <li><a href="#apropos" class="lien-mobile">À propos</a></li>
-                <!-- Séparateur visuel -->
-                <li class="separateur"></li>
-                <li><a href="#" class="bouton-action connexion">Connexion</a></li>
-                <li><a href="#" class="bouton-action inscription">S'inscrire</a></li>
-                <!-- Bouton de basculement de thème transformé en icône -->
-                <li class="theme-menu">
-                    <button class="bouton-theme" aria-label="Changer le thème">
-                        <i class="fa-regular fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </div>
+        <div class="boutons-entete">
+            <a href="#" class="bouton-action connexion">Connexion</a>
+            <a href="#" class="bouton-action inscription">S'inscrire</a>
+        </div>
+
+        <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+    <!-- Menu burger (mobile) -->
+    <nav class="menu-mobile" aria-label="Menu mobile">
+        <ul>
+            <li><a href="#parrainage" class="lien-mobile">Parrainage</a></li>
+            <li><a href="#competition" class="lien-mobile">Compétition</a></li>
+            <li><a href="#evenement" class="lien-mobile">Évènement</a></li>
+            <li><a href="#collaboration" class="lien-mobile">Collaboration</a></li>
+            <li><a href="#apropos" class="lien-mobile">À propos</a></li>
+            <!-- Séparateur visuel -->
+            <li class="separateur"></li>
+            <li><a href="#" class="bouton-action connexion">Connexion</a></li>
+            <li><a href="#" class="bouton-action inscription">S'inscrire</a></li>
+            <!-- Bouton de basculement de thème transformé en icône -->
+        </ul>
+    </nav>
 </header>
 
 
@@ -94,70 +76,53 @@ echo $title;
          ===================================================
          Utilisation d'articles pour chaque diapositive et d'un contrôle ARIA
     -->
-    <section class="hero" aria-label="Accueil">
-        <div class="carrousel">
-            <div class="carrousel-interne">
-                <!-- Diapositive 1 -->
-                <article class="diapositive active" aria-label="Diapositive 1">
-                    <div class="contenu-diapositive">
-                        <div class="cote-gauche">
-                            <h1>Bienvenue à la Journée d’Intégration</h1>
-                            <p>Vivez une expérience inoubliable lors de cet événement de rencontre et de partage.</p>
-                            <div class="boutons-hero">
-                                <button class="bouton primaire">Rejoignez-nous</button>
-                                <button class="bouton secondaire">En savoir plus</button>
-                            </div>
-                        </div>
-                        <div class="cote-droite">
-                            <div class="logo-flottant">Logo 3D</div>
+    <section class="hero">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Bienvenue à la Journée d'Intégration</h1>
+                        <p class="slide-description">Vivez une expérience inoubliable lors de cet événement de rencontre
+                            et de partage.</p>
+                        <div class="slide-buttons">
+                            <button class="btn primary">Rejoignez-nous</button>
+                            <button class="btn secondary">En savoir plus</button>
                         </div>
                     </div>
-                </article>
+                </div>
 
-                <!-- Diapositive 2 -->
-                <article class="diapositive" aria-label="Diapositive 2">
-                    <div class="contenu-diapositive">
-                        <div class="cote-gauche">
-                            <h1>Découvrez nos Activités</h1>
-                            <p>Des ateliers, des conférences et bien plus encore pour enrichir votre expérience.</p>
-                            <div class="boutons-hero">
-                                <button class="bouton primaire">Programme</button>
-                                <button class="bouton secondaire">S’inscrire</button>
-                            </div>
-                        </div>
-                        <div class="cote-droite">
-                            <div class="logo-flottant">Activités</div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Découvrez nos Activités</h1>
+                        <p class="slide-description">Des ateliers, des conférences et bien plus encore pour enrichir
+                            votre expérience.</p>
+                        <div class="slide-buttons">
+                            <button class="btn primary">Programme</button>
+                            <button class="btn secondary">S'inscrire</button>
                         </div>
                     </div>
-                </article>
+                </div>
 
-                <!-- Diapositive 3 -->
-                <article class="diapositive" aria-label="Diapositive 3">
-                    <div class="contenu-diapositive">
-                        <div class="cote-gauche">
-                            <h1>Rencontrez vos Parrains</h1>
-                            <p>Un accompagnement personnalisé tout au long de votre cursus.</p>
-                            <div class="boutons-hero">
-                                <button class="bouton primaire">Parrainage</button>
-                                <button class="bouton secondaire">Témoignages</button>
-                            </div>
-                        </div>
-                        <div class="cote-droite">
-                            <div class="logo-flottant">Parrains</div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Rencontrez vos Parrains</h1>
+                        <p class="slide-description">Un accompagnement personnalisé tout au long de votre cursus.</p>
+                        <div class="slide-buttons">
+                            <button class="btn primary">Parrainage</button>
+                            <button class="btn secondary">Témoignages</button>
                         </div>
                     </div>
-                </article>
+                </div>
             </div>
 
-            <!-- Boutons de navigation du carrousel -->
-            <button class="bouton-navigation precedent" aria-label="Diapositive précédente">←</button>
-            <button class="bouton-navigation suivant" aria-label="Diapositive suivante">→</button>
-
-            <!-- Indicateurs (points) -->
-            <div class="controle-carrousel">
-                <button class="point-carrousel active" aria-label="Diapositive 1"></button>
-                <button class="point-carrousel" aria-label="Diapositive 2"></button>
-                <button class="point-carrousel" aria-label="Diapositive 3"></button>
+            <!-- Dots -->
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+                <button class="dot" aria-label="Slide 3"></button>
             </div>
         </div>
     </section>
@@ -171,7 +136,8 @@ echo $title;
         <div class="conteneur-activites">
             <header class="entete-section">
                 <h1>Nos Activités</h1>
-                <p>Découvrez notre sélection d’événements pour rythmer l'année avant et après la journée d’intégration.</p>
+                <p>Découvrez notre sélection d’événements pour rythmer l'année avant et après la journée
+                    d’intégration.</p>
             </header>
             <div class="grille-activites">
                 <!-- Carte Activité 1 -->
@@ -189,7 +155,8 @@ echo $title;
                     <div class="details-activite">
                         <h2>Journée à thème</h2>
                         <h3>NOVEMBRE BLEU</h3>
-                        <p>Organisation d'une journée pour soutenir le lutte contre le cancer de la prostate chez l'Homme.</p>
+                        <p>Organisation d'une journée pour soutenir le lutte contre le cancer de la prostate chez
+                            l'Homme.</p>
                     </div>
                 </article>
                 <!-- Carte Activité 3 -->
@@ -217,11 +184,12 @@ echo $title;
                 <div class="marquee">
                     <div class="marquee-content" id="firstRow"></div>
                 </div>
-                <!-- <div class="marquee reverse">
+                <div class="marquee reverse">
                     <div class="marquee-content" id="secondRow"></div>
-                </div> -->
+                </div>
                 <div class="gradient-overlay gradient-left"></div>
                 <div class="gradient-overlay gradient-right"></div>
+
             </div>
         </div>
     </section>
@@ -245,19 +213,23 @@ echo $title;
                     <div class="controls">
                         <div class="controls-btn">
                             <button class="control-button" id="prevButton">
-                                <svg class="btn"  width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <svg class="btn" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
+                                     stroke="currentColor" fill="none">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M15 6l-6 6l6 6" />
+                                    <path d="M15 6l-6 6l6 6"/>
                                 </svg>
                             </button>
                             <button class="control-button" id="nextButton">
-                                <svg class="btn" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <svg class="btn" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
+                                     stroke="currentColor" fill="none">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M9 6l6 6l-6 6" />
+                                    <path d="M9 6l6 6l-6 6"/>
                                 </svg>
                             </button>
                         </div>
-                        <a href="equipe.html"><button>Voir Plus</button></a>
+                        <a href="equipe.html">
+                            <button>Voir Plus</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -295,7 +267,8 @@ echo $title;
             </button>
             <div class="faq-reponse">
                 <p>
-                    Nos délais varient en fonction de la complexité du projet. Généralement, nous livrons les projets dans un délai de 2 à 8 semaines.
+                    Nos délais varient en fonction de la complexité du projet. Généralement, nous livrons les projets
+                    dans un délai de 2 à 8 semaines.
                 </p>
             </div>
         </div>
@@ -308,7 +281,8 @@ echo $title;
             </button>
             <div class="faq-reponse">
                 <p>
-                    Nous restons en contact régulier via emails, appels ou réunions virtuelles, et vous recevez des points d’avancement clairs et détaillés à chaque étape.
+                    Nous restons en contact régulier via emails, appels ou réunions virtuelles, et vous recevez des
+                    points d’avancement clairs et détaillés à chaque étape.
                 </p>
             </div>
         </div>
@@ -380,7 +354,7 @@ echo $title;
             <a href="#" class="icone-reseau" aria-label="Facebook">
                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                      class="icone-svg" viewBox="0 0 24 24">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
                 </svg>
             </a>
             <a href="#" class="icone-reseau" aria-label="Twitter">
@@ -399,7 +373,8 @@ echo $title;
             <a href="#" class="icone-reseau" aria-label="LinkedIn">
                 <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                      stroke-width="0" class="icone-svg" viewBox="0 0 24 24">
-                    <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                    <path stroke="none"
+                          d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
                     <circle cx="4" cy="4" r="2" stroke="none"/>
                 </svg>
             </a>
@@ -412,7 +387,9 @@ echo $title;
      =======================================================
      Inclusion du fichier JavaScript principal.
 -->
-<script src="assets/js/scripts.js"></script>
+<script src="private/client/assets/js/accueil.js"></script>
+<div class="logo-flottant"></div>
+<script type="module" src="private/client/assets/js/logo3D.js"></script>
+
 </body>
 </html>
-
