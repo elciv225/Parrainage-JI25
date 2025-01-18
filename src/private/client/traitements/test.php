@@ -5,6 +5,7 @@ namespace client\traitements;
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Charger l'autoloader de Composer
 
 use config\Database;
+use models\QuestionManager;
 
 try {
     // Obtenir la connexion PDO

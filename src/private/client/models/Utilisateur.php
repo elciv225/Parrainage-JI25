@@ -1,6 +1,6 @@
 <?php
 
-namespace client\traitements;
+namespace models;
 
 class Utilisateur
 {

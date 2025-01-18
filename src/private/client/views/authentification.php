@@ -1,111 +1,3 @@
-<?php
-
-use config\Database;
-use client\traitements\UtilisateurManager;
-use client\traitements\Utilisateur;
-
-
-if (isset($_POST['btn-inscription-complete'])) {
-
-    // Gestion de la photo
-    $photoPath = null; // Initialisation du chemin
-    if (isset($_FILES['photo-profil']) && is_uploaded_file($_FILES['photo-profil']['tmp_name'])) {
-        $photo = $_FILES['photo-profil']; // Récupérer les informations du fichier
-
-        // Définir un chemin de stockage absolu
-        $uploadDir = __DIR__ . '/client/uploads/photos/'; // Répertoire absolu
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true); // Créer le répertoire si inexistant
-        }
-
-        // Nettoyer les données utilisateur pour le nom du fichier
-        $prenom = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['prenoms']); // Retirer les caractères non valides
-        $nom = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['nom']);
-
-        // Générer un nom unique basé sur les données utilisateur
-        $uniqueName = "user_{$prenom}_{$nom}_" . uniqid() . '.' . pathinfo($photo['name'], PATHINFO_EXTENSION);
-        $photoPath = $uploadDir . $uniqueName; // Chemin absolu complet
-
-        // Déplacement du fichier
-        if (!move_uploaded_file($photo['tmp_name'], $photoPath)) {
-            echo "Erreur lors de l'enregistrement de la photo.";
-            $photoPath = null; // Réinitialisation en cas d'erreur
-        }
-    }
-
-    $utilisateur_post = new Utilisateur(
-        null,
-        $_POST['prenoms'],
-        $_POST['nom'],
-        $_POST['niveau'],
-        $_POST['email'],
-        $_POST['motDePasse'],
-        $photoPath,
-        '',
-        (int)$_POST['totalScore'],
-        null
-    );
-
-    // Connexion à la ase de données
-    $pdo = Database::getConnection();
-
-    // Instance de UtilisateurManger
-    $manager = new UtilisateurManager($pdo);
-
-    $utilisateur = $manager->inscription($utilisateur_post);
-
-    if ($utilisateur === null) {
-        $_SESSION['erreur_connexion'] = "Erreur lors de la connexion";
-    } else {
-        $_SESSION['utilisateur'] = [
-            'id' => $utilisateur->getUtilisateurId(),
-            'prenom' => $utilisateur->getPrenom(),
-            'nom' => $utilisateur->getNom(),
-            'email' => $utilisateur->getEmail(),
-            'niveau' => $utilisateur->getNiveau(),
-            'photo' => $utilisateur->getPhoto(),
-            'score_personnalite' => $utilisateur->getScorePersonnalite(),
-            'id_profil' => $utilisateur->getIdProfil(),
-            'date_creation' => $utilisateur->getDateCreation(),
-        ];
-        // Rediriger vers la page d'accueil
-        header('Location: /');
-        exit();
-    }
-}
-
-
-if (isset($_POST['btn-connexion'])) {
-    // Connexion à la ase de données
-    $pdo = Database::getConnection();
-
-    // Instance de UtilisateurManger
-    $manager = new UtilisateurManager($pdo);
-
-    $utilisateur = $manager->connexion($_POST['email'], $_POST['motDePasse']);
-
-    if ($utilisateur === null) {
-        $_SESSION['erreur_connexion'] = "Erreur lors de la connexion";
-    } else {
-        $_SESSION['utilisateur'] = [
-            'id' => $utilisateur->getUtilisateurId(),
-            'prenom' => $utilisateur->getPrenom(),
-            'nom' => $utilisateur->getNom(),
-            'email' => $utilisateur->getEmail(),
-            'niveau' => $utilisateur->getNiveau(),
-            'photo' => $utilisateur->getPhoto(),
-            'score_personnalite' => $utilisateur->getScorePersonnalite(),
-            'id_profil' => $utilisateur->getIdProfil(),
-            'date_creation' => $utilisateur->getDateCreation(),
-        ];
-        // Rediriger vers la page d'accueil
-        header('Location: /');
-        exit();
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -195,7 +87,7 @@ if (isset($_POST['btn-connexion'])) {
             </form>
         </div>
         <div class="connexion" id="connexion">
-            <form method="post">
+            <form method="post" action="/connexion">
                 <div class="header-form">
                     <h3>Connectez-vous</h3>
                     <h6>Vous n'avez pas de compte ? <a class="link" href="#inscription">Cliquez ici pour vous
@@ -230,7 +122,7 @@ if (isset($_POST['btn-connexion'])) {
         </div>
         <div class="ajout-photo" id="ajout-photo">
 
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" action="/inscription" enctype="multipart/form-data">
                 <div class="header-form">
                     <h3>Ajouter votre photo de profil</h3>
                     <p>Attention ! Cette image sera affichée lors du parrainage, alors choisissez une photo qui vous fait sourire, on ne sait jamais ! 😄</p>

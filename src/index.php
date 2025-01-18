@@ -16,6 +16,7 @@ session_start([
 
 require_once __DIR__ . "/vendor/autoload.php";
 
+
 // Charger les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -84,6 +85,7 @@ if (empty($_SESSION['utilisateur'])) {
 // Initialiser l'URL courante
 Route::init($_GET['url'] ?? '/');
 
+
 // Définir les routes
 Route::get('/', function () {
     View::render('accueil',[
@@ -122,6 +124,7 @@ Route::get('/authentification', function (){
     ]);
 });
 
+require_once 'private/client/routes/traitements.php';
 
 // Exécuter la route
 Route::run();

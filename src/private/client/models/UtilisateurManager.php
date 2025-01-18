@@ -1,7 +1,8 @@
 <?php
 
-namespace client\traitements;
+namespace models;
 
+use client\traitements\PDOException;
 use PDO;
 
 class UtilisateurManager

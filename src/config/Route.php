@@ -74,4 +74,3 @@ class Route
     }
 }
 
-class RouterException extends \Exception {}

@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Charger l'autoloader pour les classes configurées
 
 use config\Database;
-use client\traitements\QuestionManager;
+use models\QuestionManager;
 
 $balancedQuestions = [];
 try {

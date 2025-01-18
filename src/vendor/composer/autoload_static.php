@@ -17,8 +17,13 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         array (
             'views\\' => 6,
         ),
+        'm' => 
+        array (
+            'models\\' => 7,
+        ),
         'c' => 
         array (
+            'controllers\\' => 12,
             'config\\' => 7,
             'client\\traitements\\' => 19,
         ),
@@ -46,6 +51,14 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         'views\\' => 
         array (
             0 => __DIR__ . '/../..' . '/private/client/views',
+        ),
+        'models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/private/client/models',
+        ),
+        'controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/private/client/controllers',
         ),
         'config\\' => 
         array (

@@ -5,6 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/config" isTestSource="false" packagePrefix="config\" />
       <sourceFolder url="file://$MODULE_DIR$/src/private/client/traitements" isTestSource="false" packagePrefix="client\traitements\" />
       <sourceFolder url="file://$MODULE_DIR$/src/private/client/views" isTestSource="false" packagePrefix="views\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/private/client/controllers" isTestSource="false" packagePrefix="controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/private/client/models" isTestSource="false" packagePrefix="models\" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/graham-campbell/result-type" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpoption/phpoption" />

@@ -7,7 +7,9 @@
     "psr-4": {
       "client\\traitements\\": "private/client/traitements/",
       "config\\": "config/",
-      "views\\": "private/client/views/"
+      "views\\": "private/client/views/",
+      "models\\": "private/client/models/",
+      "controllers\\": "private/client/controllers/"
     }
   }
 }
