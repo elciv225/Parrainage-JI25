@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="private/client/assets/css/styles.css">
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
-    <title><?= $title ?></title>
+    <title><?= $title ?? "Titre par défaut" ?></title>
 </head>
 <body>
 
 <div class="principal-container">
     <div class="section-gauche">
-
+        <div class="carousel-container">
+            <div class="carousel-slide">Slide 1</div>
+            <div class="carousel-slide">Slide 2</div>
+            <div class="carousel-slide">Slide 3</div>
+            <div class="carousel-slide">Slide 4</div>
+        </div>
+        <div class="dots-container"></div>
     </div>
     <div class="section-droite">
         <div class="inscription" id="inscription">
@@ -23,11 +29,18 @@
                 </div>
                 <div class="body-form">
                     <div class="input-group" style="position: relative; z-index: 1000;">
-                        <input type="text" name="nom" id="inscription-nom" placeholder="Veuillez  écrire ici">
+                        <input
+                                type="text"
+                                name="nom"
+                                id="inscription-nom"
+                                placeholder="Veuillez  écrire ici"
+                                autocomplete="off"
+                        >
                         <label for="inscription-nom">Nom</label>
                     </div>
                     <div class="input-group" style="position: relative; z-index: 999;">
-                        <input type="text" name="nom" id="inscription-prenoms" placeholder="Veuillez  écrire ici">
+                        <input type="text" name="nom" id="inscription-prenoms" placeholder="Veuillez  écrire ici"
+                               autocomplete="off" >
                         <label for="inscription-prenoms">Prénoms</label>
                     </div>
                     <div class="select-group">
@@ -42,36 +55,37 @@
                         <label for="inscription-niveau">Niveau</label>
                     </div>
                     <div class="input-group">
-                        <input type="email" name="email" id="inscription-email" placeholder="Veuillez  écrire ici">
+                        <input type="email" name="email" id="inscription-email" placeholder="Veuillez  écrire ici"
+                               autocomplete="off" >
                         <label for="inscription-email">Email</label>
                     </div>
 
                     <div class="input-group">
                         <input type="password" name="motDePasse" id="inscription-mdp"
-                               placeholder="Veuillez  écrire ici">
+                               placeholder="Veuillez  écrire ici" autocomplete="off" >
                         <label for="inscription-mdp">Mot de Passe</label>
                         <!-- Conteneur du SVG “œil” pour toggler -->
                         <lord-icon
-                            src="https://cdn.lordicon.com/wepoiyzv.json"
-                            trigger="morph"
-                            stroke="bold"
-                            state="hover-lashes"
-                            colors="primary:#ffffff,secondary:#e8b730"
-                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                                src="https://cdn.lordicon.com/wepoiyzv.json"
+                                trigger="morph"
+                                stroke="bold"
+                                state="hover-lashes"
+                                colors="primary:#ffffff,secondary:#e8b730"
+                                style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 25%; z-index: 9999">
                         </lord-icon>
                     </div>
                     <div class="input-group">
                         <input type="password" name="confirmMotDePasse" id="inscription-confirm-mdp"
-                               placeholder="Veuillez  écrire ici">
+                               placeholder="Veuillez  écrire ici" autocomplete="off" >
                         <label for="inscription-confirm-mdp">Confirmer le mot de passe</label>
                         <!-- Conteneur du SVG “œil” pour toggler -->
                         <lord-icon
-                            src="https://cdn.lordicon.com/wepoiyzv.json"
-                            trigger="hover"
-                            stroke="bold"
-                            state="hover-lashes"
-                            colors="primary:#ffffff,secondary:#e8b730"
-                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                                src="https://cdn.lordicon.com/wepoiyzv.json"
+                                trigger="hover"
+                                stroke="bold"
+                                state="hover-lashes"
+                                colors="primary:#ffffff,secondary:#e8b730"
+                                style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 25%; z-index: 9999">
                         </lord-icon>
                     </div>
 
@@ -96,19 +110,21 @@
 
                 <div class="body-form">
                     <div class="input-group">
-                        <input type="email" name="email" id="connexion-email" placeholder="Veuillez  écrire ici">
+                        <input type="email" name="email" id="connexion-email" placeholder="Veuillez  écrire ici"
+                               autocomplete="off" >
                         <label for="connexion-email">Email</label>
                     </div>
                     <div class="input-group">
-                        <input type="password" name="motDePasse" id="connexion-mdp" placeholder="Veuillez  écrire ici">
+                        <input type="password" name="motDePasse" id="connexion-mdp" placeholder="Veuillez  écrire ici"
+                               autocomplete="off" >
                         <label for="connexion-mdp">Mot de passe</label>
                         <lord-icon
-                            src="https://cdn.lordicon.com/wepoiyzv.json"
-                            trigger="hover"
-                            stroke="bold"
-                            state="hover-lashes"
-                            colors="primary:#ffffff,secondary:#e8b730"
-                            style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 15%; z-index: 9999">
+                                src="https://cdn.lordicon.com/wepoiyzv.json"
+                                trigger="hover"
+                                stroke="bold"
+                                state="hover-lashes"
+                                colors="primary:#ffffff,secondary:#e8b730"
+                                style="width:1.5rem;height:1.5rem; position: absolute; right: 10px; top: 25%; z-index: 9999">
                         </lord-icon>
                     </div>
                 </div>
@@ -125,7 +141,8 @@
             <form method="post" action="/inscription" enctype="multipart/form-data">
                 <div class="header-form">
                     <h3>Ajouter votre photo de profil</h3>
-                    <p>Attention ! Cette image sera affichée lors du parrainage, alors choisissez une photo qui vous fait sourire, on ne sait jamais ! 😄</p>
+                    <p>Attention ! Cette image sera affichée lors du parrainage, alors choisissez une photo qui vous
+                        fait sourire, on ne sait jamais ! 😄</p>
                 </div>
                 <div class="body-form">
                     <input type="hidden" name="nom" id="hidden-nom">

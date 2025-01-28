@@ -822,4 +822,60 @@ document.addEventListener("DOMContentLoaded", function () {
         previewContainer.classList.remove('active');
         errorMessage.classList.remove('active');
     });
+
+
+    /*********************************************************
+     * Carrousel de la zone de connexion
+     ********************************************************/
+    const carousel = document.querySelector('.carousel-container');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.querySelector('.dots-container');
+    let currentSlide = 0;
+    let autoPlayInterval;
+
+    // Créer les points de navigation
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (index === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        // Animation avec GSAP
+        gsap.to(carousel, {
+            duration: 1,
+            x: -currentSlide * 100 + '%',
+            ease: 'power2.inOut'
+        });
+
+        // Mise à jour des points
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }, 4000); // Défilement toutes les 4 secondes
+    }
+
+    // Démarrer le défilement automatique
+    startAutoPlay();
+
+    // Pause au survol du carrousel
+    carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Pause au survol des points
+    dotsContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    dotsContainer.addEventListener('mouseleave', startAutoPlay);
+
 });

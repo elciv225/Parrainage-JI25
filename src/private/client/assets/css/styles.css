@@ -39,6 +39,7 @@
 
     /* Overlays et shadows */
     --overlay: rgba(44, 62, 80, 0.1);
+    --shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -90,6 +91,7 @@
 
         /* Overlays et shadows */
         --overlay: rgba(0, 0, 0, 0.5);
+        --shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
         --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
         --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
         --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
@@ -201,13 +203,13 @@ body.parrainage-active {
     justify-content: center;
     width: 800px;
     height: 70vh;
+    max-height: 512px;
     padding: 10px;
     border-radius: 22px;
     gap: 5px;
     overflow: hidden;
-    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
-    backdrop-filter: blur(6px);
-    background: rgba(255, 255, 255, 0.1);
+    background-color: var(--background-tertiary);
+    box-shadow: var(--shadow);
 
     .section-gauche {
         width: 40%;
@@ -215,11 +217,56 @@ body.parrainage-active {
         padding: 8px;
         display: flex;
         justify-content: center;
-        backdrop-filter: blur(6px);
-        background: rgba(255, 255, 255, 0.1);
+        background-color: var(--background-input);
         overflow: hidden;
         position: relative;
+        box-shadow: var(--shadow);
         z-index: 1;
+
+        .carousel-container {
+            display: flex;
+            position: relative;
+            align-content: center;
+            transform: translateX(0);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 12px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            pointer-events: all;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .dot.active {
+            background: #333;
+            transform: scale(1.2);
+        }
+
     }
 
     .section-droite {
@@ -618,6 +665,9 @@ body.parrainage-active .principal-container {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     top: 0;
     left: 0;
 }
@@ -678,8 +728,8 @@ body.parrainage-active .principal-container {
 
 .quiz-content {
     padding: 2rem;
-
 }
+
 
 .question {
     font-size: 1.25rem;
@@ -695,6 +745,7 @@ body.parrainage-active .principal-container {
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    max-height: 260px;
 }
 
 .option {
@@ -723,8 +774,6 @@ body.parrainage-active .principal-container {
     padding: 1.5rem 0;
     display: flex;
     justify-content: space-around;
-    position: absolute;
-    bottom: 15px;
     width: 100%;
 }
 
@@ -978,6 +1027,7 @@ body.parrainage-active .principal-container {
     .principal-container {
         width: 90%;
         height: 90vh;
+        max-height: 640px;
         gap: 0;
 
         .section-gauche {
@@ -1019,12 +1069,7 @@ body.parrainage-active .principal-container {
     }
 
     .options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
+        overflow-x: scroll;
     }
 
     .option {
@@ -1044,6 +1089,13 @@ body.parrainage-active .principal-container {
         width: 50%;
         height: 45px;
     }
+
+    #prev-btn, #next-btn {
+        width: 40%;
+        height: 40px;
+    }
+
+
 }
 
 

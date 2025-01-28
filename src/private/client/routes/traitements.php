@@ -5,7 +5,7 @@ use config\Route;
 
 // Traitement d'inscription
 Route::post('/inscription', function (){
-    Authentification::inscription();
+   Authentification::inscription();
 },'traitement_inscription');
 
 // Traitement de connexion

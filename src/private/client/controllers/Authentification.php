@@ -33,15 +33,13 @@ class Authentification
             );
 
             $utilisateur = $manager->inscription($utilisateur);
-
-            if ($utilisateur) { // Connexion reussi
+            if ($utilisateur) {
                 self::setUtilisateurSession($utilisateur);
-            } else { // Erreur lors de l'inscription
+                header('Location: /');
+            } else {
                 $_SESSION['erreur_connexion'] = "Erreur lors de la connexion";
+                header('Location: /authentification');
             }
-        } else {
-            // On va afficher la view dans ce cas
-            echo "Il y a soucis";
         }
     }
 
@@ -51,17 +49,18 @@ class Authentification
             $pdo = Database::getConnection();
             $manager = new UtilisateurManager($pdo);
 
+
             $utilisateur = $manager->connexion($_POST['email'], $_POST['motDePasse']);
 
             if ($utilisateur) {
                 self::setUtilisateurSession($utilisateur);
+                header('Location: /');
             } else {
-                $_SESSION['erreur_connexion'] = "Erreur lors de la connexion";
+                $_SESSION['erreur_connexion'] = "Erreur sur l'email/mot de passe";
+                header('Location: /authentification');
             }
-        } else {
-            // On va afficher la view dans ce cas
-            echo "Il y a soucis";
         }
+
     }
 
     public static function uploadPhoto($inputFile, $inputPrenoms, $inputNom): string|null
@@ -70,7 +69,7 @@ class Authentification
             $photo = $inputFile; // Récupérer les informations du fichier
 
             // Définir un chemin de stockage absolu
-            $uploadDir = __DIR__ . '/client/uploads/photos/'; // Répertoire absolu
+            $uploadDir = __DIR__ . '/../../client/uploads/photos/'; // Répertoire absolu
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true); // Créer le répertoire si inexistant
             }
@@ -81,7 +80,11 @@ class Authentification
 
             // Générer un nom unique basé sur les données utilisateur
             $uniqueName = "user_{$prenom}_{$nom}_" . uniqid() . '.' . pathinfo($photo['name'], PATHINFO_EXTENSION);
-            return $uploadDir . $uniqueName; // Chemin absolu complet
+            $destinationPath = $uploadDir . $uniqueName;
+
+            if (move_uploaded_file($inputFile['tmp_name'], $destinationPath)) {
+                return $uniqueName; // Retourne le nom du fichier, pas le chemin complet
+            }
         }
 
         return null;
@@ -101,9 +104,5 @@ class Authentification
             'id_profil' => $utilisateur->getIdProfil(),
             'date_creation' => $utilisateur->getDateCreation(),
         ];
-        // Rediriger vers la page d'accueil
-        header('Location: /');
-        exit; // On utilise exit pour s'assurer que le script s'arrête après la redirection
     }
-
 }
