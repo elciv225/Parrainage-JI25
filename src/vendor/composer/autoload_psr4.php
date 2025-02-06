@@ -10,7 +10,6 @@ return array(
     'models\\' => array($baseDir . '/private/client/models'),
     'controllers\\' => array($baseDir . '/private/client/controllers'),
     'config\\' => array($baseDir . '/config'),
-    'client\\traitements\\' => array($baseDir . '/private/client/traitements'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),

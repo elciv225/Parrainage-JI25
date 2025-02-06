@@ -25,7 +25,6 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         array (
             'controllers\\' => 12,
             'config\\' => 7,
-            'client\\traitements\\' => 19,
         ),
         'S' => 
         array (
@@ -63,10 +62,6 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
         'config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/config',
-        ),
-        'client\\traitements\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/private/client/traitements',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (

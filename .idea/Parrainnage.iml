@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/config" isTestSource="false" packagePrefix="config\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/private/client/traitements" isTestSource="false" packagePrefix="client\traitements\" />
       <sourceFolder url="file://$MODULE_DIR$/src/private/client/views" isTestSource="false" packagePrefix="views\" />
       <sourceFolder url="file://$MODULE_DIR$/src/private/client/controllers" isTestSource="false" packagePrefix="controllers\" />
       <sourceFolder url="file://$MODULE_DIR$/src/private/client/models" isTestSource="false" packagePrefix="models\" />
