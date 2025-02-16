@@ -1,20 +1,27 @@
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
   deploy:
     runs-on: self-hosted
+    container:
+      # Une image officielle Node basée sur Debian récent (glibc ≥ 2.28)
+      image: node:20-bullseye
+      # Optionnel mais très souvent nécessaire pour Docker-in-Docker :
+      # on active le mode “privileged” et on monte le socket Docker de l’hôte
+      options: --privileged -v /var/run/docker.sock:/var/run/docker.sock
+
     steps:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
+      - name: Installer docker-compose (si pas déjà présent)
+        run: |
+          apt-get update
+          apt-get install -y docker-compose
+
       - name: 🚀 Déployer l’application sur EC2
         run: |
-          cd /home/ec2-user/actions-runner/_work/Parrainage-JI25
-          git pull github main || git clone https://github.com/elciv225/Parrainage-JI25.git .
+          # Vous êtes dans un conteneur Debian/Node 20 avec glibc >= 2.27
+          # Mais le docker socket pointe sur le moteur Docker de l’hôte AL2
+          # On peut donc exécuter docker-compose up/down comme d’habitude
+          cd /home/ec2-user/actions-runner/_work/Parrainage-JI25/Parrainage-JI25
           docker-compose down
           docker-compose up --build -d
