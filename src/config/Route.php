@@ -32,6 +32,16 @@ class Route
         ];
     }
 
+    public static function jsonResponse(array $data, int $status = 200): void
+    {
+        // Définir l'en-tête de la réponse pour indiquer que c'est du JSON
+        header('Content-Type: application/json', true, $status);
+
+        // Convertir les données en JSON et les envoyer
+        echo json_encode($data);
+        exit;
+    }
+
     public static function run(): void
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';

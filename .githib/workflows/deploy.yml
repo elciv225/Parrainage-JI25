@@ -1,0 +1,20 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: 🛠️ Récupérer le code du dépôt
+        uses: actions/checkout@v3
+
+      - name: 🚀 Déployer l’application sur EC2
+        run: |
+          cd /home/ec2-user/actions-runner/_work/Parrainage-JI25/Parrainage-JI25
+          git pull origin main
+          docker compose down
+          docker compose up --build -d
