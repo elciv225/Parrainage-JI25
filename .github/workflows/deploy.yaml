@@ -19,16 +19,20 @@ jobs:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
-      - name: Installer docker-compose (si pas déjà présent)
+      - name: 💁🏾‍♂️ Installer docker-compose (si pas déjà présent)
         run: |
           apt-get update
           apt-get install -y docker-compose
 
       - name: 🚀 Déployer l’application sur EC2
         run: |
-          # Vous êtes dans un conteneur Debian/Node 20 avec glibc >= 2.27
-          # Mais le docker socket pointe sur le moteur Docker de l’hôte AL2
-          # On peut donc exécuter docker-compose up/down comme d’habitude
-          cd /home/ec2-user/actions-runner/_work/Parrainage-JI25/Parrainage-JI25
+          # Accéder au dossier cloné par GitHub Actions dans le conteneur
+          cd $GITHUB_WORKSPACE
+
+          # Vérifier que nous sommes bien dans le bon dossier
+          echo "Dossier courant : $(pwd)"
+          ls -la
+
+          # Exécuter docker-compose
           docker-compose down
           docker-compose up --build -d
