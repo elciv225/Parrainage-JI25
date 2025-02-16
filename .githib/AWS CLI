@@ -1,1 +1,0 @@
-aws ecr get-login-password | docker login --username AWS --password-stdin 127214156425.daws --versionkr.ecr.eu-north-1.amazonaws.com/parrainage-ji25
