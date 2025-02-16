@@ -16,5 +16,5 @@ jobs:
         run: |
           cd /home/ec2-user/actions-runner/_work/Parrainage-JI25
           git pull github main || git clone https://github.com/elciv225/Parrainage-JI25.git .
-          docker compose down
-          docker compose up --build -d
+          docker-compose down
+          docker-compose up --build -d
