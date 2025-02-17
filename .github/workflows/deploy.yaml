@@ -8,88 +8,90 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    timeout-minutes: 30  # Évite un blocage infini du job
+    timeout-minutes: 30
 
     container:
       image: node:20-bullseye
       options: --privileged -v /var/run/docker.sock:/var/run/docker.sock
+      user: root
+
+    env:
+      MYSQL_USER: miage
+      MYSQL_PASSWORD: JI25
+      MYSQL_DATABASE: parrainage
 
     steps:
       - name: 🛠️ Récupérer le code du dépôt
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🔽 Installer Docker et Docker Compose
         run: |
-          if ! command -v docker &> /dev/null; then
-            echo "🚀 Installation de Docker..."
-            apt update
-            apt install -y docker.io
-            systemctl start docker
-            systemctl enable docker
-          else
-            echo "✅ Docker est déjà installé."
-          fi
-          
-          if ! command -v docker-compose &> /dev/null; then
-            echo "🚀 Installation de Docker Compose..."
-            curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
-          else
-            echo "✅ Docker Compose est déjà installé."
-          fi
+          apt-get update
+          apt-get install -y docker.io curl
+          curl -L "https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+          service docker start || true
+          sleep 10
 
-      - name: ✅ Vérifier l’installation de Docker et Docker Compose
+      - name: ✅ Vérifier l'installation
         run: |
-          docker -v
-          docker-compose -v
-
-      - name: 📦 Vérifier l'installation de Node.js et npm
-        run: |
-          node -v
-          npm -v
+          docker --version || exit 1
+          docker-compose --version || exit 1
+          node --version || exit 1
+          npm --version || exit 1
 
       - name: 📦 Installer les dépendances Node.js
+        working-directory: ./src
         run: |
-          cd $GITHUB_WORKSPACE/src
-          npm install
-          ls -la node_modules
+          npm ci
+          npm list --depth=0
 
       - name: 🚧 Activer le mode maintenance
-        run: touch $GITHUB_WORKSPACE/src/maintenance.lock
-
-      - name: 🔧 Appliquer les permissions correctes
         run: |
-          chmod -R 755 $GITHUB_WORKSPACE/src
-          chown -R www-data:www-data $GITHUB_WORKSPACE/src
+          mkdir -p ./src
+          touch ./src/maintenance.lock
 
-      - name: 🚀 Déployer l’application sur EC2
+      - name: 🔧 Appliquer les permissions
         run: |
-          cd $GITHUB_WORKSPACE
-          echo "📂 Dossier courant : $(pwd)"
-          ls -la
-          docker-compose up --build -d
+          chown -R www-data:www-data ./src
+          find ./src -type f -exec chmod 644 {} \;
+          find ./src -type d -exec chmod 755 {} \;
 
-      - name: 📌 Vérifier les conteneurs en cours d'exécution
-        run: docker ps -a
+      - name: 🌐 Configurer le réseau Docker
+        run: docker network create my_network || true
 
-      - name: 📝 Vérifier les logs Apache
-        run: docker logs php_8-2 || echo "⚠️ Apache logs indisponibles."
-
-      - name: 🔄 Redémarrer Apache
-        run: docker exec php_8-2 apachectl restart || echo "⚠️ Impossible de redémarrer Apache."
-
-      - name: 🔎 Vérifier si la base de données existe
+      - name: 🚀 Déployer l'application
         run: |
-          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SHOW DATABASES; USE parrainage; SHOW TABLES;"
+          docker-compose down --remove-orphans
+          docker-compose up -d --build --force-recreate
 
-      - name: 📂 Charger la base de données sans supprimer les utilisateurs
+      - name: 📌 Vérifier le déploiement
         run: |
-          docker cp ./sql/parrainge.sql mysql_8:/parrainge.sql
-          docker exec -i mysql_8 mysql -u miage -pJI25 parrainage < /parrainge.sql
+          docker ps -a
+          sleep 10
+          docker logs php_8-2 --tail 50
 
-      - name: 🔎 Vérifier à nouveau la base de données après import
+      - name: 📝 Importer la base de données
         run: |
-          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'parrainage';"
+          if [ -f "./sql/parrainage.sql" ]; then
+            docker cp ./sql/parrainage.sql mysql_8:/tmp/
+            docker exec mysql_8 /bin/bash -c '
+              while ! mysqladmin ping -h"localhost" --silent; do
+                sleep 1
+              done
+              mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE"
+              mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /tmp/parrainage.sql
+            '
+          else
+            echo "⚠️ Fichier SQL introuvable"
+            exit 1
+          fi
 
-      - name: ✅ Désactiver le mode maintenance
-        run: rm -f $GITHUB_WORKSPACE/src/maintenance.lock
+      - name: ✅ Vérification finale
+        run: |
+          docker exec mysql_8 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "
+            SELECT COUNT(*) as tables_count 
+            FROM information_schema.tables 
+            WHERE table_schema = '$MYSQL_DATABASE'
+          "
+          rm -f ./src/maintenance.lock
