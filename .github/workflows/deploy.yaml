@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    timeout-minutes: 30  # Évite un blocage infini du job
+
     container:
       image: node:20-bullseye
       options: --privileged -v /var/run/docker.sock:/var/run/docker.sock
@@ -16,13 +18,10 @@ jobs:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
-      - name: 💁🏾‍♂️ Installer docker-compose
+      - name: ✅ Vérifier l’installation de Docker et Docker Compose
         run: |
-          apt-get update
-          apt-get install -y curl
-          curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-          chmod +x /usr/local/bin/docker-compose
-          docker-compose version
+          docker -v
+          docker-compose -v
 
       - name: 🚧 Activer le mode maintenance
         run: touch $GITHUB_WORKSPACE/src/maintenance.lock
@@ -35,6 +34,7 @@ jobs:
       - name: 🚀 Déployer l’application sur EC2
         run: |
           cd $GITHUB_WORKSPACE
+          docker-compose down
           docker-compose up --build -d
 
       - name: 📌 Vérifier les conteneurs en cours d'exécution
@@ -55,9 +55,9 @@ jobs:
           docker cp ./sql/parrainge.sql mysql_8:/parrainge.sql
           docker exec -i mysql_8 mysql -u miage -pJI25 parrainage < /parrainge.sql
 
-      - name: 🔎 Vérifier à nouveau la base de données
+      - name: 🔎 Vérifier à nouveau la base de données après import
         run: |
-          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SHOW DATABASES; USE parrainage; SHOW TABLES;"
+          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'parrainage';"
 
       - name: ✅ Désactiver le mode maintenance
         run: rm -f $GITHUB_WORKSPACE/src/maintenance.lock
