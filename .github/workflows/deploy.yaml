@@ -40,6 +40,4 @@ jobs:
           cd $GITHUB_WORKSPACE
           echo "Dossier courant : $(pwd)"
           ls -la
-          docker-compose config
-          docker-compose down
           docker-compose up --build -d
