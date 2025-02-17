@@ -31,7 +31,6 @@ services:
       MYSQL_USER: miage
       MYSQL_PASSWORD: JI25
     ports:
-      # Utilise le port 3307 pour éviter les conflits avec les bases de données
       - "3306:3306"  # Port pour accéder à MySQL
     volumes:
       - ./sql:/docker-entrypoint-initdb.d # Monte tous les fichiers SQL

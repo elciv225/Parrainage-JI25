@@ -24,20 +24,45 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
 
-      - name: 📦 Vérifier l'installation de Node.js et npm
+      - name: ✅ Vérifier Docker et Docker-Compose
         run: |
-          node -v
-          npm -v
+          docker -v
+          docker-compose -v
 
-      - name: 📦 Installer les dépendances Node.js
+      - name: 🚧 Activer le mode maintenance
+        run: touch $GITHUB_WORKSPACE/src/maintenance.lock
+
+      - name: 🔧 Appliquer les permissions correctes
         run: |
-          cd $GITHUB_WORKSPACE/src
-          npm install
-          ls -la node_modules
+          chmod -R 755 $GITHUB_WORKSPACE/src
+          chown -R www-data:www-data $GITHUB_WORKSPACE/src
 
       - name: 🚀 Déployer l’application sur EC2
         run: |
           cd $GITHUB_WORKSPACE
-          echo "Dossier courant : $(pwd)"
-          ls -la
           docker-compose up --build -d
+
+      - name: 📌 Vérifier les conteneurs en cours d'exécution
+        run: docker ps -a
+
+      - name: 📝 Vérifier les logs Apache
+        run: docker logs php_8-2
+
+      - name: 🔄 Redémarrer Apache
+        run: docker exec php_8-2 apachectl restart
+
+      - name: 🔎 Vérifier si la base de données existe
+        run: |
+          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SHOW DATABASES; USE parrainage; SHOW TABLES;"
+
+      - name: 📂 Charger la base de données sans supprimer les utilisateurs
+        run: |
+          docker cp ./sql/parrainge.sql mysql_8:/parrainge.sql
+          docker exec -i mysql_8 mysql -u miage -pJI25 parrainage < /parrainge.sql
+
+      - name: 🔎 Vérifier à nouveau la base de données
+        run: |
+          docker exec -i mysql_8 mysql -u miage -pJI25 -e "SHOW DATABASES; USE parrainage; SHOW TABLES;"
+
+      - name: ✅ Désactiver le mode maintenance
+        run: rm -f $GITHUB_WORKSPACE/src/maintenance.lock

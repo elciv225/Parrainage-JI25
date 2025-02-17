@@ -1,5 +1,11 @@
 Options +FollowSymLinks
 RewriteEngine on
 
+# Si maintenance.lock existe, forcer la redirection vers /maintenance
+RewriteCond %{DOCUMENT_ROOT}/maintenance.lock -f
+RewriteCond %{REQUEST_URI} !^/maintenance$
+RewriteRule ^.*$ /maintenance [R=302,L]
+
+# Gérer les routes normalement si le site n'est pas en maintenance
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

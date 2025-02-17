@@ -23,4 +23,13 @@ $dotenv->load();
 // Chargement du fichier du routeur
 require_once 'private/client/routes/web.php';
 
+// Gestion du site en maintenance
+// Vérifier si maintenance.lock existe
+if (file_exists(__DIR__ . '/maintenance.lock')) {
+    if ($_SERVER['REQUEST_URI'] !== '/maintenance') {
+        header("Location: /maintenance");
+        exit;
+    }
+}
+
 
