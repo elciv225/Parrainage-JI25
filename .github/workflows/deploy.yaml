@@ -19,10 +19,13 @@ jobs:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
-      - name: 💁🏾‍♂️ Installer docker-compose (si pas déjà présent)
+      - name: 💁🏾‍♂️ Installer docker-compose (dernière version)
         run: |
           apt-get update
-          apt-get install -y docker-compose
+          apt-get install -y curl
+          curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+          docker-compose version
 
       - name: 🚀 Déployer l’application sur EC2
         run: |
@@ -32,6 +35,9 @@ jobs:
           # Vérifier que nous sommes bien dans le bon dossier
           echo "Dossier courant : $(pwd)"
           ls -la
+
+          # Vérifier la validité du fichier docker-compose.yaml
+          docker-compose config
 
           # Exécuter docker-compose
           docker-compose down

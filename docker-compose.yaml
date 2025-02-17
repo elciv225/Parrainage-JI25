@@ -1,3 +1,4 @@
+version: '3.8'
 # Définition des services que nous voulons utiliser
 services:
   php:
