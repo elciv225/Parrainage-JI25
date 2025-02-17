@@ -13,7 +13,6 @@ jobs:
     container:
       image: node:20-bullseye
       options: --privileged -v /var/run/docker.sock:/var/run/docker.sock
-      user: root
 
     env:
       MYSQL_USER: miage
