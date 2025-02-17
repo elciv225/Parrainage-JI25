@@ -24,11 +24,6 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
 
-      - name: ✅ Vérifier Docker et Docker-Compose
-        run: |
-          docker -v
-          docker-compose -v
-
       - name: 🚧 Activer le mode maintenance
         run: touch $GITHUB_WORKSPACE/src/maintenance.lock
 
