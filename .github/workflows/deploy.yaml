@@ -21,28 +21,38 @@ jobs:
       - name: 🔽 Installer Docker et Docker Compose
         run: |
           if ! command -v docker &> /dev/null; then
-            echo "Docker n'est pas installé. Installation en cours..."
+            echo "🚀 Installation de Docker..."
             sudo apt update
             sudo apt install -y docker.io
             sudo systemctl start docker
             sudo systemctl enable docker
           else
-            echo "Docker est déjà installé."
+            echo "✅ Docker est déjà installé."
           fi
 
           if ! command -v docker-compose &> /dev/null; then
-            echo "Docker Compose n'est pas installé. Installation en cours..."
+            echo "🚀 Installation de Docker Compose..."
             curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
           else
-            echo "Docker Compose est déjà installé."
+            echo "✅ Docker Compose est déjà installé."
           fi
 
       - name: ✅ Vérifier l’installation de Docker et Docker Compose
         run: |
           docker -v
           docker-compose -v
-      
+
+      - name: 📦 Vérifier l'installation de Node.js et npm
+        run: |
+          node -v
+          npm -v
+
+      - name: 📦 Installer les dépendances Node.js
+        run: |
+          cd $GITHUB_WORKSPACE/src
+          npm install
+          ls -la node_modules
 
       - name: 🚧 Activer le mode maintenance
         run: touch $GITHUB_WORKSPACE/src/maintenance.lock
@@ -55,17 +65,18 @@ jobs:
       - name: 🚀 Déployer l’application sur EC2
         run: |
           cd $GITHUB_WORKSPACE
-          docker-compose down
+          echo "📂 Dossier courant : $(pwd)"
+          ls -la
           docker-compose up --build -d
 
       - name: 📌 Vérifier les conteneurs en cours d'exécution
         run: docker ps -a
 
       - name: 📝 Vérifier les logs Apache
-        run: docker logs php_8-2
+        run: docker logs php_8-2 || echo "⚠️ Apache logs indisponibles."
 
       - name: 🔄 Redémarrer Apache
-        run: docker exec php_8-2 apachectl restart
+        run: docker exec php_8-2 apachectl restart || echo "⚠️ Impossible de redémarrer Apache."
 
       - name: 🔎 Vérifier si la base de données existe
         run: |

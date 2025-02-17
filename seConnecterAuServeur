@@ -1,4 +1,4 @@
-ssh -i parrainage.pem ec2-user@51.20.131.214
-
+ssh -i parrainage.pem ec2-user@16.171.57.136
+ec2-16-171-57-136.eu-north-1.compute.amazonaws.com
 Restart
 aws ec2 reboot-instances --instance-ids i-0f116577657d4f4d6
