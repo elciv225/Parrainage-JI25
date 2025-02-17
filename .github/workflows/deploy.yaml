@@ -24,11 +24,6 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
 
-      - name: 📢 Activer la page de maintenance
-        run: |
-          echo "🚧 Activation de la page de maintenance..."
-          cp $GITHUB_WORKSPACE/maintenance.html /var/www/html/index.html
-
       - name: 📦 Installer Node.js et npm
         run: |
           apt-get install -y curl gnupg
