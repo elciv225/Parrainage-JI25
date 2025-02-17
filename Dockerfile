@@ -23,7 +23,8 @@ WORKDIR /var/www/html
 COPY . .
 
 # Installer les dépendances Node.js (GSAP)
-RUN npm install gsap
+RUN npm install gsap --unsafe-perm
+
 
 # Exposer le port 80
 EXPOSE 80

@@ -9,10 +9,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     container:
-      # Une image officielle Node basée sur Debian récent (glibc ≥ 2.28)
       image: node:20-bullseye
-      # Optionnel mais très souvent nécessaire pour Docker-in-Docker :
-      # on active le mode “privileged” et on monte le socket Docker de l’hôte
       options: --privileged -v /var/run/docker.sock:/var/run/docker.sock
 
     steps:
@@ -27,18 +24,40 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
 
+      - name: 📢 Activer la page de maintenance
+        run: |
+          echo "🚧 Activation de la page de maintenance..."
+          cp $GITHUB_WORKSPACE/maintenance.html /var/www/html/index.html
+
+      - name: 📦 Installer Node.js et npm
+        run: |
+          apt-get install -y curl gnupg
+          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /usr/share/keyrings/nodesource-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/nodesource-archive-keyring.gpg] https://deb.nodesource.com/node_18.x bullseye main" | tee /etc/apt/sources.list.d/nodesource.list > /dev/null
+          apt-get update && apt-get install -y nodejs npm
+          node -v
+          npm -v
+
       - name: 🚀 Déployer l’application sur EC2
         run: |
-          # Accéder au dossier cloné par GitHub Actions dans le conteneur
           cd $GITHUB_WORKSPACE
-
-          # Vérifier que nous sommes bien dans le bon dossier
-          echo "Dossier courant : $(pwd)"
+          
+          echo "📁 Dossier courant : $(pwd)"
           ls -la
 
-          # Vérifier la validité du fichier docker-compose.yaml
+          echo "✅ Vérification de docker-compose.yaml..."
           docker-compose config
 
-          # Exécuter docker-compose
+          echo "📦 Installation des dépendances Node.js..."
+          docker run --rm -v $(pwd):/app -w /app node:20 npm install --unsafe-perm
+
+          echo "🔥 Arrêt des anciens conteneurs..."
           docker-compose down
+
+          echo "🚀 Lancement du déploiement..."
           docker-compose up --build -d
+
+      - name: ✅ Supprimer la page de maintenance
+        run: |
+          echo "✅ Suppression de la page de maintenance..."
+          rm -f /var/www/html/index.html
