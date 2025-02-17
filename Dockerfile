@@ -8,8 +8,10 @@ RUN apt-get update && apt-get upgrade -y && \
     a2enmod rewrite && \
     rm -rf /var/lib/apt/lists/*
 
-# Configurer Apache pour permettre les .htaccess
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+# Configurer Apache pour permettre les .htaccess et activer mod_rewrite
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf && \
+    a2enmod rewrite
+
 
 # Installer Node.js et npm (si non déjà installé)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
