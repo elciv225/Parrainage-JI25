@@ -24,7 +24,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql_8
-    command: --default-authecdntication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: parrainage
