@@ -19,14 +19,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 # Définir le répertoire de travail pour l'application
 WORKDIR /var/www/html
 
-# Copier les fichiers package.json et package-lock.json
-COPY package.json package-lock.json ./
-
-# Installer les dépendances Node.js avant de copier le reste des fichiers
-RUN npm install
-
-# Copier les fichiers du projet après installation des dépendances
+# Copier les fichiers du projet dans le conteneur
 COPY . .
+
+# Installer les dépendances Node.js (GSAP)
+RUN npm install gsap
 
 # Exposer le port 80
 EXPOSE 80
