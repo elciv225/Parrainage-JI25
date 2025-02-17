@@ -20,6 +20,11 @@ Route::get('/maintenance', function () {
         'title'=>'Journée d\'Integration 2025 - Page en maintenance veillez revenir plutard'
     ]);
 });
+Route::get('/test', function () {
+    View::render('test',[
+        'title'=>'Journée d\'Integration 2025 - Page en maintenance - test '
+    ]);
+});
 
 // Page admin
 Route::get('/admin', function () {

@@ -19,6 +19,8 @@ jobs:
       MYSQL_PASSWORD: JI25
       MYSQL_DATABASE: parrainage
       MYSQL_ROOT_PASSWORD: password
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
 
     steps:
       - name: 🛠️ Récupérer le code du dépôt
@@ -27,18 +29,22 @@ jobs:
       - name: 🔽 Installer Docker et Docker Compose
         run: |
           apt-get update
-          apt-get install -y docker.io curl
+          apt-get install -y docker.io curl apache2-utils
           curl -L "https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
           chmod +x /usr/local/bin/docker-compose
           service docker start || true
-          sleep 10
+          sleep 5
 
-      - name: ✅ Vérifier l'installation
+      - name: 🔧 Préparer l'environnement
         run: |
-          docker --version || exit 1
-          docker-compose --version || exit 1
-          node --version || exit 1
-          npm --version || exit 1
+          # S'assurer que le groupe docker existe
+          groupadd -f docker
+          # Ajouter l'utilisateur courant au groupe docker
+          usermod -aG docker $USER || true
+          # Créer le groupe www-data s'il n'existe pas
+          groupadd -f www-data
+          # Créer l'utilisateur www-data s'il n'existe pas
+          id -u www-data &>/dev/null || useradd -r -g www-data www-data
 
       - name: 📦 Installer les dépendances Node.js
         working-directory: ./src
@@ -46,29 +52,61 @@ jobs:
           npm ci
           npm list --depth=0
 
-      - name: 🚧 Activer le mode maintenance
+      - name: 🔧 Configurer les permissions
         run: |
+          # Donner les permissions au dossier src
           mkdir -p ./src
-          touch ./src/maintenance.lock
-
-      - name: 🔧 Appliquer les permissions
-        run: |
           chown -R www-data:www-data ./src
-          find ./src -type f -exec chmod 644 {} \;
-          find ./src -type d -exec chmod 755 {} \;
+          chmod -R 755 ./src
+          
+          # Donner les permissions au socket Docker
+          chmod 666 /var/run/docker.sock
+          
+          # Créer et configurer le dossier de logs Apache
+          mkdir -p /var/log/apache2
+          chown -R www-data:www-data /var/log/apache2
+          chmod -R 755 /var/log/apache2
 
       - name: 🌐 Configurer le réseau Docker
         run: docker network create my_network || true
 
+      - name: 🛑 Arrêter les conteneurs existants
+        run: |
+          docker-compose down --remove-orphans --volumes || true
+          docker system prune -f
+
       - name: 🚀 Déployer l'application
         run: |
-          docker-compose down --remove-orphans
+          # S'assurer que les images sont à jour
+          docker-compose pull
+          
+          # Démarrer les services
           docker-compose up -d --build --force-recreate
+          
+          # Attendre que les conteneurs soient prêts
+          sleep 10
+          
+          # Vérifier l'état des conteneurs
+          docker-compose ps
+
+      - name: 🔧 Configurer Apache
+        run: |
+          docker exec php_8-2 bash -c '
+            # Configurer les permissions d'Apache
+            chown -R www-data:www-data /var/www/html
+            chmod -R 755 /var/www/html
+          
+            # Activer les modules nécessaires
+            a2enmod rewrite
+          
+            # Redémarrer Apache
+            service apache2 restart
+          '
 
       - name: ⏳ Attendre que MySQL soit prêt
         run: |
           echo "Attente du démarrage de MySQL..."
-          attempts=60
+          attempts=30
           until docker exec mysql_8 mysqladmin ping -h"localhost" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent || [ $attempts -eq 0 ]; do
             echo "En attente de MySQL... ($attempts tentatives restantes)"
             attempts=$((attempts - 1))
@@ -79,28 +117,26 @@ jobs:
             echo "Timeout en attendant MySQL"
             exit 1
           fi
+
+      - name: 🔍 Vérifier l'état des services
+        run: |
+          echo "Vérification de MySQL..."
+          docker exec mysql_8 mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SELECT 1"
           
-          echo "MySQL est prêt !"
-
-      - name: 🔧 Configurer MySQL
-        run: |
-          docker exec mysql_8 mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e "
-            SET GLOBAL log_bin_trust_function_creators = 1;
-            GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';
-            FLUSH PRIVILEGES;
-          "
-
-      - name: 📌 Vérifier les conteneurs
-        run: |
-          docker ps -a
-          docker logs mysql_8 --tail 50
-          docker logs php_8-2 --tail 50
+          echo "Vérification d'Apache..."
+          docker exec php_8-2 apache2ctl -S
+          
+          echo "Logs des conteneurs:"
+          docker-compose logs --tail=50
 
       - name: ✅ Vérification finale
         run: |
+          echo "Test de connexion à Apache..."
+          curl -v http://localhost:8081/test || echo "Apache n'est pas accessible sur le port 8081"
+          
+          echo "Test de connexion à MySQL..."
           docker exec mysql_8 mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "
             SELECT COUNT(*) as tables_count 
             FROM information_schema.tables 
             WHERE table_schema = '$MYSQL_DATABASE'
           "
-          rm -f ./src/maintenance.lock
