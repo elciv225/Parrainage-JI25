@@ -68,15 +68,19 @@ jobs:
       - name: ⏳ Attendre que MySQL soit prêt
         run: |
           echo "Attente du démarrage de MySQL..."
-          timeout=120
-          until docker exec mysql_8 mysqladmin ping -h"localhost" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent || [ $timeout -le 0 ]; do
-            sleep 1
-            ((timeout--))
+          attempts=60
+          until docker exec mysql_8 mysqladmin ping -h"localhost" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --silent || [ $attempts -eq 0 ]; do
+            echo "En attente de MySQL... ($attempts tentatives restantes)"
+            attempts=$((attempts - 1))
+            sleep 2
           done
-          if [ $timeout -le 0 ]; then
+          
+          if [ $attempts -eq 0 ]; then
             echo "Timeout en attendant MySQL"
             exit 1
           fi
+          
+          echo "MySQL est prêt !"
 
       - name: 🔧 Configurer MySQL
         run: |
