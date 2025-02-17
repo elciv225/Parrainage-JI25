@@ -16,7 +16,7 @@ jobs:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
-      - name: 💁🏾‍♂️ Installer docker-compose (dernière version)
+      - name: 💁🏾‍♂️ Installer docker-compose
         run: |
           apt-get update
           apt-get install -y curl
@@ -24,35 +24,22 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
 
-      - name: 📦 Installer Node.js et npm
+      - name: 📦 Vérifier l'installation de Node.js et npm
         run: |
-          apt-get install -y curl gnupg
-          curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /usr/share/keyrings/nodesource-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/nodesource-archive-keyring.gpg] https://deb.nodesource.com/node_18.x bullseye main" | tee /etc/apt/sources.list.d/nodesource.list > /dev/null
-          apt-get update && apt-get install -y nodejs npm
           node -v
           npm -v
+
+      - name: 📦 Installer les dépendances Node.js
+        run: |
+          cd $GITHUB_WORKSPACE/src
+          npm install
+          ls -la node_modules
 
       - name: 🚀 Déployer l’application sur EC2
         run: |
           cd $GITHUB_WORKSPACE
-          
-          echo "📁 Dossier courant : $(pwd)"
+          echo "Dossier courant : $(pwd)"
           ls -la
-
-          echo "✅ Vérification de docker-compose.yaml..."
           docker-compose config
-
-          echo "📦 Installation des dépendances Node.js..."
-          docker run --rm -v $(pwd):/app -w /app node:20 npm install --unsafe-perm
-
-          echo "🔥 Arrêt des anciens conteneurs..."
           docker-compose down
-
-          echo "🚀 Lancement du déploiement..."
           docker-compose up --build -d
-
-      - name: ✅ Supprimer la page de maintenance
-        run: |
-          echo "✅ Suppression de la page de maintenance..."
-          rm -f /var/www/html/index.html
