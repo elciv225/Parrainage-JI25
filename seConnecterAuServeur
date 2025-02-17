@@ -1,3 +1,4 @@
 ssh -i parrainage.pem ec2-user@51.20.131.214
 
-token CI/CD GitHub
+Restart
+aws ec2 reboot-instances --instance-ids i-0f116577657d4f4d6

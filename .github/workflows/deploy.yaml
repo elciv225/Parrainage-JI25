@@ -18,10 +18,31 @@ jobs:
       - name: 🛠️ Récupérer le code du dépôt
         uses: actions/checkout@v3
 
+      - name: 🔽 Installer Docker et Docker Compose
+        run: |
+          if ! command -v docker &> /dev/null; then
+            echo "Docker n'est pas installé. Installation en cours..."
+            sudo apt update
+            sudo apt install -y docker.io
+            sudo systemctl start docker
+            sudo systemctl enable docker
+          else
+            echo "Docker est déjà installé."
+          fi
+
+          if ! command -v docker-compose &> /dev/null; then
+            echo "Docker Compose n'est pas installé. Installation en cours..."
+            curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+          else
+            echo "Docker Compose est déjà installé."
+          fi
+
       - name: ✅ Vérifier l’installation de Docker et Docker Compose
         run: |
           docker -v
           docker-compose -v
+      
 
       - name: 🚧 Activer le mode maintenance
         run: touch $GITHUB_WORKSPACE/src/maintenance.lock
