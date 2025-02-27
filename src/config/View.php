@@ -5,7 +5,7 @@ namespace config;
 
 class View
 {
-    private static string $baseDir = 'private/client/views/'; // Répertoire des vues
+    private static string $baseDir = 'backend/client/views/'; // Répertoire des vues
 
     /**
      * Rend une vue.

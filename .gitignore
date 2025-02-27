@@ -1,5 +1,5 @@
 # Ignorer le node_module
-/src/node_modules
+#/src/node_modules
 
 # Ignorer .env
 /src/.env

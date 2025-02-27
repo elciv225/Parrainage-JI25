@@ -6,9 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'views\\' => array($baseDir . '/private/client/views'),
-    'models\\' => array($baseDir . '/private/client/models'),
-    'controllers\\' => array($baseDir . '/private/client/controllers'),
+    'views\\' => array($baseDir . '/backend/client/views'),
+    'models\\' => array($baseDir . '/backend/client/models'),
+    'controllers\\' => array($baseDir . '/backend/client/controllers'),
     'config\\' => array($baseDir . '/config'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),

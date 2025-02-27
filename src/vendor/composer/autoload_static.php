@@ -49,15 +49,15 @@ class ComposerStaticInite875ae8441d070d7dda5f4b47a2117aa
     public static $prefixDirsPsr4 = array (
         'views\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/private/client/views',
+            0 => __DIR__ . '/../..' . '/backend/client/views',
         ),
         'models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/private/client/models',
+            0 => __DIR__ . '/../..' . '/backend/client/models',
         ),
         'controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/private/client/controllers',
+            0 => __DIR__ . '/../..' . '/backend/client/controllers',
         ),
         'config\\' => 
         array (

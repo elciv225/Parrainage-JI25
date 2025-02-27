@@ -21,7 +21,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // Chargement du fichier du routeur
-require_once 'private/client/routes/web.php';
+require_once 'backend/client/routes/web.php';
 
 // Gestion du site en maintenance
 // Vérifier si maintenance.lock existe

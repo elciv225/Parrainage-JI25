@@ -1,19 +1,10 @@
-version: '3.8'
-# Définition des services que nous voulons utiliser
 services:
   php:
-    # Utilisation de l'image Docker pour PHP 8.2 avec Apache
     image: php:8.2-apache
-    # Nom du conteneur pour faciliter la gestion
-    container_name: php_8-2
-    # Configuration des ports
+    container_name: php_backend
     ports:
-      - "8081:80"  # Port pour accéder à l'application PHP
-    # Définition des volumes pour permettre la persistance des données
-    environment:
-      - APACHE_DISABLE_ACCESS_FILE=true
+      - "8081:80"
     volumes:
-      # Le dossier ./php sur la machine hôte est mappé à /var/www/html dans le conteneur
       - ./src:/var/www/html
     build:
       context: .
@@ -23,30 +14,38 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: mysql_8
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql_db
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: parrainage
       MYSQL_USER: miage
       MYSQL_PASSWORD: JI25
     ports:
-      - "3306:3306"  # Port pour accéder à MySQL
+      - "3306:3306"
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d # Monte tous les fichiers SQL
-      - mysql_data:/var/lib/mysql # Volume pour persister les données MySQL
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
       PMA_ARBITRARY: 1
-      PMA_HOST: mysql_8
+      PMA_HOST: mysql_db
       PMA_USER: miage
       PMA_PASSWORD: JI25
     ports:
-      # Utilise le port 8082 pour accéder à phpMyAdmin
-      - '8082:80'  # Port pour accéder à phpMyAdmin
+      - "8082:80"
+
+  frontend:
+    image: node:18
+    container_name: vite_frontend
+    working_dir: /app
+    volumes:
+      - ./src/frontend:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
+
 
 volumes:
-  mysql_data : # Volume persistant pour MySQL
+  mysql_data:

@@ -6,9 +6,9 @@
   "autoload": {
     "psr-4": {
       "config\\": "config/",
-      "views\\": "private/client/views/",
-      "models\\": "private/client/models/",
-      "controllers\\": "private/client/controllers/"
+      "views\\": "backend/client/views/",
+      "models\\": "backend/client/models/",
+      "controllers\\": "backend/client/controllers/"
     }
   }
 }
