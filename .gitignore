@@ -4,3 +4,10 @@
 # Ignorer .env
 /src/.env
 
+parrainage.pem
+parrainage.pem.pub
+seConnecterAuServeur
+task-definition.json
+
+
+
