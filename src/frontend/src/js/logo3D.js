@@ -1,6 +1,6 @@
-import * as THREE from './node_modules/three/build/three.module.js';
-import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import {gsap} from "/node_modules/gsap/index.js";
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { gsap } from 'gsap';
 
 /****************************************************
  * Lancement global au chargement du DOM
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         loadLogo() {
             const loader = new GLTFLoader();
-            const logoPath = 'assets/images/logo.glb';
+            const logoPath = 'logo.glb';
 
             loader.load(
                 logoPath,

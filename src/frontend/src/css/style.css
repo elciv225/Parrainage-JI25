@@ -1,96 +1,116 @@
+@import url("https://use.typekit.net/bfu2oym.css");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
+  /* Configuration du thème */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Couleurs de base */
+  --primary-color: #1A5E63;
+  --secondary-color: #FFC857;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  /* Couleurs des composants - Mode clair */
+  --background-primary: #FFFFFF;
+  --background-secondary: #F8FAFB;
+  --background-tertiary: #ECF0F1;
+  --background-input: #BDC3C7;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  /* Text */
+  --text-primary: #050E10;
+  --text-secondary: #0A1B20;
+  --text-disabled: #BDC3C7;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  /* Boutons */
+  --button-primary: #1A5E63;
+  --button-primary-hover: #15484B;
+  --button-secondary: #FFC857;
+  --button-secondary-hover: #FCCF6C;
+  --button-disabled: #E0E6E8;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+  /* États */
+  --success: rgba(102, 187, 106, 0.55); /* Vert doux */
+  --warning: rgba(255, 193, 7, 0.55); /* Jaune épuré */
+  --error: rgba(239, 83, 80, 0.55); /* Rouge subtil */
+  --info: rgba(100, 181, 246, 0.55); /* Bleu clair */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
+  /* Bordures */
+  --border-light: #87999A;
+  --border-medium: #6B7B7C;
+  --border-dark: #162122;
 
-.card {
-  padding: 2em;
+  /* Overlays et shadows */
+  --overlay: rgba(44, 62, 80, 0.1);
+  --shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Inputs */
+  --input-border: #1A5E63;
+  --input-focus: rgba(26, 94, 99, 20%);
+
+  /* Liens */
+  --link-color: #2A8F96;
+  --link-hover: #1A5E63;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Couleurs de base */
+    --primary-color: #1A5E63; /* Variante lumineuse pour le contraste */
+    --secondary-color: #FFC857;
+
+    /* Couleurs des composants - Mode sombre */
+    --background-primary: #121212;
+    --background-secondary: #1E1E1E;
+    --background-tertiary: #2A2A2A;
+    --background-input: #2D2D2D;
+
+    /* Text */
+    --text-primary: #EAEAEA;
+    --text-secondary: #CFCFCF;
+    --text-disabled: #7F8C8D;
+
+    /* Boutons */
+    --button-primary: #1A5E63;
+    --button-primary-hover: #15484B;
+    --button-secondary: #FFC857;
+    --button-secondary-hover: #F3BA44;
+    --button-disabled: #4F5B5C;
+
+    /* États */
+    --success: rgba(39, 174, 96, 0.4); /* Vert atténué */
+    --warning: rgba(243, 156, 18, 0.4); /* Jaune subtil */
+    --error: rgba(231, 76, 60, 0.4); /* Rouge modéré */
+    --info: rgba(52, 152, 219, 0.4); /* Bleu clair */
+
+    /* Bordures */
+    --border-light: #2C3E50;
+    --border-medium: #34495E;
+    --border-dark: #1A252F;
+
+    /* Overlays et shadows */
+    --overlay: rgba(0, 0, 0, 0.5);
+    --shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+
+    /* Inputs */
+    --input-border: #1A5E63;
+    --input-focus: rgba(26, 94, 99, 20%);
+
+    /* Liens */
+    --link-color: #1A5E63;
+    --link-hover: #15484B;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: geologica-variable, sans-serif;
+  font-style: normal;
+  font-variation-settings: "CRSV" 0, "SHRP" 0, "slnt" 0, "wght" 100;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="backend/client/assets/css/styles.css">
+    <link rel="stylesheet" href="backend/client/assets/css/authentification.css">
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <title><?= $title ?? "Titre par défaut" ?></title>
 </head>
@@ -225,6 +225,6 @@
         });
     });
 </script>
-<script type="module" src="backend/client/assets/js/animations.js"></script>
+<script type="module" src="backend/client/assets/js/authentification.js"></script>
 </body>
 </html>

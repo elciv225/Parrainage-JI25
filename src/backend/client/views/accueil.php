@@ -12,14 +12,7 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
-
-    <!-- Feuille de style principale -->
-    <?php if ($devMode): ?>
-        <link rel="stylesheet" href="http://localhost:5173/src/css/accueil.css">
-    <?php else: ?>
-        <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
-    <?php endif; ?>
-
+    <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
