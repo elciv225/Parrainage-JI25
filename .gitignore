@@ -1,13 +1,8 @@
-# Ignorer le node_module
-#/src/node_modules
-
-# Ignorer .env
-/src/.env
-
 parrainage.pem
 parrainage.pem.pub
 seConnecterAuServeur
 task-definition.json
-
+/src/backend/client/assets/*
+/src/frontend/node_modules
 
 
