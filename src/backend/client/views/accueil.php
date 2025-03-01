@@ -1,8 +1,3 @@
-<?php
-// Vérifier si on est en mode développement
-$devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -390,10 +385,7 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
      =======================================================
      Inclusion du fichier JavaScript principal.
 -->
-<?php if ($devMode): ?>
-    <script type="module" src="http://localhost:5173/src/js/accueil.js"></script>
-<?php else: ?>
-    <script src="backend/client/assets/js/accueil.js"></script>
-<?php endif ?>
+<script src="backend/client/assets/js/accueil.js"></script>
+
 </body>
 </html>

@@ -11,10 +11,7 @@ session_start([
     'sid_bits_per_character' => 6,     // Augmente l'entropie de l'ID de session
 ]);
 
-
-
 require_once __DIR__ . "/vendor/autoload.php";
-
 
 // Charger les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
