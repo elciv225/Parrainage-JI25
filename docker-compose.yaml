@@ -1,21 +1,22 @@
-version: "3.8"
 services:
   php:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: php:8.2-apache
     container_name: php_backend
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./src:/var/www/html
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - mysql
 
   mysql:
     image: mysql:8.0
     container_name: mysql_db
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: parrainage
@@ -24,6 +25,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - ./sql:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql
 
   phpmyadmin:
@@ -35,7 +37,7 @@ services:
       PMA_USER: miage
       PMA_PASSWORD: JI25
     ports:
-      - "8082:80"
+      - "81:80"
 
 volumes:
   mysql_data:

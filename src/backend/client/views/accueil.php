@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Métadonnées et informations de base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
     <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
-    <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
-<!-- =======================================================
-     EN-TÊTE
-     =======================================================
-     L'en-tête contient la barre de navigation principale.
-     On utilise des balises sémantiques et des noms de classes en français.
--->
 <header class="header">
     <nav class="nav-container">
-        <a href="index.html" class="marque">
+        <a href="/" class="marque">
             <img class="logo-ji" src="assets/images/logo-02.svg" alt="Logo Journée d'Intégration">
             <div class="texte-marque">
                 <div>JOURNÉE</div>
@@ -55,7 +47,7 @@
             <li><a href="#apropos" class="lien-mobile">À propos</a></li>
             <!-- Séparateur visuel -->
             <li class="separateur"></li>
-            <li><a href="#" class="bouton-action connexion">Connexion</a></li>
+            <li><a href="/authentification#connexion" class="bouton-action connexion">Connexion</a></li>
             <li><a href="#" class="bouton-action inscription">S'inscrire</a></li>
             <!-- Bouton de basculement de thème transformé en icône -->
         </ul>
