@@ -1,3 +1,4 @@
+version: "3.8"
 services:
   php:
     build:
@@ -9,14 +10,6 @@ services:
       - "443:443"
     volumes:
       - ./src:/var/www/html
-    environment:
-      DB_HOST: mysql_db
-      DB_PORT: 3306
-      DB_NAME: parrainage
-      DB_USER: miage
-      DB_PASSWORD: JI25
-      ADMIN_LOGIN: JI
-      ADMIN_KEY: 25
     depends_on:
       - mysql
 
