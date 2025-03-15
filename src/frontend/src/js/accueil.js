@@ -71,7 +71,7 @@ const App = {
      * 3. Animation des éléments au scroll (cartes, membres d'équipe, FAQ)
      */
     initAnimationsScroll() {
-        const options = { threshold: 0.1 };
+        const options = {threshold: 0.1};
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

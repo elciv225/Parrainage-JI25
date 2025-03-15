@@ -101,7 +101,7 @@ a:hover {
     transition: opacity 1s ease-in-out;
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    justify-content: center;
     background: linear-gradient(45deg, var(--primary-color), var(--background-tertiary));
 }
 
@@ -110,10 +110,15 @@ a:hover {
 }
 
 .slide-content {
-    max-width: 600px;
+    max-width: 1200px;
     opacity: 0;
     transform: translateY(20px);
     transition: all 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
 .slide.active .slide-content {
@@ -125,9 +130,15 @@ a:hover {
     font-size: 3rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    width: 80%;
+    position: relative;
+    left: 50px;
 }
 
 .slide-description {
+    width: 80%;
+    position: relative;
+    left: 50px;
     font-size: 1.2rem;
     margin-bottom: 2rem;
     color: var(--text-secondary);
@@ -262,7 +273,6 @@ main{
 
 .marque {
     display: flex;
-    gap: 0.2rem;
     align-items: center;
 }
 .logo-ji {
@@ -275,6 +285,7 @@ main{
     font-size: 1.1rem;
     color: var(--text-secondary);
     position: relative;
+    left: -5px;
 }
 
 /* Liens de navigation pour bureau */
@@ -543,13 +554,19 @@ main{
 }
 /* === Animation logo 3D === */
 .logo-flottant {
-    width: 100%;
-    height: 100vh; /* Pleine hauteur de l'écran */
-    position: relative; /* Nécessaire pour positionner le canvas */
-    background-color: transparent; /* Optionnel : Pour déboguer */
-    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    z-index: 0; /* Positionné derrière le contenu des slides */
+    pointer-events: none; /* Permet de cliquer à travers le logo */
 }
 
+/* Permettre les interactions uniquement sur le canvas Three.js */
+.logo-flottant canvas {
+    pointer-events: auto;
+}
 
 /* Boutons de navigation du carrousel */
 .bouton-navigation {

@@ -53,15 +53,10 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
         </ul>
     </nav>
 </header>
-
-
-<!-- =======================================================
-     CONTENU PRINCIPAL
-     =======================================================
-     On regroupe ici le contenu principal avec des sections clairement identifiées.
--->
 <main>
     <section class="hero">
+        <!-- Conteneur pour le logo 3D -->
+        <div class="logo-flottant"></div>
         <div class="carousel">
             <div class="carousel-inner">
                 <!-- Slide 1 -->
@@ -70,10 +65,6 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                         <h1 class="slide-title">Bienvenue à la Journée d'Intégration</h1>
                         <p class="slide-description">Vivez une expérience inoubliable lors de cet événement de rencontre
                             et de partage.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Rejoignez-nous</button>
-                            <button class="btn secondary">En savoir plus</button>
-                        </div>
                     </div>
                 </div>
                 <!-- Slide 2 -->
@@ -82,10 +73,6 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                         <h1 class="slide-title">Découvrez nos Activités</h1>
                         <p class="slide-description">Des ateliers, des conférences et bien plus encore pour enrichir
                             votre expérience.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Programme</button>
-                            <button class="btn secondary">S'inscrire</button>
-                        </div>
                     </div>
                 </div>
 
@@ -94,10 +81,6 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                     <div class="slide-content">
                         <h1 class="slide-title">Rencontrez vos Parrains</h1>
                         <p class="slide-description">Un accompagnement personnalisé tout au long de votre cursus.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Parrainage</button>
-                            <button class="btn secondary">Témoignages</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -225,48 +208,113 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
 
     <!-- === SECTION FAQ === -->
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
+
         <h2 class="titre-faq">Questions Fréquentes</h2>
 
+
+
+        <!-- FAQ Item 1 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>Quand aura lieu la JI ?</span>
+
+                <span>Quand et où se tiendra la Journée d'Intégration ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Contactez notre équipe via le formulaire de contact ou appelez-nous directement.
-                    Nous organiserons une consultation gratuite pour discuter de vos besoins.
+
+                    La Journée d'Intégration se tiendra le 12 avril à la Caistab du Plateau. Restez connectés pour le programme détaillé !
+
                 </p>
+
             </div>
+
         </div>
+
+
 
         <!-- FAQ Item 2 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>C'est quoi le Miage Project Challenge ?</span>
+
+                <span>Quels seront les temps forts de la Journée d'Intégration ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Nos délais varient en fonction de la complexité du projet. Généralement, nous livrons les projets
-                    dans un délai de 2 à 8 semaines.
+
+                    L’événement comprendra des panels de discussion, des conférences et le Miage Project Challenge, un concours mettant en avant les talents des étudiants en MIAGE.
+
                 </p>
+
             </div>
+
         </div>
 
+
+
         <!-- FAQ Item 3 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>Comment se déroule le suivi du projet ?</span>
+
+                <span>Y a-t-il des frais de participation pour les étudiants ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Nous restons en contact régulier via emails, appels ou réunions virtuelles, et vous recevez des
-                    points d’avancement clairs et détaillés à chaque étape.
+
+                    Oui, les étudiants de L2, M1 et M2 doivent s’acquitter de leurs droits de participation à la vie estudiantine, d’un montant de 15 000 FCFA, avant de pouvoir assister à la Journée d’Intégration.
+
                 </p>
+
             </div>
+
         </div>
+
+
+
+        <!-- FAQ Item 4 -->
+
+        <div class="faq-item" tabindex="0">
+
+            <button class="faq-question" aria-expanded="false">
+
+                <span>Comment puis-je m’inscrire et obtenir plus d’informations ?</span>
+
+                <i class="faq-icone">+</i>
+
+            </button>
+
+            <div class="faq-reponse">
+
+                <p>
+
+                    Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à jour sur l’événement. Vous pouvez également contacter l’équipe organisatrice pour toute question.
+
+                </p>
+
+            </div>
+
+        </div>
+
     </section>
 </main>
 
@@ -320,6 +368,7 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
     </div>
 </footer>
 <script src="backend/client/assets/js/accueil.js"></script>
+<script type="module" src="backend/client/assets/js/logo3D.js"></script>
 
 </body>
 </html>
