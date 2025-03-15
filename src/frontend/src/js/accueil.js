@@ -207,25 +207,25 @@ const testimonials = [
         quote: "Charger de supervise et coordonne les activités du comité, représente officiellement le groupe et prend les décisions stratégiques.",
         name: "SORO Eméric Jamel",
         designation: "Président du comité d'organisation (PCO)",
-        src: "assets/images/membres/Soro.jpg"
+        src: "backend/client/assets/images/Emeric.jpg"
     },
     {
         quote: "Charger d'assister le président, le remplace en son absence et supervise des projets ou sous-comités spécifiques.",
         name: "ADJE Aude-esther",
         designation: "Vice président du comité d'organisation (Vice-PCO)",
-        src: "assets/images/membres/Aude1.jpg"
+        src: "backend/client/assets/images/default.jpg"
     },
     {
         quote: "Charger de gèrer la documentation, rédige les procès-verbaux, prépare les ordres du jour et assure la communication interne.",
         name: "TRA Lou Océane",
         designation: "Sécrétaire et Responsable du comité logiciel",
-        src: "assets/images/membres/Oceane.jpg"
+        src: "backend/client/assets/images/default.jpg"
     },
     {
         quote: "Charger de gèrer les finances, prépare les budgets, suit les dépenses/recettes et veille à la transparence financière.",
         name: "IRIE Anne Jemima",
         designation: "Trésorier",
-        src: "assets/images/membres/Jemima.jpg"
+        src: "backend/client/assets/images/Jemima.jpg"
     }
 ];
 

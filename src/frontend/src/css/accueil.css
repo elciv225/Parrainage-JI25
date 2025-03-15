@@ -33,7 +33,8 @@ a:hover {
     width: 90%;
     z-index: 1000;
     transition: all 0.3s ease;
-    background: transparent;
+    background: transparent; /* Fond légèrement visible comme fallback */
+    -webkit-backdrop-filter: blur(15px); /* Pour Safari */
     backdrop-filter: blur(15px);
 }
 
@@ -49,10 +50,10 @@ a:hover {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 .liens-navigation {
@@ -259,20 +260,21 @@ main{
     height: 60px;
 }
 
-/* Marque (logo + intitulé) */
 .marque {
     display: flex;
+    gap: 0.2rem;
     align-items: center;
-    gap: 1rem;
 }
 .logo-ji {
-    height: 50px;
-    width: auto;
+    height: 60px;
+    width: 60px;
 }
 .texte-marque {
+    text-wrap: nowrap;
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--text-secondary);
+    position: relative;
 }
 
 /* Liens de navigation pour bureau */
@@ -388,8 +390,9 @@ main{
     width: 240px;
     height: 0;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
+    background: transparent; /* Fond légèrement visible comme fallback */
+    -webkit-backdrop-filter: blur(15px); /* Pour Safari */
+    backdrop-filter: blur(15px);
     border-radius: 10px;
     transition: height 0.3s ease-in-out, opacity 0.3s;
     opacity: 0;
@@ -397,7 +400,7 @@ main{
 
 /* Menu ouvert */
 .menu-mobile.open {
-    height: 420px;
+    height: 300px;
     opacity: 1;
 }
 
@@ -406,6 +409,9 @@ main{
     list-style: none;
     padding: 1rem 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Liens du menu mobile */
@@ -848,12 +854,18 @@ main{
         grid-template-columns: 1fr 1fr;
     }
 }
-.btn {
+
+.control-button {
     background-color: var(--primary-color);
 }
-.btn .path {
-    stroke: var(--secondary-color);
+
+.control-button svg {
+    stroke: var(--background-primary);
 }
+
+
+
+
 .team .image-container {
     position: relative;
     height: 320px;
@@ -891,12 +903,10 @@ main{
 }
 .team .designation {
     font-size: 0.875rem;
-
     margin-top: 0.25rem;
 }
 .team .quote {
     font-size: 1.125rem;
-
     margin-top: 2rem;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -957,8 +967,8 @@ main{
     color: var(--primary-color);
 }
 .faq-item {
-    background: #fff;
-    border: 1px solid #ddd;
+    background: var(--background-primary);
+    border: 1px solid var(--border-dark);
     border-radius: 8px;
     margin-bottom: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -975,17 +985,17 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f7f7f7;
+    background: var(--background-tertiary);
     padding: 1rem 1.5rem;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     border: none;
     cursor: pointer;
     transition: background 0.3s;
 }
 .faq-question:hover {
-    background: #eaeaea;
+    background: var(--background-secondary);
 }
 .faq-icone {
     font-size: 1.5rem;
@@ -995,7 +1005,7 @@ main{
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s, padding 0.5s;
-    background: #fff;
+    background:var(--background-tertiary) ;
 }
 .faq-reponse p {
     margin: 1rem 1.5rem;
