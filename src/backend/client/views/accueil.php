@@ -1,20 +1,17 @@
 <?php
-// Vérifier si on est en mode développement
-$devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
+
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Métadonnées et informations de base -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
-    <link rel="icon" href="backend/client/assets/images/logo-02.svg">
     <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title><?= $title ?? "Titre par défaut" ?></title>
+    <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
 <header class="header">
@@ -25,9 +22,10 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
         </a>
 
         <ul class="liens-navigation">
-            <li><a href="#parrainage" class="lien">Parrainage</a></li>
+            <li><a href="/parrainage" class="lien">Parrainage</a></li>
+            <li><a href="#activite" class="lien">Activités</a></li>
             <li><a href="#competition" class="lien">Compétition</a></li>
-            <li><a href="#evenement" class="lien">Évènement</a></li>
+            <li><a href="#equipe" class="lien">Nôtre équipe</a></li>
         </ul>
 
         <div class="boutons-entete">
@@ -42,9 +40,10 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
     <!-- Menu burger (mobile) -->
     <nav class="menu-mobile" aria-label="Menu mobile">
         <ul>
-            <li><a href="#parrainage" class="lien-mobile">Parrainage</a></li>
+            <li><a href="/parrainage" class="lien-mobile">Parrainage</a></li>
+            <li><a href="#activite" class="lien-mobile">Activités</a></li>
             <li><a href="#competition" class="lien-mobile">Compétition</a></li>
-            <li><a href="#evenement" class="lien-mobile">Évènement</a></li>
+            <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>
             <!-- Séparateur visuel -->
             <li class="separateur"></li>
             <li><a href="#" class="bouton-action connexion">Connexion</a></li>
@@ -95,7 +94,7 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
     </section>
 
     <!-- === SECTION ACTIVITÉS === -->
-    <section id="parrainage" class="activites" aria-label="Activités Phare">
+    <section id="activite" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
                 <h1>Nos Activités</h1>
@@ -123,21 +122,23 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                     </div>
                 </article>
                 <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/mpc25.png" alt="Compétition Hackathon">
-                    <div class="details-activite">
-                        <h2>Concours informatique</h2>
-                        <h3>Miage Project Chalenge</h3>
-                        <p>Marquer l'histoire de MIAGE</p>
-                    </div>
-                </article>
-                <article class="carte-activite" tabindex="0">
                     <img src="backend/client/assets/images/blackWhite.jpg" alt="Journée Black & White">
                     <div class="details-activite">
-                        <h2>Concours informatique</h2>
+                        <h2>Journée Black & White</h2>
                         <h3>Miage Project Chalenge</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
+            </div>
+        </div>
+    </section>
+    <section id="competition" class="activites" aria-label="Activités Phare">
+        <div class="conteneur-activites">
+            <header class="entete-section">
+                <h1>Nos Compétition</h1>
+                <p>Découvrez nos compétition pour marquer l'histoire de MIAGE.</p>
+            </header>
+            <div class="grille-activites">
                 <article class="carte-activite" tabindex="0">
                     <img src="backend/client/assets/images/mpc25.png" alt="Compétition Hackathon">
                     <div class="details-activite">
@@ -146,7 +147,14 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
-
+                <article class="carte-activite" tabindex="0">
+                    <img src="backend/client/assets/images/fashionWeek.jpg" alt="Journée Black & White">
+                    <div class="details-activite">
+                        <h2>Style</h2>
+                        <h3>Fashion Week</h3>
+                        <p>Marquer l'histoire de MIAGE</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -165,7 +173,7 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
         </div>
     </section>
 
-    <section id="collaboration" class="team" aria-label="Nos Comités">
+    <section id="equipe" class="team" aria-label="Nos Comités">
         <h2>Notre Équipe</h2>
         <div class="container">
             <div class="testimonials-grid">
