@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="backend/client/assets/css/authentification.css">
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <title><?= $title ?? "Titre par défaut" ?></title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
 </head>
 <body>
 
