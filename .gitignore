@@ -2,7 +2,3 @@ src/frontend
 seConnecterAuServeur
 task-definition.json
 .idea
-
-#docker-compose.yaml
-#Dockerfile
-#src/.env

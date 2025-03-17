@@ -23,7 +23,7 @@ services:
       MYSQL_USER: miage
       MYSQL_PASSWORD: JI25
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql

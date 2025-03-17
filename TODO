@@ -1,0 +1,2 @@
+J'ai fait la commande git update-index --assume-unchanged monfichier.txt pour empêcher les modification de monfichier.txt. Mais je veux maintenant annuler cette commande. Comment faire ?
+Je fait comme ça : git update-index --no-assume-unchanged monfichier.txt
