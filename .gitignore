@@ -5,3 +5,4 @@ task-definition.json
 .gitignore
 docker-compose.yaml
 Dockerfile
+src/.env
