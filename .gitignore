@@ -1,8 +1,0 @@
-parrainage.pem
-parrainage.pem.pub
-seConnecterAuServeur
-task-definition.json
-/src/backend/client/assets/*
-/src/frontend/node_modules
-
-
