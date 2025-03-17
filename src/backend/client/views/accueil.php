@@ -1,11 +1,18 @@
+<?php
+// Vérifier si on est en mode développement
+$devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Métadonnées et informations de base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
+    <link rel="icon" href="backend/client/assets/images/logo-02.svg">
     <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -13,19 +20,14 @@
 <header class="header">
     <nav class="nav-container">
         <a href="/" class="marque">
-            <img class="logo-ji" src="assets/images/logo-02.svg" alt="Logo Journée d'Intégration">
-            <div class="texte-marque">
-                <div>JOURNÉE</div>
-                <div>D'INTÉGRATION</div>
-            </div>
+            <img class="logo-ji" src="backend/client/assets/images/logo.png" alt="Logo Journée d'Intégration">
+            <div class="texte-marque">JOURNEE D'INTEGRATION</div>
         </a>
 
         <ul class="liens-navigation">
             <li><a href="#parrainage" class="lien">Parrainage</a></li>
             <li><a href="#competition" class="lien">Compétition</a></li>
             <li><a href="#evenement" class="lien">Évènement</a></li>
-            <li><a href="#collaboration" class="lien">Collaboration</a></li>
-            <li><a href="#apropos" class="lien">À propos</a></li>
         </ul>
 
         <div class="boutons-entete">
@@ -43,30 +45,18 @@
             <li><a href="#parrainage" class="lien-mobile">Parrainage</a></li>
             <li><a href="#competition" class="lien-mobile">Compétition</a></li>
             <li><a href="#evenement" class="lien-mobile">Évènement</a></li>
-            <li><a href="#collaboration" class="lien-mobile">Collaboration</a></li>
-            <li><a href="#apropos" class="lien-mobile">À propos</a></li>
             <!-- Séparateur visuel -->
             <li class="separateur"></li>
-            <li><a href="/authentification#connexion" class="bouton-action connexion">Connexion</a></li>
+            <li><a href="#" class="bouton-action connexion">Connexion</a></li>
             <li><a href="#" class="bouton-action inscription">S'inscrire</a></li>
             <!-- Bouton de basculement de thème transformé en icône -->
         </ul>
     </nav>
 </header>
-
-
-<!-- =======================================================
-     CONTENU PRINCIPAL
-     =======================================================
-     On regroupe ici le contenu principal avec des sections clairement identifiées.
--->
 <main>
-    <!-- ===================================================
-         SECTION HERO / CARROUSEL
-         ===================================================
-         Utilisation d'articles pour chaque diapositive et d'un contrôle ARIA
-    -->
     <section class="hero">
+        <!-- Conteneur pour le logo 3D -->
+        <div class="logo-flottant"></div>
         <div class="carousel">
             <div class="carousel-inner">
                 <!-- Slide 1 -->
@@ -75,23 +65,14 @@
                         <h1 class="slide-title">Bienvenue à la Journée d'Intégration</h1>
                         <p class="slide-description">Vivez une expérience inoubliable lors de cet événement de rencontre
                             et de partage.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Rejoignez-nous</button>
-                            <button class="btn secondary">En savoir plus</button>
-                        </div>
                     </div>
                 </div>
-
                 <!-- Slide 2 -->
                 <div class="slide">
                     <div class="slide-content">
                         <h1 class="slide-title">Découvrez nos Activités</h1>
                         <p class="slide-description">Des ateliers, des conférences et bien plus encore pour enrichir
                             votre expérience.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Programme</button>
-                            <button class="btn secondary">S'inscrire</button>
-                        </div>
                     </div>
                 </div>
 
@@ -100,10 +81,6 @@
                     <div class="slide-content">
                         <h1 class="slide-title">Rencontrez vos Parrains</h1>
                         <p class="slide-description">Un accompagnement personnalisé tout au long de votre cursus.</p>
-                        <div class="slide-buttons">
-                            <button class="btn primary">Parrainage</button>
-                            <button class="btn secondary">Témoignages</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -117,11 +94,7 @@
         </div>
     </section>
 
-    <!-- ===================================================
-         SECTION ACTIVITÉS
-         ===================================================
-         Une section dédiée aux activités phares avec un en-tête de section.
-    -->
+    <!-- === SECTION ACTIVITÉS === -->
     <section id="parrainage" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
@@ -130,18 +103,9 @@
                     d’intégration.</p>
             </header>
             <div class="grille-activites">
-                <!-- Carte Activité 1 -->
+                <!-- nov bleu -->
                 <article class="carte-activite" tabindex="0">
-                    <img src="assets/images/activites/JAP X2 JI.jpg" alt="Atelier Rencontre & Échange">
-                    <div class="details-activite">
-                        <h2>Compétition</h2>
-                        <h3>Collaboration Inédite</h3>
-                        <p>Nous n'en dirons pas plus....</p>
-                    </div>
-                </article>
-                <!-- Carte Activité 2 -->
-                <article class="carte-activite" tabindex="0">
-                    <img src="assets/images/activites/novembre bleu.png" alt="Conférence Innovation & Tech">
+                    <img src="backend/client/assets/images/novBleu.png" alt="Conférence Innovation & Tech">
                     <div class="details-activite">
                         <h2>Journée à thème</h2>
                         <h3>NOVEMBRE BLEU</h3>
@@ -149,24 +113,45 @@
                             l'Homme.</p>
                     </div>
                 </article>
-                <!-- Carte Activité 3 -->
+                <!-- Oct Rose -->
                 <article class="carte-activite" tabindex="0">
-                    <img src="assets/images/activites/Oct rose2.png" alt="Compétition Hackathon">
+                    <img src="backend/client/assets/images/octRose.png" alt="Compétition Hackathon">
                     <div class="details-activite">
                         <h2>Journée à Thème</h2>
                         <h3>OCTOBRE ROSE</h3>
                         <p>Organisation d'une journée pour soutenir le lutte contre le cancer du sein chez la Femme</p>
                     </div>
                 </article>
+                <article class="carte-activite" tabindex="0">
+                    <img src="backend/client/assets/images/mpc25.png" alt="Compétition Hackathon">
+                    <div class="details-activite">
+                        <h2>Concours informatique</h2>
+                        <h3>Miage Project Chalenge</h3>
+                        <p>Marquer l'histoire de MIAGE</p>
+                    </div>
+                </article>
+                <article class="carte-activite" tabindex="0">
+                    <img src="backend/client/assets/images/blackWhite.jpg" alt="Journée Black & White">
+                    <div class="details-activite">
+                        <h2>Concours informatique</h2>
+                        <h3>Miage Project Chalenge</h3>
+                        <p>Marquer l'histoire de MIAGE</p>
+                    </div>
+                </article>
+                <article class="carte-activite" tabindex="0">
+                    <img src="backend/client/assets/images/mpc25.png" alt="Compétition Hackathon">
+                    <div class="details-activite">
+                        <h2>Concours informatique</h2>
+                        <h3>Miage Project Chalenge</h3>
+                        <p>Marquer l'histoire de MIAGE</p>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
 
-    <!-- ===================================================
-        SECTION PARTENAIRES
-        ===================================================
-        Affichage des logos des partenaires en grille.
-    -->
+    <!-- === Section partenaire === -->
     <section class="partenaires" aria-label="Ils nous font confiance">
         <div class="conteneur-partenaires">
             <h2>Ils nous font confiance</h2>
@@ -179,16 +164,10 @@
                 </div>
                 <div class="gradient-overlay gradient-left"></div>
                 <div class="gradient-overlay gradient-right"></div>
-
             </div>
         </div>
     </section>
 
-    <!-- ===================================================
-         SECTION ÉQUIPE
-         ===================================================
-         Présentation des membres de l’équipe.
-    -->
     <section id="collaboration" class="team" aria-label="Nos Comités">
         <h2>Notre Équipe</h2>
         <div class="container">
@@ -217,7 +196,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <a href="equipe.html">
+                        <a href="/equipe">
                             <button>Voir Plus</button>
                         </a>
                     </div>
@@ -227,113 +206,130 @@
     </section>
 
 
-    <!-- ===================================================
-         SECTION FAQ
-         ===================================================
-         Liste des questions fréquentes sous forme d'accordéon.
-    -->
+    <!-- === SECTION FAQ === -->
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
+
         <h2 class="titre-faq">Questions Fréquentes</h2>
 
+
+
         <!-- FAQ Item 1 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>Comment débuter avec vos services ?</span>
+
+                <span>Quand et où se tiendra la Journée d'Intégration ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Contactez notre équipe via le formulaire de contact ou appelez-nous directement.
-                    Nous organiserons une consultation gratuite pour discuter de vos besoins.
+
+                    La Journée d'Intégration se tiendra le 12 avril à la Caistab du Plateau. Restez connectés pour le programme détaillé !
+
                 </p>
+
             </div>
+
         </div>
+
+
 
         <!-- FAQ Item 2 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>Quels sont vos délais moyens ?</span>
+
+                <span>Quels seront les temps forts de la Journée d'Intégration ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Nos délais varient en fonction de la complexité du projet. Généralement, nous livrons les projets
-                    dans un délai de 2 à 8 semaines.
+
+                    L’événement comprendra des panels de discussion, des conférences et le Miage Project Challenge, un concours mettant en avant les talents des étudiants en MIAGE.
+
                 </p>
+
             </div>
+
         </div>
 
+
+
         <!-- FAQ Item 3 -->
+
         <div class="faq-item" tabindex="0">
+
             <button class="faq-question" aria-expanded="false">
-                <span>Comment se déroule le suivi du projet ?</span>
+
+                <span>Y a-t-il des frais de participation pour les étudiants ?</span>
+
                 <i class="faq-icone">+</i>
+
             </button>
+
             <div class="faq-reponse">
+
                 <p>
-                    Nous restons en contact régulier via emails, appels ou réunions virtuelles, et vous recevez des
-                    points d’avancement clairs et détaillés à chaque étape.
+
+                    Oui, les étudiants de L2, M1 et M2 doivent s’acquitter de leurs droits de participation à la vie estudiantine, d’un montant de 15 000 FCFA, avant de pouvoir assister à la Journée d’Intégration.
+
                 </p>
+
             </div>
+
         </div>
+
+
+
+        <!-- FAQ Item 4 -->
+
+        <div class="faq-item" tabindex="0">
+
+            <button class="faq-question" aria-expanded="false">
+
+                <span>Comment puis-je m’inscrire et obtenir plus d’informations ?</span>
+
+                <i class="faq-icone">+</i>
+
+            </button>
+
+            <div class="faq-reponse">
+
+                <p>
+
+                    Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à jour sur l’événement. Vous pouvez également contacter l’équipe organisatrice pour toute question.
+
+                </p>
+
+            </div>
+
+        </div>
+
     </section>
 </main>
 
-<!-- =======================================================
-     PIED DE PAGE
-     =======================================================
-     La section pied de page contient les informations de contact, liens rapides et réseaux sociaux.
--->
 <footer class="pied-de-page" role="contentinfo">
     <!-- Partie supérieure du pied de page -->
     <div class="pied-haut">
         <div class="conteneur-pied">
             <div class="marque-pied">
                 <a href="#" class="lien-marque">
-                    <img class="logo-ji" src="assets/images/logo-02.svg" alt="Logo Journée d’Intégration">
+                    <img class="logo-ji" src="backend/client/assets/images/logo.png" alt="Logo Journée d’Intégration">
                     <span class="titre-marque">JOURNÉE D’INTÉGRATION</span>
                 </a>
                 <p class="description-marque">
                     Rejoignez-nous pour un événement unique de networking, de partage et de découverte.
                 </p>
-            </div>
-            <div class="liens-pied">
-                <div class="colonne-liens">
-                    <h2>Activités</h2>
-                    <ul>
-                        <li><a href="#parrainage">Parrainage</a></li>
-                        <li><a href="#competition">Compétition</a></li>
-                        <li><a href="#evenement">Évènements</a></li>
-                        <li><a href="#collaboration">Collaboration</a></li>
-                    </ul>
-                </div>
-                <div class="colonne-liens">
-                    <h2>À propos</h2>
-                    <ul>
-                        <li><a href="#apropos">Notre équipe</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#">Mentions légales</a></li>
-                        <li><a href="#">Politique de confidentialité</a></li>
-                    </ul>
-                </div>
-                <div class="colonne-liens">
-                    <h2>Ressources</h2>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Guides</a></li>
-                        <li><a href="#">Témoignages</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="colonne-liens">
-                    <h2>Infos pratiques</h2>
-                    <ul>
-                        <li><a href="#">Plan du site</a></li>
-                        <li><a href="#">Accès &amp; Transports</a></li>
-                        <li><a href="#">Hébergements</a></li>
-                        <li><a href="#">Sponsors</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -371,13 +367,8 @@
         </div>
     </div>
 </footer>
-
-<!-- =======================================================
-     SCRIPTS
-     =======================================================
-     Inclusion du fichier JavaScript principal.
--->
 <script src="backend/client/assets/js/accueil.js"></script>
+<script type="module" src="backend/client/assets/js/logo3D.js"></script>
 
 </body>
 </html>
