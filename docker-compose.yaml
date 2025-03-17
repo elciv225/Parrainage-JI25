@@ -3,7 +3,7 @@ services:
     image: php:8.2-apache
     container_name: php_backend
     ports:
-      - "80:80"
+      - "8081:80"
       - "443:443"
     volumes:
       - ./src:/var/www/html
@@ -37,7 +37,7 @@ services:
       PMA_USER: miage
       PMA_PASSWORD: JI25
     ports:
-      - "81:80"
+      - "8082:80"
 
 volumes:
   mysql_data:

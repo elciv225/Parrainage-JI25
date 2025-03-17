@@ -159,9 +159,6 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
                 <div class="marquee">
                     <div class="marquee-content" id="firstRow"></div>
                 </div>
-                <div class="marquee reverse">
-                    <div class="marquee-content" id="secondRow"></div>
-                </div>
                 <div class="gradient-overlay gradient-left"></div>
                 <div class="gradient-overlay gradient-right"></div>
             </div>
@@ -205,114 +202,57 @@ $devMode = isset($_ENV['VITE_DEV']) && $_ENV['VITE_DEV'] === 'true';
         </div>
     </section>
 
-
     <!-- === SECTION FAQ === -->
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
-
         <h2 class="titre-faq">Questions Fréquentes</h2>
-
-
-
-        <!-- FAQ Item 1 -->
-
         <div class="faq-item" tabindex="0">
-
             <button class="faq-question" aria-expanded="false">
-
                 <span>Quand et où se tiendra la Journée d'Intégration ?</span>
-
                 <i class="faq-icone">+</i>
-
             </button>
-
             <div class="faq-reponse">
-
                 <p>
-
-                    La Journée d'Intégration se tiendra le 12 avril à la Caistab du Plateau. Restez connectés pour le programme détaillé !
-
+                    La Journée d'Intégration se tiendra le 12 avril à la Caistab du Plateau. Restez connectés pour le
+                    programme détaillé !
                 </p>
-
             </div>
-
         </div>
-
-
-
-        <!-- FAQ Item 2 -->
-
         <div class="faq-item" tabindex="0">
-
             <button class="faq-question" aria-expanded="false">
-
                 <span>Quels seront les temps forts de la Journée d'Intégration ?</span>
-
                 <i class="faq-icone">+</i>
-
             </button>
-
             <div class="faq-reponse">
-
                 <p>
-
-                    L’événement comprendra des panels de discussion, des conférences et le Miage Project Challenge, un concours mettant en avant les talents des étudiants en MIAGE.
-
+                    L’événement comprendra des panels de discussion, des conférences et le Miage Project Challenge, un
+                    concours mettant en avant les talents des étudiants en MIAGE.
                 </p>
-
             </div>
-
         </div>
-
-
-
-        <!-- FAQ Item 3 -->
-
         <div class="faq-item" tabindex="0">
-
             <button class="faq-question" aria-expanded="false">
-
                 <span>Y a-t-il des frais de participation pour les étudiants ?</span>
-
                 <i class="faq-icone">+</i>
-
             </button>
-
             <div class="faq-reponse">
-
                 <p>
-
-                    Oui, les étudiants de L2, M1 et M2 doivent s’acquitter de leurs droits de participation à la vie estudiantine, d’un montant de 15 000 FCFA, avant de pouvoir assister à la Journée d’Intégration.
-
+                    Oui, les étudiants de L2, M1 et M2 doivent s’acquitter de leurs droits de participation à la vie
+                    estudiantine, d’un montant de 15 000 FCFA, avant de pouvoir assister à la Journée d’Intégration.
                 </p>
-
             </div>
-
         </div>
-
-
-
-        <!-- FAQ Item 4 -->
-
         <div class="faq-item" tabindex="0">
-
             <button class="faq-question" aria-expanded="false">
-
                 <span>Comment puis-je m’inscrire et obtenir plus d’informations ?</span>
-
                 <i class="faq-icone">+</i>
-
             </button>
 
             <div class="faq-reponse">
-
                 <p>
-
-                    Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à jour sur l’événement. Vous pouvez également contacter l’équipe organisatrice pour toute question.
-
+                    Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à
+                    jour sur l’événement. Vous pouvez également contacter l’équipe organisatrice pour toute question.
                 </p>
-
             </div>
-
         </div>
 
     </section>

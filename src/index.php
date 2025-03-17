@@ -26,6 +26,6 @@ require_once 'backend/client/routes/web.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="favicon" href="backend/client/assets/images/logo.png">
+    <link rel="favicon" href="logo.ico">
 </head>
 
