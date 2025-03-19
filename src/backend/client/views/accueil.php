@@ -29,8 +29,7 @@
         </ul>
 
         <div class="boutons-entete">
-            <a href="#" class="bouton-action connexion">Connexion</a>
-            <a href="#" class="bouton-action inscription">S'inscrire</a>
+            <li><a href="/authentification" class="bouton-action inscription">Se Connecter</a></li>
         </div>
 
         <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">
