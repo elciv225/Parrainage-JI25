@@ -46,8 +46,7 @@
             <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>
             <!-- Séparateur visuel -->
             <li class="separateur"></li>
-            <li><a href="#" class="bouton-action connexion">Connexion</a></li>
-            <li><a href="#" class="bouton-action inscription">S'inscrire</a></li>
+            <li><a href="/authentification" class="bouton-action inscription">Se Connecter</a></li>
             <!-- Bouton de basculement de thème transformé en icône -->
         </ul>
     </nav>
