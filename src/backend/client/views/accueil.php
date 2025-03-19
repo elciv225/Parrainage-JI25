@@ -29,7 +29,7 @@
         </ul>
 
         <div class="boutons-entete">
-            <li><a href="/authentification" class="bouton-action inscription">Se Connecter</a></li>
+            <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
         </div>
 
         <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">

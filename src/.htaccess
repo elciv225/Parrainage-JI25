@@ -1,18 +1,17 @@
 Options +FollowSymLinks
-RewriteEngine on
+RewriteEngine On
+
+# Redirection HTTP vers HTTPS (placer cette règle en premier)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # Ne pas réécrire les fichiers JS, CSS, images et autres assets
 RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|eot|mp4|webp|json|xml)$ [NC]
 RewriteRule .* - [L]
 
-# Gérer les routes normalement si le site n'est pas en maintenance
+# Gérer les routes normalement si le fichier n'existe pas
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # S'assurer que le bon type MIME est utilisé pour les fichiers JS
 AddType application/javascript .js
-
-# Rédirige directement vers https
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
