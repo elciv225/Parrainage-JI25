@@ -15,12 +15,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('', function () {
-    View::render('accueil',[
-        'title'=>'Journée d\'Integration 2025 - Accueil'
-    ]);
-});
-
 Route::get('/maintenance', function () {
     View::render('maintenance',[
         'title'=>'Journée d\'Integration 2025 - Page en maintenance veillez revenir plutard'
