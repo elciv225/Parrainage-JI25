@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `categorie_question` (
                                                     `id_categorie` int UNSIGNED NOT NULL AUTO_INCREMENT,
                                                     `titre_categorie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
                                                     PRIMARY KEY (`id_categorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertions des données de la table `categorie_question`
 INSERT INTO `categorie_question` (`titre_categorie`) VALUES
                                                          ('Préférences et intérêts'),
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `questionnaire` (
                                                `id_categorie` int UNSIGNED DEFAULT NULL,
                                                PRIMARY KEY (`question_id`),
                                                KEY `fk_questionnaire` (`id_categorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertion des questions
 -- Désactiver les contraintes de clé étrangère
 SET foreign_key_checks = 0;
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `options_questions` (
                                                    `scores_personnalite` double DEFAULT NULL,
                                                    PRIMARY KEY (`option_id`),
                                                    KEY `idx_question` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertion des données de la table `options_questions`
 -- Désactiver les contraintes de clé étrangère
 SET foreign_key_checks = 0;
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
                                               UNIQUE KEY `unq_utilisateurs_id_profil` (`id_profil`),
                                               KEY `idx_nom_prenom` (`nom`,`prenom`),
                                               KEY `idx_date_creation` (`date_creation`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
