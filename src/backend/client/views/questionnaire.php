@@ -29,7 +29,7 @@ try {
 <div class="quiz-container">
     <header class="quiz-header">
         <nav class="quiz-nav">
-            <button class="back-btn" onclick="location.href='index.php';">← Retour</button>
+            <button class="back-btn" onclick="location.href='/authentification';">← Retour</button>
             <div>
                 <div class="quiz-title">Aptitude Test</div>
                 <div class="question-counter">Question <span id="question-number">1</span>

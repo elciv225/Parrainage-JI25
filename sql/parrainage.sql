@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS `questionnaire` (
                                                KEY `fk_questionnaire` (`id_categorie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertion des questions
+-- Désactiver les contraintes de clé étrangère
+SET foreign_key_checks = 0;
 INSERT INTO `questionnaire` ( `texte_question`, `img_question`, `id_categorie`) VALUES
                                                                                     ('Quel est ton sport préféré ?', NULL, 1),
                                                                                     ('Real ou Barça ?', NULL, 1),
@@ -81,6 +83,8 @@ INSERT INTO `questionnaire` ( `texte_question`, `img_question`, `id_categorie`) 
                                                                                     ('Ecole est dure ?', NULL, 3),
                                                                                     ('Ton prof Fav ?', NULL, 3),
                                                                                     ('Si tu étais un plat ivoirien, lequel serais-tu ?', NULL, 3);
+-- Réactiver les contraintes de clé étrangère
+SET foreign_key_checks = 1;
 -- --------------------------------------------------------
 
 --
@@ -95,6 +99,8 @@ CREATE TABLE IF NOT EXISTS `options_questions` (
                                                    KEY `idx_question` (`question_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertion des données de la table `options_questions`
+-- Désactiver les contraintes de clé étrangère
+SET foreign_key_checks = 0;
 INSERT INTO `options_questions` (`question_id`, `texte_option`, `scores_personnalite`) VALUES
                                                                                            (1, 'Basketball', 5),
                                                                                            (1, 'Football', 3),
@@ -185,6 +191,8 @@ INSERT INTO `options_questions` (`question_id`, `texte_option`, `scores_personna
                                                                                            (31, 'M. Codja', 4),
                                                                                            (32, 'Garba', 3),
                                                                                            (32, 'Le plaaaaminn', 5);
+-- Réactiver les contraintes de clé étrangère
+SET foreign_key_checks = 1;
 -- --------------------------------------------------------
 
 --
