@@ -135,30 +135,21 @@ require_once 'backend/client/routes/web.php';
         const loaderContainer = document.getElementById('loaderContainer');
         const contentContainer = document.getElementById('contentContainer');
 
-        // Fonction pour masquer le loader
         function hideLoader() {
             loaderContainer.classList.add('hide');
             setTimeout(() => {
-                contentContainer.classList.add('show');
-                // Optionnel : supprimer complètement le loader après l'animation
                 setTimeout(() => {
                     loaderContainer.style.display = 'none';
                 }, 800);
             }, 400);
         }
 
-        // Vérifier si la page est déjà chargée
         if (document.readyState === 'complete') {
-            // La page est déjà chargée, masquer immédiatement le loader
             hideLoader();
         } else {
-            // Attendre que toutes les ressources soient chargées
             window.addEventListener('load', function () {
-                // Ajouter un petit délai pour l'effet visuel
                 setTimeout(hideLoader, 1000);
             });
-
-            // Fallback si l'événement load ne se déclenche pas correctement
             setTimeout(hideLoader, 5000);
         }
     });
