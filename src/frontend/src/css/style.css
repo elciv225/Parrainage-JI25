@@ -1,0 +1,128 @@
+@import url("https://use.typekit.net/bfu2oym.css");
+
+:root {
+  /* Configuration du thème */
+  color-scheme: light dark;
+
+  /* Couleurs de base */
+  --primary-color: #1A5E63;
+  --secondary-color: #FFC857;
+
+  /* Couleurs des composants - Mode clair */
+  --background-primary: #FFFFFF;
+  --background-secondary: #F8FAFB;
+  --background-tertiary: #ECF0F1;
+  --background-input: #BDC3C7;
+
+  /* Text */
+  --text-primary: #050E10;
+  --text-secondary: #0A1B20;
+  --text-disabled: #BDC3C7;
+
+  /* Boutons */
+  --button-primary: #1A5E63;
+  --button-primary-hover: #15484B;
+  --button-secondary: #FFC857;
+  --button-secondary-hover: #FCCF6C;
+  --button-disabled: #E0E6E8;
+
+  /* États */
+  --success: rgba(102, 187, 106, 0.55); /* Vert doux */
+  --warning: rgba(255, 193, 7, 0.55); /* Jaune épuré */
+  --error: rgba(239, 83, 80, 0.55); /* Rouge subtil */
+  --info: rgba(100, 181, 246, 0.55); /* Bleu clair */
+
+  /* Bordures */
+  --border-light: #87999A;
+  --border-medium: #6B7B7C;
+  --border-dark: #162122;
+
+  /* Degradés */
+  --gradient-hover: linear-gradient(to bottom,
+    rgba(240, 240, 240, 0.8), /* Couleur claire en mode clair */
+    rgba(220, 220, 220, 0.9)  /* Couleur plus foncée en mode clair */
+    );
+
+  /* Overlays et shadows */
+  --overlay: rgba(44, 62, 80, 0.1);
+  --shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Inputs */
+  --input-border: #1A5E63;
+  --input-focus: rgba(26, 94, 99, 20%);
+
+  /* Liens */
+  --link-color: #2A8F96;
+  --link-hover: #1A5E63;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Couleurs de base */
+    --primary-color: #1A5E63; /* Variante lumineuse pour le contraste */
+    --secondary-color: #FFC857;
+
+    /* Couleurs des composants - Mode sombre */
+    --background-primary: #121212;
+    --background-secondary: #1E1E1E;
+    --background-tertiary: #2A2A2A;
+    --background-input: #2D2D2D;
+
+    /* Text */
+    --text-primary: #EAEAEA;
+    --text-secondary: #CFCFCF;
+    --text-disabled: #7F8C8D;
+
+    /* Boutons */
+    --button-primary: #1A5E63;
+    --button-primary-hover: #15484B;
+    --button-secondary: #FFC857;
+    --button-secondary-hover: #F3BA44;
+    --button-disabled: #4F5B5C;
+
+    /* États */
+    --success: rgba(39, 174, 96, 0.4); /* Vert atténué */
+    --warning: rgba(243, 156, 18, 0.4); /* Jaune subtil */
+    --error: rgba(231, 76, 60, 0.4); /* Rouge modéré */
+    --info: rgba(52, 152, 219, 0.4); /* Bleu clair */
+
+    /* Bordures */
+    --border-light: #2C3E50;
+    --border-medium: #34495E;
+    --border-dark: #1A252F;
+
+    /* Degradés */
+    --gradient-hover: linear-gradient(to bottom,
+    rgba(30, 30, 30, 0.8), /* Couleur foncée en mode sombre */
+    rgba(15, 15, 15, 0.9)  /* Couleur plus foncée en mode sombre */
+    );
+
+    /* Overlays et shadows */
+    --overlay: rgba(0, 0, 0, 0.5);
+    --shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+
+    /* Inputs */
+    --input-border: #1A5E63;
+    --input-focus: rgba(26, 94, 99, 20%);
+
+    /* Liens */
+    --link-color: #1A5E63;
+    --link-hover: #15484B;
+  }
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: geologica-variable, sans-serif;
+  font-style: normal;
+  font-variation-settings: "CRSV" 0, "SHRP" 0, "slnt" 0, "wght" 100;
+}
