@@ -1,10 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
 
-# Redirection HTTP vers HTTPS (placer cette règle en premier)
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
 # Ne pas réécrire les fichiers JS, CSS, images et autres assets
 RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|eot|mp4|webp|json|xml)$ [NC]
 RewriteRule .* - [L]
