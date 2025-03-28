@@ -6,6 +6,8 @@
    chargez GSAP via un CDN (avant ce script).
 */
 import {gsap} from "gsap";
+// Importer les icônes Lucide
+import {createIcons, EyeClosed, Eye} from "lucide";
 
 /****************************************************
  * Lancement global au chargement du DOM
@@ -186,9 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const parrainageDiv = document.getElementById("parrainage");
     const ajoutPhotoDiv = document.getElementById("ajout-photo"); // NOUVEAU
 
-    const sectionGauche = document.querySelector(".section-gauche");
-    const sectionDroite = document.querySelector(".section-droite");
-
     // Vérifier si on est sur mobile (max-width: 530px)
     const isMobile = window.matchMedia("(max-width: 530px)").matches;
 
@@ -196,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function switchForm(e, targetId = null) {
         if (e) e.preventDefault();
         // ex: targetId = "connexion", "inscription", "parrainage", "ajout-photo"
-        targetId = targetId || (e ? e.target.getAttribute("href").substring(1) : null);
+        targetId = targetId || (e ? e.target.getAttribute("href").substring(1) : window.location.hash.substring(1));
 
         let elementToHide, elementToShow;
 
@@ -204,26 +203,18 @@ document.addEventListener("DOMContentLoaded", function () {
             elementToHide = inscriptionDiv;
             elementToShow = connexionDiv;
             document.body.classList.remove("parrainage-active");
-            sectionGauche.style.display = "";
         } else if (targetId === "inscription") {
             elementToHide = connexionDiv;
             elementToShow = inscriptionDiv;
             document.body.classList.remove("parrainage-active");
-            sectionGauche.style.display = "";
         } else if (targetId === "parrainage") {
             elementToHide = inscriptionDiv;
             elementToShow = parrainageDiv;
             document.body.classList.add("parrainage-active");
-            // Masquer la section gauche
-            sectionGauche.style.display = "none";
-        }
-        // NOUVEAU : si on veut aller de #parrainage → #ajout-photo
-        else if (targetId === "ajout-photo") {
+        } else if (targetId === "ajout-photo") {
             elementToHide = parrainageDiv;
             elementToShow = ajoutPhotoDiv;
-            // On reste en mode "parrainage-active" ou pas, selon vos besoins
             document.body.classList.add("parrainage-active");
-            sectionGauche.style.display = "none";
         }
 
         // Masquer tous les éléments avant d'appliquer l'animation
@@ -355,16 +346,6 @@ document.addEventListener("DOMContentLoaded", function () {
             duration: 0.5,
             ease: "power3.out",
         })
-        .from(
-            ".section-gauche",
-            {
-                opacity: 0,
-                x: -40,
-                duration: 0.5,
-                ease: "power3.out",
-            },
-            "-=0.3"
-        )
         .from(
             ".section-droite",
             {
@@ -545,14 +526,14 @@ document.addEventListener("DOMContentLoaded", function () {
         suggestionsContainer.style.display = 'block';
         suggestionsContainer.style.opacity = '0';
         gsap.fromTo(suggestionsContainer,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.3 }
+            {opacity: 0, y: -10},
+            {opacity: 1, y: 0, duration: 0.3}
         );
 
         // Animation des éléments de la liste
         gsap.fromTo(suggestionsContainer.children,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.3, stagger: 0.05 }
+            {opacity: 0, y: -10},
+            {opacity: 1, y: 0, duration: 0.3, stagger: 0.05}
         );
     }
 
@@ -594,8 +575,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Animation du message d'erreur
         gsap.fromTo(erreur,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.3 }
+            {opacity: 0, y: -10},
+            {opacity: 1, y: 0, duration: 0.3}
         );
 
         // Disparition automatique
@@ -614,9 +595,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Gestionnaire d'événements pour les inputs
     [
-        { input: inputNom, suggestions: suggestionsNom, type: "nom" },
-        { input: inputPrenoms, suggestions: suggestionsPrenoms, type: "prenoms" }
-    ].forEach(({ input, suggestions, type }) => {
+        {input: inputNom, suggestions: suggestionsNom, type: "nom"},
+        {input: inputPrenoms, suggestions: suggestionsPrenoms, type: "prenoms"}
+    ].forEach(({input, suggestions, type}) => {
         input.addEventListener("input", () => {
             const query = input.value;
             const matches = rechercherEtudiants(query, type).map(etudiant => etudiant[type]);
@@ -650,39 +631,53 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputMotDePasse = document.getElementById('inscription-mdp');
     const inputConfirmeMotDePasse = document.getElementById('inscription-confirm-mdp');
 
-    inputConfirmeMotDePasse.addEventListener("blur", ()=>{
-        setTimeout(()=>{
+    inputConfirmeMotDePasse.addEventListener("blur", () => {
+        setTimeout(() => {
             const valueConfirmeMdp = inputConfirmeMotDePasse.value;
             const valutMdp = inputMotDePasse.value;
 
-            if (valutMdp !== valueConfirmeMdp){
+            if (valutMdp !== valueConfirmeMdp) {
                 inputConfirmeMotDePasse.setAttribute("invalid", "true");
                 afficherErreur(inputConfirmeMotDePasse, "Les mots de passe ne correspondent pas");
-            }else {
+            } else {
                 inputConfirmeMotDePasse.removeAttribute("invalid");
             }
         }, 200)
     })
 
+    const lucideIconsConfig = {
+        icons: {
+            EyeClosed,
+            Eye
+        }
+    };
     // Section voir ou non le mot de passe.
     const inputGroups = document.querySelectorAll(".input-group");
 
     inputGroups.forEach(group => {
         const passwordInput = group.querySelector('input[type="password"], input[type="text"]');
-        const lordIcon = group.querySelector("lord-icon");
+        const lucideIcon = group.querySelector('[data-lucide]');
 
-        if (passwordInput && lordIcon) {
-            let isRevealed = false;
+        if (passwordInput && lucideIcon) {
+            let isRevealed = passwordInput.type === "text";
 
-            // Animation douce pour le lord-icon
+            // Synchroniser l'icône initiale avec l'état de l'input
+            if (isRevealed) {
+                lucideIcon.setAttribute("data-lucide", "eye");
+            } else {
+                lucideIcon.setAttribute("data-lucide", "eye-closed");
+            }
+            createIcons(lucideIconsConfig); // Mettre à jour les icônes après le changement initial
+
+            // Animation for the Lucide icon
             const animateIcon = (reveal) => {
-                gsap.to(lordIcon, {
+                gsap.to(lucideIcon, {
                     duration: 0.5,
                     scale: 1.1,
                     blur: 15,
                     ease: "elastic.out(1, 0.5)",
                     onComplete: () => {
-                        gsap.to(lordIcon, {
+                        gsap.to(lucideIcon, {
                             duration: 0.3,
                             scale: 1,
                             blur: 0,
@@ -692,7 +687,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             };
 
-            // Animation fluide pour le texte
+            // Animation for text transition
             const animateTextTransition = (reveal) => {
                 gsap.to(passwordInput, {
                     duration: 0.3,
@@ -701,21 +696,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     ease: "power2.inOut",
                     onComplete: () => {
                         passwordInput.type = reveal ? "text" : "password";
-                        lordIcon.setAttribute("state", reveal ? "morph-lashes" : "hover-lashes");
+                        lucideIcon.setAttribute("data-lucide", reveal ? "eye" : "eye-closed");
+
+                        // Reinitialize Lucide icon to update the icon
+                        createIcons(lucideIconsConfig);
 
                         gsap.to(passwordInput, {
                             duration: 0.3,
                             blur: 0,
                             opacity: 1,
                             ease: "power2.out",
-                            clearProps: "y" // Nettoie la propriété y après l'animation
+                            clearProps: "y"
                         });
                     }
                 });
             };
 
-            // Gestionnaire de clic sur l'icône
-            lordIcon.addEventListener("click", () => {
+            // Click event listener
+            lucideIcon.addEventListener("click", () => {
                 animateIcon(isRevealed);
                 animateTextTransition(!isRevealed);
                 isRevealed = !isRevealed;
@@ -815,60 +813,4 @@ document.addEventListener("DOMContentLoaded", function () {
         previewContainer.classList.remove('active');
         errorMessage.classList.remove('active');
     });
-
-
-    /*********************************************************
-     * Carrousel de la zone de connexion
-     ********************************************************/
-    const carousel = document.querySelector('.carousel-container');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dotsContainer = document.querySelector('.dots-container');
-    let currentSlide = 0;
-    let autoPlayInterval;
-
-    // Créer les points de navigation
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.className = 'dot' + (index === 0 ? ' active' : '');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    function goToSlide(index) {
-        currentSlide = index;
-        updateCarousel();
-    }
-
-    function updateCarousel() {
-        // Animation avec GSAP
-        gsap.to(carousel, {
-            duration: 1,
-            x: -currentSlide * 100 + '%',
-            ease: 'power2.inOut'
-        });
-
-        // Mise à jour des points
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
-
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }, 4000); // Défilement toutes les 4 secondes
-    }
-
-    // Démarrer le défilement automatique
-    startAutoPlay();
-
-    // Pause au survol du carrousel
-    carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-    carousel.addEventListener('mouseleave', startAutoPlay);
-
-    // Pause au survol des points
-    dotsContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-    dotsContainer.addEventListener('mouseleave', startAutoPlay);
-
 });

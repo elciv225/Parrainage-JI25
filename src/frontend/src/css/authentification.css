@@ -86,9 +86,8 @@ body.parrainage-active {
     position: relative;
     display: flex;
     justify-content: center;
-    width: 800px;
-    height: 70vh;
-    max-height: 512px;
+    width: 560px;
+    min-height: 70vh;
     padding: 10px;
     border-radius: 22px;
     gap: 5px;
@@ -96,66 +95,8 @@ body.parrainage-active {
     background-color: var(--background-tertiary);
     box-shadow: var(--shadow);
 
-    .section-gauche {
-        width: 40%;
-        border-radius: 12px;
-        padding: 8px;
-        display: flex;
-        justify-content: center;
-        background-color: var(--background-input);
-        overflow: hidden;
-        position: relative;
-        box-shadow: var(--shadow);
-        z-index: 1;
-
-        .carousel-container {
-            display: flex;
-            position: relative;
-            align-content: center;
-            transform: translateX(0);
-            will-change: transform;
-        }
-
-        .carousel-slide {
-            flex: 0 0 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 12px;
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            pointer-events: all;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            background: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .dot.active {
-            background: #333;
-            transform: scale(1.2);
-        }
-
-    }
-
     .section-droite {
-        width: 70%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         overflow: hidden;
@@ -192,7 +133,6 @@ body.parrainage-active {
 
             h3 {
                 font-size: 2rem;
-                /* Bold*/
             }
 
             h6 {
@@ -447,16 +387,12 @@ lord-icon {
     position: absolute;
     top: 0;
     left: 0;
-    width: 800px; /* Prend toute la largeur du conteneur principal */
+    width: 560px; /* Prend toute la largeur du conteneur principal */
     height: 100%; /* Prend toute la hauteur du conteneur principal */
     background: transparent;
     opacity: 0;
     z-index: -1;
     border-radius: 22px; /* Même border-radius que le conteneur principal */
-}
-
-body.parrainage-active .section-gauche {
-    display: none !important; /* La section gauche n'est plus visible */
 }
 
 body.parrainage-active .section-droite {
@@ -683,7 +619,7 @@ body.parrainage-active .principal-container {
     position: absolute;
     top: 0;
     left: 0;
-    width: 800px; /* Même largeur que .principal-container */
+    width: 560px; /* Même largeur que .principal-container */
     height: 100%;
     background: var(--background-primary); /* Fond blanc (ou transparent si vous préférez) */
     border-radius: 22px; /* Même border-radius que les autres sections */
@@ -697,11 +633,26 @@ body.parrainage-active .principal-container {
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
+
+        .header-form {
+            display: flex;
+            padding: 10px 0;
+            max-width: 560px;
+            align-items: center;
+            gap: 5px;
+        }
+
+        p{
+            width: 460px;
+            height: auto;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
 
         .body-form {
-            height: 65%;
+            height: 60%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -876,6 +827,12 @@ body.parrainage-active .principal-container {
  *
  */
 
+@media (max-height: 610px) {
+    .principal-container {
+        min-height: 80vh;
+    }
+}
+
 
 /* === Smartphones === */
 @media (max-width: 530px) {
@@ -915,9 +872,6 @@ body.parrainage-active .principal-container {
         max-height: 640px;
         gap: 0;
 
-        .section-gauche {
-            display: none;
-        }
 
         .section-droite {
             width: 100%;

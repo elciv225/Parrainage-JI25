@@ -222,25 +222,25 @@ const testimonials = [
         quote: "Charger de supervise et coordonne les activités du comité, représente officiellement le groupe et prend les décisions stratégiques.",
         name: "SORO Eméric Jamel",
         designation: "Président du comité d'organisation (PCO)",
-        src: "backend/client/assets/images/Emeric.jpg"
+        src: "backend/client/assets/images/Emeric.webp"
     },
     {
         quote: "Charger d'assister le président, le remplace en son absence et supervise des projets ou sous-comités spécifiques.",
         name: "ADJE Aude-esther",
         designation: "Vice président du comité d'organisation (Vice-PCO)",
-        src: "backend/client/assets/images/Aude.jpg"
+        src: "backend/client/assets/images/Aude.webp"
     },
     {
         quote: "Charger de gèrer la documentation, rédige les procès-verbaux, prépare les ordres du jour et assure la communication interne.",
         name: "TRA Lou Océane",
         designation: "Sécrétaire et Responsable du comité logiciel",
-        src: "backend/client/assets/images/oceane.png"
+        src: "backend/client/assets/images/oceane.webp"
     },
     {
         quote: "Charger de gèrer les finances, prépare les budgets, suit les dépenses/recettes et veille à la transparence financière.",
         name: "IRIE Anne Jemima",
         designation: "Trésorier",
-        src: "backend/client/assets/images/Jemima.jpg"
+        src: "backend/client/assets/images/Jemima.webp"
     }
 ];
 
@@ -297,16 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const reviews = [
     {
-        img: "backend/client/assets/images/ufhb.png"
+        img: "backend/client/assets/images/ufhb.webp"
     },
     {
-        img: "backend/client/assets/images/mi.png"
+        img: "backend/client/assets/images/mi.webp"
     },
     {
-        img: "backend/client/assets/images/pmd.png"
+        img: "backend/client/assets/images/pmd.webp"
     },
     {
-        img: "backend/client/assets/images/paytou.png"
+        img: "backend/client/assets/images/paytou.webp"
     }
 ];
 function createReviewCard(review) {

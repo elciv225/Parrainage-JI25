@@ -18,7 +18,7 @@ try {
     $manager->loadQuestions();
 
     // Obtenir 10 questions équilibrées
-    $balancedQuestions = $manager->getBalancedQuestions(3);
+    $balancedQuestions = $manager->getBalancedQuestions(10);
 } catch (Exception $e) {
     // Gérer les exceptions potentielles
     echo '<div class="error">Erreur : ' . $e->getMessage() . '</div>';
@@ -29,7 +29,7 @@ try {
 <div class="quiz-container">
     <header class="quiz-header">
         <nav class="quiz-nav">
-            <button class="back-btn" onclick="location.href='/authentification';">← Retour</button>
+            <button class="back-btn" onclick="/*location.href='/authentification';*/history.back();">← Retour</button>
             <div>
                 <div class="quiz-title">Aptitude Test</div>
                 <div class="question-counter">Question <span id="question-number">1</span>

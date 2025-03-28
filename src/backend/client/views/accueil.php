@@ -5,58 +5,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="logo.webp">
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
     <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title><?= $title ?? "Titre par défaut" ?></title>
-    <link rel="icon" type="image/png" href="logo.png">
+
 </head>
 <body>
 <header class="header">
     <nav class="nav-container">
         <a href="/" class="marque">
-            <img class="logo-ji" src="backend/client/assets/images/logo.png" alt="Logo Journée d'Intégration">
+            <img class="logo-ji" src="backend/client/assets/images/logo.webp" alt="Logo Journée d'Intégration">
             <div class="texte-marque">JOURNEE D'INTEGRATION</div>
         </a>
-
         <ul class="liens-navigation">
             <li><a href="/parrainage" class="lien">Parrainage</a></li>
             <li><a href="#activite" class="lien">Activités</a></li>
             <li><a href="#competition" class="lien">Compétition</a></li>
             <li><a href="#equipe" class="lien">Nôtre équipe</a></li>
         </ul>
-
         <div class="boutons-entete">
             <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
         </div>
-
         <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
-    <!-- Menu burger (mobile) -->
     <nav class="menu-mobile" aria-label="Menu mobile">
         <ul>
             <li><a href="/parrainage" class="lien-mobile">Parrainage</a></li>
             <li><a href="#activite" class="lien-mobile">Activités</a></li>
             <li><a href="#competition" class="lien-mobile">Compétition</a></li>
             <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>
-            <!-- Séparateur visuel -->
             <li class="separateur"></li>
             <li><a href="/authentification" class="bouton-action inscription">Se Connecter</a></li>
-            <!-- Bouton de basculement de thème transformé en icône -->
         </ul>
     </nav>
 </header>
 <main>
     <section class="hero">
-        <!-- Conteneur pour le logo 3D -->
         <div class="logo-flottant"></div>
         <div class="carousel">
             <div class="carousel-inner">
-                <!-- Slide 1 -->
                 <div class="slide active">
                     <div class="slide-content">
                         <h1 class="slide-title">Bienvenue à la Journée d'Intégration</h1>
@@ -64,7 +58,6 @@
                             et de partage.</p>
                     </div>
                 </div>
-                <!-- Slide 2 -->
                 <div class="slide">
                     <div class="slide-content">
                         <h1 class="slide-title">Découvrez nos Activités</h1>
@@ -72,8 +65,6 @@
                             votre expérience.</p>
                     </div>
                 </div>
-
-                <!-- Slide 3 -->
                 <div class="slide">
                     <div class="slide-content">
                         <h1 class="slide-title">Rencontrez vos Parrains</h1>
@@ -81,8 +72,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Dots -->
             <div class="carousel-dots">
                 <button class="dot active" aria-label="Slide 1"></button>
                 <button class="dot" aria-label="Slide 2"></button>
@@ -90,8 +79,6 @@
             </div>
         </div>
     </section>
-
-    <!-- === SECTION ACTIVITÉS === -->
     <section id="activite" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
@@ -101,8 +88,8 @@
             </header>
             <div class="grille-activites">
                 <!-- nov bleu -->
-                <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/novBleu.png" alt="Conférence Innovation & Tech">
+                <article class="carte-activite" >
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech">
                     <div class="details-activite">
                         <h2>Journée à thème</h2>
                         <h3>NOVEMBRE BLEU</h3>
@@ -111,16 +98,16 @@
                     </div>
                 </article>
                 <!-- Oct Rose -->
-                <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/octRose.png" alt="Compétition Hackathon">
+                <article class="carte-activite" >
+                    <img src="backend/client/assets/images/octRose.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
                         <h2>Journée à Thème</h2>
                         <h3>OCTOBRE ROSE</h3>
                         <p>Organisation d'une journée pour soutenir le lutte contre le cancer du sein chez la Femme</p>
                     </div>
                 </article>
-                <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/blackWhite.jpg" alt="Journée Black & White">
+                <article class="carte-activite" >
+                    <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
                     <div class="details-activite">
                         <h2>Journée Black & White</h2>
                         <h3>Miage Project Chalenge</h3>
@@ -137,16 +124,16 @@
                 <p>Découvrez nos compétition pour marquer l'histoire de MIAGE.</p>
             </header>
             <div class="grille-activites">
-                <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/mpc25.png" alt="Compétition Hackathon">
+                <article class="carte-activite" >
+                    <img src="backend/client/assets/images/mpc25.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
                         <h2>Concours informatique</h2>
                         <h3>Miage Project Chalenge</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
-                <article class="carte-activite" tabindex="0">
-                    <img src="backend/client/assets/images/fashionWeek.jpg" alt="Journée Black & White">
+                <article class="carte-activite">
+                    <img src="backend/client/assets/images/fashionWeek.webp" alt="Journée Black & White">
                     <div class="details-activite">
                         <h2>Style</h2>
                         <h3>Fashion Week</h3>
@@ -156,8 +143,6 @@
             </div>
         </div>
     </section>
-
-    <!-- === Section partenaire === -->
     <section class="partenaires" aria-label="Ils nous font confiance">
         <div class="conteneur-partenaires">
             <h2>Ils nous font confiance</h2>
@@ -170,7 +155,6 @@
             </div>
         </div>
     </section>
-
     <section id="equipe" class="team" aria-label="Nos Comités">
         <h2>Notre Équipe</h2>
         <div class="container">
@@ -207,11 +191,9 @@
             </div>
         </div>
     </section>
-
-    <!-- === SECTION FAQ === -->
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
         <h2 class="titre-faq">Questions Fréquentes</h2>
-        <div class="faq-item" tabindex="0">
+        <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
                 <span>Quand et où se tiendra la Journée d'Intégration ?</span>
                 <i class="faq-icone">+</i>
@@ -223,7 +205,7 @@
                 </p>
             </div>
         </div>
-        <div class="faq-item" tabindex="0">
+        <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
                 <span>Quels seront les temps forts de la Journée d'Intégration ?</span>
                 <i class="faq-icone">+</i>
@@ -235,7 +217,7 @@
                 </p>
             </div>
         </div>
-        <div class="faq-item" tabindex="0">
+        <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
                 <span>Y a-t-il des frais de participation pour les étudiants ?</span>
                 <i class="faq-icone">+</i>
@@ -247,12 +229,11 @@
                 </p>
             </div>
         </div>
-        <div class="faq-item" tabindex="0">
+        <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
                 <span>Comment puis-je m’inscrire et obtenir plus d’informations ?</span>
                 <i class="faq-icone">+</i>
             </button>
-
             <div class="faq-reponse">
                 <p>
                     Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à
@@ -260,17 +241,14 @@
                 </p>
             </div>
         </div>
-
     </section>
 </main>
-
 <footer class="pied-de-page" role="contentinfo">
-    <!-- Partie supérieure du pied de page -->
     <div class="pied-haut">
         <div class="conteneur-pied">
             <div class="marque-pied">
                 <a href="#" class="lien-marque">
-                    <img class="logo-ji" src="backend/client/assets/images/logo.png" alt="Logo Journée d’Intégration">
+                    <img class="logo-ji" src="backend/client/assets/images/logo.webp" alt="Logo Journée d’Intégration">
                     <span class="titre-marque">JOURNÉE D’INTÉGRATION</span>
                 </a>
                 <p class="description-marque">
@@ -279,7 +257,6 @@
             </div>
         </div>
     </div>
-    <!-- Partie inférieure du pied de page -->
     <div class="pied-bas">
         <p class="texte-bas">© 2025 Journée d’Intégration — Tous droits réservés</p>
         <div class="reseaux-sociaux">
@@ -315,6 +292,5 @@
 </footer>
 <script src="backend/client/assets/js/accueil.js"></script>
 <script type="module" src="backend/client/assets/js/logo3D.js"></script>
-
 </body>
 </html>
