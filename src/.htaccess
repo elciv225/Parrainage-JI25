@@ -1,12 +1,21 @@
+# Empêcher l'affichage de l'index des dossiers
+Options -Indexes
+
+# Activer le moteur de réécriture d'URL
 Options +FollowSymLinks
 RewriteEngine On
+
+# Redirection HTTP vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # Ne pas réécrire les fichiers JS, CSS, images et autres assets
 RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|eot|mp4|webp|json|xml)$ [NC]
 RewriteRule .* - [L]
 
-# Gérer les routes normalement si le fichier n'existe pas
+# Gérer les routes dynamiques si le fichier demandé n'existe pas
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # S'assurer que le bon type MIME est utilisé pour les fichiers JS
