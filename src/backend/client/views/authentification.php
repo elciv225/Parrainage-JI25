@@ -28,7 +28,7 @@
                         <label for="inscription-nom">Nom</label>
                     </div>
                     <div class="input-group" style="position: relative; z-index: 999;">
-                        <input type="text" name="nom" id="inscription-prenoms" placeholder="Veuillez  écrire ici"
+                        <input type="text" name="prenoms" id="inscription-prenoms" placeholder="Veuillez  écrire ici"
                                autocomplete="off">
                         <label for="inscription-prenoms">Prénoms</label>
                     </div>

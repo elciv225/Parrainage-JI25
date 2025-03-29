@@ -208,11 +208,30 @@ CREATE TABLE IF NOT EXISTS `profil_personnalite` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- Insertion des profils de personnalité basés sur les scores
 INSERT INTO `profil_personnalite` (`titre_profil`, `description`, `born_inf_score`, `born_sup_score`) VALUES
-                                                                                                          ('Le Casanier Introverti', 'Tu préfères rester chez toi, tu es calme, réfléchi, et tu apprécies les activités solitaires comme la lecture ou les jeux vidéo. Tu es plutôt ponctuel et assidu dans tes tâches.', -100, -20),
-                                                                                                          ('L Analyste Technique', 'Tu es passionné de technologie et de programmation. Tu as un esprit logique et analytique. Linux est probablement ton système d exploitation préféré, et tu passes beaucoup de temps à créer ou améliorer des choses.', -19, 0),
-                                                                                                          ('L Équilibré', 'Tu as un bon équilibre entre vie sociale et personnelle. Tu n es ni trop extraverti, ni trop introverti. Tu es généralement à l heure, tu prends soin de toi et tu as des habitudes saines.', 1, 10),
-                                                                                                          ('Le Social Actif', 'Tu es énergique, sociable et tu aimes sortir avec tes amis. Les réseaux sociaux sont importants pour toi et tu préfères être dehors plutôt que chez toi. Tu es probablement fan de sport.', 11, 32),
-                                                                                                          ('Le Geek Extraverti', 'Tu combines passion pour la technologie avec une vie sociale active. Tu es à l aise dans les discussions techniques comme dans les soirées. Tu es probablement passionné d anime et de jeux vidéo tout en ayant un cercle social étendu.', 61, 100);
+                                                                                                          ('Le Casanier Introverti',
+                                                                                                           'Tu préfères rester chez toi, tu es calme, réfléchi, et tu apprécies les activités solitaires comme la lecture ou les jeux vidéo. Tu es plutôt ponctuel et assidu dans tes tâches.',
+                                                                                                           -100, -20),
+
+                                                                                                          ('L Analyste Technique',
+                                                                                                           'Tu es passionné de technologie et de programmation. Tu as un esprit logique et analytique. Linux est probablement ton système d exploitation préféré, et tu passes beaucoup de temps à créer ou améliorer des choses.',
+                                                                                                           -19, 0),
+
+                                                                                                          ('L Équilibré',
+                                                                                                           'Tu as un bon équilibre entre vie sociale et personnelle. Tu n es ni trop extraverti, ni trop introverti. Tu es généralement à l heure, tu prends soin de toi et tu as des habitudes saines.',
+                                                                                                           1, 10),
+
+                                                                                                          ('Le Social Actif',
+                                                                                                           'Tu es énergique, sociable et tu aimes sortir avec tes amis. Les réseaux sociaux sont importants pour toi et tu préfères être dehors plutôt que chez toi. Tu es probablement fan de sport.',
+                                                                                                           11, 32),
+
+                                                                                                          ('L Aventurier Curieux',
+                                                                                                           'Tu aimes découvrir de nouvelles choses, voyager et tester de nouvelles expériences. Tu es curieux, adaptable et tu apprécies aussi bien la technologie que les interactions sociales.',
+                                                                                                           33, 60),
+
+                                                                                                          ('Le Geek Extraverti',
+                                                                                                           'Tu combines passion pour la technologie avec une vie sociale active. Tu es à l aise dans les discussions techniques comme dans les soirées. Tu es probablement passionné d anime et de jeux vidéo tout en ayant un cercle social étendu.',
+                                                                                                           61, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -268,67 +287,10 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
                                               `id_profil` smallint UNSIGNED DEFAULT NULL,
                                               PRIMARY KEY (`utilisateur_id`),
                                               UNIQUE KEY `idx_email` (`email`),
-                                              UNIQUE KEY `unq_utilisateurs_id_profil` (`id_profil`),
                                               KEY `idx_nom_prenom` (`nom`,`prenom`),
                                               KEY `idx_date_creation` (`date_creation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
-
---
--- Déclencheurs `utilisateurs`
---
-DROP TRIGGER IF EXISTS `assign_profil_after_insert`;
-DELIMITER $$
-CREATE TRIGGER `assign_profil_after_insert` AFTER INSERT ON `utilisateurs` FOR EACH ROW BEGIN
-    DECLARE profil_id SMALLINT UNSIGNED;
-
--- Vérifier si le score_personnalite n'est pas NULL
-    IF NEW.score_personnalite IS NOT NULL THEN
-        -- Trouver l'ID du profil correspondant au score_personnalite
-        SELECT id_profil
-        INTO profil_id
-        FROM profil_personnalite
-        WHERE NEW.score_personnalite BETWEEN born_inf_score AND born_sup_score
-        LIMIT 1;
-
--- Mettre à jour id_profil si un profil valide a été trouvé
-        IF profil_id IS NOT NULL THEN
-            UPDATE utilisateurs
-            SET id_profil = profil_id
-            WHERE utilisateur_id = NEW.utilisateur_id
-              AND (id_profil IS NULL OR id_profil != profil_id);
-        END IF;
-    END IF;
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `assign_profil_after_update`;
-DELIMITER $$
-CREATE TRIGGER `assign_profil_after_update` AFTER UPDATE ON `utilisateurs` FOR EACH ROW BEGIN
-    DECLARE profil_id SMALLINT UNSIGNED;
-
--- Vérifier si le score_personnalite a changé et n'est pas NULL
-    IF NEW.score_personnalite IS NOT NULL
-        AND (OLD.score_personnalite IS NULL OR OLD.score_personnalite != NEW.score_personnalite) THEN
-        -- Trouver l'ID du profil correspondant au score_personnalite
-        SELECT id_profil
-        INTO profil_id
-        FROM profil_personnalite
-        WHERE NEW.score_personnalite BETWEEN born_inf_score AND born_sup_score
-        LIMIT 1;
-
--- Mettre à jour id_profil seulement si nécessaire
-        IF profil_id IS NOT NULL
-            AND (NEW.id_profil IS NULL OR NEW.id_profil != profil_id) THEN
-            UPDATE utilisateurs
-            SET id_profil = profil_id
-            WHERE utilisateur_id = NEW.utilisateur_id
-              AND (id_profil IS NULL OR id_profil != profil_id);
-        END IF;
-    END IF;
-END
-$$
-DELIMITER ;
 
 --
 -- Contraintes pour les tables déchargées

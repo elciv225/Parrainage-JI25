@@ -12,3 +12,8 @@ Route::post('/inscription', function (){
 Route::post('/connexion', function (){
     Authentification::connexion();
 },'traitement_connexion');
+
+// Traitement de déconnexion
+Route::get('/deconnexion', function (){
+    Authentification::deconnexion();
+},'traitement_deconnexion');

@@ -12,7 +12,7 @@
     <title>Journée d'Intégration</title>
     <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title><?= $title ?? "Titre par défaut" ?></title>
+    <title><?= $title ?? "Journée d'intégration" ?></title>
 </head>
 <body>
 <header class="header">
@@ -28,7 +28,14 @@
             <li><a href="#equipe" class="lien">Nôtre équipe</a></li>
         </ul>
         <div class="boutons-entete">
-            <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
+            <?php if ($utilisateur): ?>
+                <p id="salut">Salut <?= $utilisateur['nom'] ?> !</p>
+                <form action="/deconnexion" method="GET">
+                    <button type="submit" class="bouton-action">Au revoir ?</button>
+                </form>
+            <?php else: ?>
+                <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
+            <?php endif; ?>
         </div>
         <div class="hamburger" role="button" tabindex="0" aria-label="Ouvrir le menu">
             <i class="fa-solid fa-bars"></i>
@@ -87,7 +94,7 @@
             </header>
             <div class="grille-activites">
                 <!-- nov bleu -->
-                <article class="carte-activite" >
+                <article class="carte-activite">
                     <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech">
                     <div class="details-activite">
                         <h2>Journée à thème</h2>
@@ -97,7 +104,7 @@
                     </div>
                 </article>
                 <!-- Oct Rose -->
-                <article class="carte-activite" >
+                <article class="carte-activite">
                     <img src="backend/client/assets/images/octRose.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
                         <h2>Journée à Thème</h2>
@@ -105,7 +112,7 @@
                         <p>Organisation d'une journée pour soutenir le lutte contre le cancer du sein chez la Femme</p>
                     </div>
                 </article>
-                <article class="carte-activite" >
+                <article class="carte-activite">
                     <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
                     <div class="details-activite">
                         <h2>Journée Black & White</h2>
@@ -123,7 +130,7 @@
                 <p>Découvrez nos compétition pour marquer l'histoire de MIAGE.</p>
             </header>
             <div class="grille-activites">
-                <article class="carte-activite" >
+                <article class="carte-activite">
                     <img src="backend/client/assets/images/mpc25.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
                         <h2>Concours informatique</h2>

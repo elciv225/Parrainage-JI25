@@ -48,10 +48,9 @@ class UtilisateurManager
                 $utilisateur->setMotDePasseHash($mot_de_passe_hash);
 
                 // Préparation de la requête d'insertion
-                $sql = "INSERT INTO parrainage.utilisateurs
-                    (prenom, nom, niveau, email, mot_de_passe_hash, photo, score_personnalite, id_profil, date_creation) 
-                    VALUES
-                    (:prenom, :nom, :niveau, :email, :motDePasseHash, :photo, :scorePersonnalite, :idProfil, NOW())";
+                $sql = "INSERT INTO parrainage.utilisateurs (prenom, nom, niveau, email, mot_de_passe_hash, photo, score_personnalite, id_profil, date_creation) 
+                        VALUES (:prenom, :nom, :niveau, :email, :motDePasseHash, :photo, :scorePersonnalite, (SELECT id_profil FROM parrainage.profil_personnalite 
+                        WHERE :scorePersonnalite BETWEEN born_inf_score AND born_sup_score LIMIT 1), NOW())";
 
                 $stmt = $this->pdo->prepare($sql);
 
@@ -63,7 +62,6 @@ class UtilisateurManager
                 $stmt->bindValue(':email', $utilisateur->getEmail(), PDO::PARAM_STR);
                 $stmt->bindValue(':motDePasseHash', $utilisateur->getMotDePasseHash(), PDO::PARAM_STR);
                 $stmt->bindValue(':scorePersonnalite', $utilisateur->getScorePersonnalite(), PDO::PARAM_INT);
-                $stmt->bindValue(':idProfil', $utilisateur->getIdProfil(), PDO::PARAM_INT);
 
                 // Exécution de la requête
                 $res = $stmt->execute();

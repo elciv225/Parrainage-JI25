@@ -10,19 +10,20 @@ Route::init($_GET['url'] ?? '/');
 
 // Définir les routes
 Route::get('/', function () {
-    View::render('accueil',[
-        'title'=>'Journée d\'Integration 2025 - Accueil'
+    View::render('accueil', [
+        'title' => 'Journée d\'Integration 2025 - Accueil',
+        'utilisateur' => $_SESSION['utilisateur'] ?? null
     ]);
 });
 
 Route::get('/maintenance', function () {
-    View::render('maintenance',[
-        'title'=>'Journée d\'Integration 2025 - Page en maintenance veillez revenir plutard'
+    View::render('maintenance', [
+        'title' => 'Journée d\'Integration 2025 - Page en maintenance veillez revenir plutard'
     ]);
 });
 Route::get('/test', function () {
-    View::render('test',[
-        'title'=>'Journée d\'Integration 2025 - Page en maintenance - test '
+    View::render('test', [
+        'title' => 'Journée d\'Integration 2025 - Page en maintenance - test '
     ]);
 });
 
@@ -51,9 +52,9 @@ Route::get('/admin', function () {
 });
 
 // Page authentification
-Route::get('/authentification', function (){
-    View::render('authentification',[
-        'title'=>'Journée d\'Integration 2025 - Authentification'
+Route::get('/authentification', function () {
+    View::render('authentification', [
+        'title' => 'Journée d\'Integration 2025 - Authentification'
     ]);
 });
 

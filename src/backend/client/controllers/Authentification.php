@@ -49,7 +49,6 @@ class Authentification
             $pdo = Database::getConnection();
             $manager = new UtilisateurManager($pdo);
 
-
             $utilisateur = $manager->connexion($_POST['email'], $_POST['motDePasse']);
 
             if ($utilisateur) {
@@ -61,6 +60,17 @@ class Authentification
             }
         }
 
+    }
+
+    public static function deconnexion(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        session_unset();
+        session_destroy();
+
+        header('Location: /');
     }
 
     public static function uploadPhoto($inputFile, $inputPrenoms, $inputNom): string|null
