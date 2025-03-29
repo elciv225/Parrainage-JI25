@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: php_backend
     ports:
-      - "80:80"
+      - "8081:80"
       - "443:443"
     volumes:
       - ./src:/var/www/html
@@ -21,7 +21,7 @@ services:
       MYSQL_USER: miage
       MYSQL_PASSWORD: JI25
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./sql/parrainage.sql:/docker-entrypoint-initdb.d/parrainage.sql
       - mysql_data:/var/lib/mysql
@@ -34,7 +34,7 @@ services:
       PMA_USER: miage
       PMA_PASSWORD: JI25
     ports:
-      - "81:80"
+      - "8082:80"
 
 volumes:
   mysql_data:
