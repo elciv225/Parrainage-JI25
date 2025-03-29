@@ -1,3 +1,4 @@
 src/frontend
 seConnecterAuServeur
 .idea
+src/backend/client/uploads/*
