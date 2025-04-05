@@ -118,4 +118,46 @@ class UtilisateurManager
 
         return null;
     }
+
+    /**
+     * Récupère tous les utilisateurs ayant un profil spécifique.
+     *
+     * @param int $id_profil L'ID du profil à rechercher.
+     * @return array Un tableau d'objets Utilisateur.
+     */
+    public function getUtilisateursByProfil(int $id_profil): array
+    {
+        $utilisateurs = []; // Initialize an empty array to store users
+
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM parrainage.utilisateurs WHERE id_profil = :id_profil");
+            $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Récupérer les données utilisateur et créer des objets Utilisateur
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $utilisateur = new Utilisateur(
+                    (int)$row['utilisateur_id'],
+                    (string)$row['prenom'],
+                    (string)$row['nom'],
+                    (string)$row['niveau'],
+                    (string)$row['email'],
+                    (string)$row['mot_de_passe_hash'],
+                    (string)$row['photo'],
+                    (string)$row['date_creation'],
+                    $row['score_personnalite'] !== null ? (float)$row['score_personnalite'] : null,
+                    $row['id_profil'] !== null ? (int)$row['id_profil'] : null
+                );
+                $utilisateurs[] = $utilisateur; // Add the Utilisateur object to the array
+            }
+
+        } catch (PDOException $e) {
+            // Gestion d'erreur
+            echo "Erreur lors de la requête : " . $e->getMessage();
+            return []; // Return an empty array in case of an error
+        }
+
+        return $utilisateurs; // Return the array of Utilisateur objects
+    }
+
 }

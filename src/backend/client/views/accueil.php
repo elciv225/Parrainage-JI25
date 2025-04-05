@@ -22,16 +22,26 @@
             <div class="texte-marque">JOURNEE D'INTEGRATION</div>
         </a>
         <ul class="liens-navigation">
-            <li><a href="/parrainage" class="lien">Parrainage</a></li>
+            <li>
+                <div class="lien cache" data-tooltip="🔥">
+                    Parrainage
+                </div>
+            </li>
             <li><a href="#activite" class="lien">Activités</a></li>
             <li><a href="#competition" class="lien">Compétition</a></li>
             <li><a href="#equipe" class="lien">Nôtre équipe</a></li>
         </ul>
+        <div class="modal-overlay" id="timerModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">&times;</button>
+                <h2 class="modal-title">Compte à rebours</h2>
+                <div class="big-timer" id="modalCountdown">--j --:--:--</div>
+            </div>
+        </div>
         <div class="boutons-entete">
             <?php if ($utilisateur): ?>
-                <p id="salut">Salut <?= $utilisateur['nom'] ?> !</p>
                 <form action="/deconnexion" method="GET">
-                    <button type="submit" class="bouton-action">Au revoir ?</button>
+                    <button type="submit" class="bouton-action">Bye ! <?= $utilisateur['nom'] ?></button>
                 </form>
             <?php else: ?>
                 <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
@@ -43,13 +53,30 @@
     </nav>
     <nav class="menu-mobile" aria-label="Menu mobile">
         <ul>
-            <li><a href="/parrainage" class="lien-mobile">Parrainage</a></li>
+            <li>
+                <div class="lien-mobile cache" data-tooltip="🔥">
+                    Parrainage
+                </div>
+            </li>
             <li><a href="#activite" class="lien-mobile">Activités</a></li>
             <li><a href="#competition" class="lien-mobile">Compétition</a></li>
             <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>
             <li class="separateur"></li>
-            <li><a href="/authentification" class="bouton-action inscription">Se Connecter</a></li>
+            <?php if ($utilisateur): ?>
+                <form action="/deconnexion" method="GET">
+                    <button type="submit" class="bouton-action">Bye ! <?= $utilisateur['nom'] ?></button>
+                </form>
+            <?php else: ?>
+                <a href="/authentification" class="bouton-action inscription">Se Connecter</a>
+            <?php endif; ?>
         </ul>
+        <div class="modal-overlay" id="timerModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">&times;</button>
+                <h2 class="modal-title">Compte à rebours</h2>
+                <div class="big-timer" id="modalCountdown">--j --:--:--</div>
+            </div>
+        </div>
     </nav>
 </header>
 <main>
@@ -296,7 +323,7 @@
         </div>
     </div>
 </footer>
-<script src="backend/client/assets/js/accueil.js"></script>
+<script type="module" src="backend/client/assets/js/accueil.js"></script>
 <script type="module" src="backend/client/assets/js/logo3D.js"></script>
 </body>
 </html>
