@@ -12,7 +12,7 @@ class Utilisateur
     private ?string $mot_de_passe_hash;
     private ?string $photo;
     private ?string $date_creation = null;    // timestamp// référence vers Promotion
-    private int $score_personnalite = 0;
+    private ?int $score_personnalite = 0;
     private ?int $id_profil = null;
 
     /**
@@ -24,10 +24,10 @@ class Utilisateur
      * @param string|null $mot_de_passe_hash
      * @param string|null $photo
      * @param string|null $date_creation
-     * @param int $score_personnalite
+     * @param int|null $score_personnalite
      * @param int|null $id_profil
      */
-    public function __construct(?int $utilisateur_id, string $prenom, string $nom, string $niveau, string $email, ?string $mot_de_passe_hash, ?string $photo, ?string $date_creation, int $score_personnalite, ?int $id_profil)
+    public function __construct(?int $utilisateur_id, string $prenom, string $nom, string $niveau, string $email, ?string $mot_de_passe_hash, ?string $photo, ?string $date_creation, ?int $score_personnalite, ?int $id_profil)
     {
         $this->utilisateur_id = $utilisateur_id;
         $this->prenom = $prenom;

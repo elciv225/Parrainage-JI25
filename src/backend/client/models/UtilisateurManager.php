@@ -135,6 +135,7 @@ class UtilisateurManager
             $stmt->execute();
 
             // Récupérer les données utilisateur et créer des objets Utilisateur
+
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $utilisateur = new Utilisateur(
                     (int)$row['utilisateur_id'],
