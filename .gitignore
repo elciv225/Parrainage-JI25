@@ -2,3 +2,6 @@ src/frontend
 seConnecterAuServeur
 .idea
 src/backend/client/uploads/*
+docker-compose.yaml
+Dockerfile
+src/.env
