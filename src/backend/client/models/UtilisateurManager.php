@@ -41,7 +41,6 @@ class UtilisateurManager
         if (!$this->utilisateurExiste($utilisateur->getEmail())) {
             try {
                 // Vérifions si l'utilisateur existe ou non
-
                 // Dans ce cas l'utilisateur n'existe pas donc on l'enregistre
                 // On hash le mot de passe
                 $mot_de_passe_hash = password_hash($utilisateur->getMotDePasseHash(), PASSWORD_DEFAULT);
@@ -96,6 +95,7 @@ class UtilisateurManager
             $stmt->execute();
             // Récupérer les données utilisateur
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
             if ($row && password_verify($mot_de_passe, $row['mot_de_passe_hash'])) {
                 // Mot de passe valide, on retourne l'Utilisateur
                 return new Utilisateur(

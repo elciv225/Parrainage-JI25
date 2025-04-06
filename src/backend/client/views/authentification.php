@@ -149,8 +149,8 @@
                     <input type="hidden" name="prenoms" id="hidden-prenoms">
                     <input type="hidden" name="niveau" id="hidden-niveau">
                     <input type="hidden" name="email" id="hidden-email">
-                    <input type="hidden" name="motDePasse" id="hidden-mdp">
-                    <input type="hidden" name="confirmMotDePasse" id="hidden-confirm-mdp">
+                    <input type="hidden" name="motDePasse" id="hidden-motDePasse">
+                    <input type="hidden" name="confirmMotDePasse" id="hidden-confirmMotDePasse">
                     <input type="hidden" name="totalScore" id="total-score">
                     <div class="input-group photo">
                         <div class="upload-zone">
