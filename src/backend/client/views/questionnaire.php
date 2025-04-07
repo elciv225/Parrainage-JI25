@@ -18,7 +18,7 @@ try {
     $manager->loadQuestions();
 
     // Obtenir 10 questions équilibrées
-    $balancedQuestions = $manager->getBalancedQuestions(10);
+    $balancedQuestions = $manager->getBalancedQuestions(20);
 } catch (Exception $e) {
     // Gérer les exceptions potentielles
     echo '<div class="error">Erreur : ' . $e->getMessage() . '</div>';

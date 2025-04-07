@@ -37,7 +37,7 @@ class QuestionManager
 
 
     // Obtenir un ensemble équilibré de questions
-    public function getBalancedQuestions(int $totalQuestions = 20): array
+    public function getBalancedQuestions(int $totalQuestions = 10): array
     {
         $balancedQuestions = [];
         $categoryCount = count($this->questionsByCategory);
