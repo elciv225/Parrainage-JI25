@@ -5,7 +5,6 @@ namespace controllers;
 use models\Utilisateur;
 use models\UtilisateurManager;
 use config\Database;
-use config\View;
 
 class Authentification
 {

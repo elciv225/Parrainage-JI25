@@ -2,153 +2,508 @@
   "etudiants": [
     {
       "niveau": "L3",
-      "nom": "Assy",
+      "nom": "ASSY",
       "prenoms": "Eliel Onésime"
     },
     {
       "niveau": "L3",
-      "nom": "Adje",
+      "nom": "ADJE",
       "prenoms": "Aude-Esther Ablan"
     },
     {
       "niveau": "L3",
-      "nom": "Akandan",
+      "nom": "AKANDAN",
       "prenoms": "Aho Paul-Emmanuel Joan"
     },
     {
       "niveau": "L3",
-      "nom": "Allouko",
+      "nom": "ALLOUKO",
       "prenoms": "Essigan Daniel Ange Nathanael"
     },
     {
       "niveau": "L3",
-      "nom": "Amani",
+      "nom": "AMANI",
       "prenoms": "Moillet Yves Emmanuel"
     },
     {
       "niveau": "L3",
-      "nom": "Angbe",
+      "nom": "ANGBE",
       "prenoms": "Charles Emmanuel"
     },
     {
       "niveau": "L3",
-      "nom": "Ano",
+      "nom": "ANO",
       "prenoms": "Josué"
     },
     {
       "niveau": "L3",
-      "nom": "Apata",
+      "nom": "APATA",
       "prenoms": "Jean-Michel Hervé"
     },
     {
       "niveau": "L3",
-      "nom": "Bahou",
+      "nom": "BAHOU",
       "prenoms": "Johan Stéphanie"
     },
     {
       "niveau": "L3",
-      "nom": "Berthe",
+      "nom": "BERTHE",
       "prenoms": "Ibrahim"
     },
     {
       "niveau": "L3",
-      "nom": "Bindje",
+      "nom": "BINDJE",
       "prenoms": "Mandah Celestin Wilfried"
     },
     {
       "niveau": "L3",
-      "nom": "Coulibaly",
+      "nom": "COULIBALY",
       "prenoms": "Kolotcholoman Sinaly"
     },
     {
       "niveau": "L3",
-      "nom": "Diakite",
+      "nom": "DIAKITE",
       "prenoms": "Mamadi"
     },
     {
       "niveau": "L3",
-      "nom": "Diby",
+      "nom": "DIBY",
       "prenoms": "Eunice Mienlié"
     },
     {
       "niveau": "L3",
-      "nom": "Fassinou",
+      "nom": "FASSINOU",
       "prenoms": "Mahougnon Jonas Dieudonné Aurel"
     },
     {
       "niveau": "L3",
-      "nom": "Gomez",
+      "nom": "GOMEZ",
       "prenoms": "Ange Axel"
     },
     {
       "niveau": "L3",
-      "nom": "Irie",
+      "nom": "IRIE",
       "prenoms": "Adjo Anne-Jemima"
     },
     {
       "niveau": "L3",
-      "nom": "Kanga",
+      "nom": "KANGA",
       "prenoms": "Agbalé Daniel"
     },
     {
       "niveau": "L3",
-      "nom": "Kassy",
+      "nom": "KASSY",
       "prenoms": "Koffi Yannis Emmanuel"
     },
     {
       "niveau": "L3",
-      "nom": "Krouma",
+      "nom": "KROUMA",
       "prenoms": "Franck Adams"
     },
     {
       "niveau": "L3",
-      "nom": "Logbo",
+      "nom": "LOGBO",
       "prenoms": "Zoukou Paula-Axel"
     },
     {
       "niveau": "L3",
-      "nom": "Monsan",
+      "nom": "MONSAN",
       "prenoms": "Josué Emmanuel Junior"
     },
     {
       "niveau": "L3",
-      "nom": "N'Guessan",
+      "nom": "N'GUESSAN",
       "prenoms": "Amah Abigaïl De Carmelle"
     },
     {
       "niveau": "L3",
-      "nom": "N'Guessan",
+      "nom": "N'GUESSAN",
       "prenoms": "Kre Laken Desirée"
     },
     {
       "niveau": "L3",
-      "nom": "Ouattara",
+      "nom": "OUATTARA",
       "prenoms": "Katié Myriam"
     },
     {
       "niveau": "L3",
-      "nom": "Sokoty",
+      "nom": "SOKOTY",
       "prenoms": "Koua Othniel Junior"
     },
     {
       "niveau": "L3",
-      "nom": "Soro",
+      "nom": "SORO",
       "prenoms": "Ouangboho"
     },
     {
       "niveau": "L3",
-      "nom": "Soro",
+      "nom": "SORO",
       "prenoms": "Eméric Jamel Désiré Katanan"
     },
     {
       "niveau": "L3",
-      "nom": "Tizie",
+      "nom": "TIZIE",
       "prenoms": "Bi Trazié Grâce David Isrël"
     },
     {
       "niveau": "L3",
-      "nom": "Tra",
+      "nom": "TRA",
       "prenoms": "Lou Océane Noémie Emmanuella Gohi"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ABISSA",
+      "prenoms": "Tamia Claude Morell"
+    },
+    {
+      "niveau": "L1",
+      "nom": "AHOTY",
+      "prenoms": "Kouassi Louis-Philippe"
+    },
+    {
+      "niveau": "L1",
+      "nom": "AHOUTY",
+      "prenoms": "Yvann Gilchris Junior"
+    },
+    {
+      "niveau": "L1",
+      "nom": "AHUI",
+      "prenoms": "Djirabou Loic Ariel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "AKA",
+      "prenoms": "Kassi Chris-Emmanuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BAMBA",
+      "prenoms": "Tia Désiré Moïse"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BERTE",
+      "prenoms": "Alla Abdel Ghaffar"
+    },
+    {
+      "niveau": "L1",
+      "nom": "DIABATE",
+      "prenoms": "Kady Marie-Auriane"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ENOKOU",
+      "prenoms": "Amalama Daniel Israël"
+    },
+    {
+      "niveau": "L1",
+      "nom": "GNAGO",
+      "prenoms": "Christ Emmanuel Ilitch Wacoubo"
+    },
+    {
+      "niveau": "L1",
+      "nom": "GORE",
+      "prenoms": "Bi Galla Jude Samuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOFFI",
+      "prenoms": "Bi Yohann Herven"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONAN",
+      "prenoms": "Aya Maheva Sheronne"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONAN",
+      "prenoms": "Kouassi Guy Charles"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONAN",
+      "prenoms": "Prince Israël Békin"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONE",
+      "prenoms": "Abdoul Mohamed Youssouf"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONE",
+      "prenoms": "Al Moustapha Mouhamad"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUA",
+      "prenoms": "Mbali Regis-Auxence Hervé"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUADIO",
+      "prenoms": "Miensa Grace Eunice"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUAKOU",
+      "prenoms": "Djessou Metty Isaac"
+    },
+    {
+      "niveau": "L1",
+      "nom": "LIA",
+      "prenoms": "Biagoné Chris Daniel-Marie"
+    },
+    {
+      "niveau": "L1",
+      "nom": "OYOU",
+      "prenoms": "Kassi Nathan Lévy Maximilien"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SERME",
+      "prenoms": "Mohamed Sidick"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SIDIBE",
+      "prenoms": "Passi Néimê Abdoul Nour"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SORO",
+      "prenoms": "Kolotioloma Issa Elimande"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TANOH",
+      "prenoms": "Bossobédji Jacques Henri"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ADUKO",
+      "prenoms": "Jérôme-Evan Ephraïm"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ALLEBY",
+      "prenoms": "Nelly-Roxane"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ASSI",
+      "prenoms": "Eric Dévenorge"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BADOLO",
+      "prenoms": "KouakouAdelph"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BERTE",
+      "prenoms": "Cheick Oumar Nantan"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BONZOU",
+      "prenoms": "Kouassi Eythan Christ Alexander"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BROU",
+      "prenoms": "Effi Marie Josette"
+    },
+    {
+      "niveau": "L1",
+      "nom": "COULIBALY",
+      "prenoms": "Siémela Syntyche"
+    },
+    {
+      "niveau": "L1",
+      "nom": "FIEGNY",
+      "prenoms": "KouakouSams Trésor"
+    },
+    {
+      "niveau": "L1",
+      "nom": "HAIDARA",
+      "prenoms": "Sidy Yahaya"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOFFI",
+      "prenoms": "Johann Christ Yvan"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONE",
+      "prenoms": "Gningneri Jedidia"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUA",
+      "prenoms": "Aka Régis-Holland Emerson"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUAKOU",
+      "prenoms": "Ya Arielle Débora"
+    },
+    {
+      "niveau": "L1",
+      "nom": "LINGUE",
+      "prenoms": "N'Guessan Jean Marie Vianney"
+    },
+    {
+      "niveau": "L1",
+      "nom": "LOKO",
+      "prenoms": "Gbahi Patrick Ebenezer"
+    },
+    {
+      "niveau": "L1",
+      "nom": "MESSOU",
+      "prenoms": "N'Dri Paul Eric Yanis"
+    },
+    {
+      "niveau": "L1",
+      "nom": "OUATTARA",
+      "prenoms": "Fangman Yoan-Emmanuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SEBAHI",
+      "prenoms": "Sanogo Clépoh Othniel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SOH",
+      "prenoms": "Ben Kévine"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TOURE",
+      "prenoms": "Kinion Paule Marie-Cécile"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TRAORE",
+      "prenoms": "Oumar"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ZOUNON",
+      "prenoms": "Donan Kushal Armel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ATTE",
+      "prenoms": "Alléchi Bryan Jean-David"
+    },
+    {
+      "niveau": "L1",
+      "nom": "ATTIE",
+      "prenoms": "Killian Marc-Aurel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BAKA",
+      "prenoms": "Kreidi Emmanuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "BEKROU",
+      "prenoms": "Sibilly Divine Chelsea Emeraude"
+    },
+    {
+      "niveau": "L1",
+      "nom": "GARDENE",
+      "prenoms": "N'Doffou Gnangoran"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KABLAN",
+      "prenoms": "Uriel Wilson"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KIMOU",
+      "prenoms": "JeanChristophe Elijah"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KONAN",
+      "prenoms": "Eddie Famien Samuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KOUAKOU",
+      "prenoms": "Djezou Metty Isaac"
+    },
+    {
+      "niveau": "L1",
+      "nom": "KPLE",
+      "prenoms": "Ahouré Thierry David"
+    },
+    {
+      "niveau": "L1",
+      "nom": "LAGO",
+      "prenoms": "Agui Pierre-Alexandre"
+    },
+    {
+      "niveau": "L1",
+      "nom": "MONKIE",
+      "prenoms": "Chris-Orhé Aduko"
+    },
+    {
+      "niveau": "L1",
+      "nom": "NIANGORAN",
+      "prenoms": "Khadydjatou Grace"
+    },
+    {
+      "niveau": "L1",
+      "nom": "NIANGORAN",
+      "prenoms": "Kouassi Ezeckiel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "OUATTARA",
+      "prenoms": "Sounan Epiphane"
+    },
+    {
+      "niveau": "L1",
+      "nom": "OUATTARA",
+      "prenoms": "Yacounon Marie-Inès"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SEKA",
+      "prenoms": "Asséké Ylice Emmanuel"
+    },
+    {
+      "niveau": "L1",
+      "nom": "SERY",
+      "prenoms": "Marie-Priscille Ogo"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TIE",
+      "prenoms": "Bi Tié Seraphin"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TIEMELE",
+      "prenoms": "Koffi Ange David"
+    },
+    {
+      "niveau": "L1",
+      "nom": "TRAORE",
+      "prenoms": "Hakeem Jean Charles"
+    },
+    {
+      "niveau": "L1",
+      "nom": "YEO",
+      "prenoms": "Sihifowa Paul Daniel"
     }
   ]
 }

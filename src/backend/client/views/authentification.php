@@ -24,12 +24,17 @@
                                 id="inscription-nom"
                                 placeholder="Veuillez  écrire ici"
                                 autocomplete="off"
+                                required
                         >
                         <label for="inscription-nom">Nom</label>
                     </div>
                     <div class="input-group" style="position: relative; z-index: 999;">
-                        <input type="text" name="prenoms" id="inscription-prenoms" placeholder="Veuillez  écrire ici"
-                               autocomplete="off">
+                        <input type="text"
+                               name="prenoms"
+                               id="inscription-prenoms"
+                               placeholder="Veuillez  écrire ici"
+                               autocomplete="off"
+                               required>
                         <label for="inscription-prenoms">Prénoms</label>
                     </div>
                     <div class="select-group">
@@ -45,13 +50,13 @@
                     </div>
                     <div class="input-group">
                         <input type="email" name="email" id="inscription-email" placeholder="Veuillez  écrire ici"
-                               autocomplete="off">
+                               autocomplete="off" required>
                         <label for="inscription-email">Email</label>
                     </div>
 
                     <div class="input-group">
                         <input type="password" name="motDePasse" id="inscription-mdp"
-                               placeholder="Veuillez  écrire ici" autocomplete="off">
+                               placeholder="Veuillez  écrire ici" autocomplete="off" required>
                         <label for="inscription-mdp">Mot de Passe</label>
                         <div class="toggle-password">
                             <svg class="eye-open hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -69,7 +74,7 @@
                     </div>
                     <div class="input-group">
                         <input type="password" name="confirmMotDePasse" id="inscription-confirm-mdp"
-                               placeholder="Veuillez  écrire ici" autocomplete="off">
+                               placeholder="Veuillez  écrire ici" autocomplete="off" required>
                         <label for="inscription-confirm-mdp">Confirmer le mot de passe</label>
                         <div class="toggle-password">
                             <svg class="eye-open hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -107,12 +112,12 @@
                 <div class="body-form">
                     <div class="input-group">
                         <input type="email" name="email" id="connexion-email" placeholder="Veuillez  écrire ici"
-                               autocomplete="off">
+                               autocomplete="off" required>
                         <label for="connexion-email">Email</label>
                     </div>
                     <div class="input-group">
                         <input type="password" name="motDePasse" id="connexion-mdp" placeholder="Veuillez  écrire ici"
-                               autocomplete="off">
+                               autocomplete="off" required>
                         <label for="connexion-mdp">Mot de passe</label>
                         <div class="toggle-password">
                             <svg class="eye-open hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"

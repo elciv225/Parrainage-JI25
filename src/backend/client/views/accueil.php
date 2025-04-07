@@ -126,7 +126,7 @@
                     <div class="details-activite">
                         <h2>Journée à thème</h2>
                         <h3>NOVEMBRE BLEU</h3>
-                        <p>Organisation d'une journée pour soutenir le lutte contre le cancer de la prostate chez
+                        <p>Organisation d'une journée pour soutenir la lutte contre le cancer de la prostate chez
                             l'Homme.</p>
                     </div>
                 </article>
@@ -136,14 +136,14 @@
                     <div class="details-activite">
                         <h2>Journée à Thème</h2>
                         <h3>OCTOBRE ROSE</h3>
-                        <p>Organisation d'une journée pour soutenir le lutte contre le cancer du sein chez la Femme</p>
+                        <p>Organisation d'une journée pour soutenir la lutte contre le cancer du sein chez la Femme</p>
                     </div>
                 </article>
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
                     <div class="details-activite">
                         <h2>Journée Black & White</h2>
-                        <h3>Miage Project Chalenge</h3>
+                        <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
