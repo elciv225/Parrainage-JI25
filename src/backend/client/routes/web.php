@@ -58,6 +58,13 @@ Route::get('/authentification', function () {
     ]);
 });
 
+// Page des concours
+Route::get('/concours', function () {
+    View::render('concours', [
+        'title' => 'Journée d\'Integration 2025 - Concours'
+    ]);
+});
+
 // Ajout des traitements des formulaires
 require_once "traitements.php";
 

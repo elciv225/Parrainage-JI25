@@ -26,9 +26,8 @@
                     Parrainage
                 </div>
             </li>
-            <li><a href="#activite" class="lien">Activités</a></li>
-            <li><a href="#competition" class="lien">Compétition</a></li>
-            <li><a href="#equipe" class="lien">Nôtre équipe</a></li>
+            <li><a href="#mpc" class="lien">MPC</a></li>
+            <li><a href="#kq" class="lien">King & Queen</a></li>
         </ul>
         <div class="modal-overlay" id="timerModal">
             <div class="modal-content">
@@ -57,9 +56,8 @@
                     Parrainage
                 </div>
             </li>
-            <li><a href="#activite" class="lien-mobile">Activités</a></li>
-            <li><a href="#competition" class="lien-mobile">Compétition</a></li>
-            <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>
+            <li><a href="#mpc" class="lien-mobile">Activités</a></li>
+            <li><a href="#kp" class="lien-mobile">Compétition</a></li>
             <li class="separateur"></li>
             <?php if ($utilisateur): ?>
                 <form action="/deconnexion" method="GET">
@@ -79,61 +77,28 @@
     </nav>
 </header>
 <main>
-    <section class="hero">
-        <div class="logo-flottant"></div>
-        <div class="carousel">
-            <div class="carousel-inner">
-                <div class="slide active">
-                    <div class="slide-content">
-                        <h1 class="slide-title">Bienvenue à la Journée d'Intégration</h1>
-                        <p class="slide-description">Vivez une expérience inoubliable lors de cet événement de rencontre
-                            et de partage.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="slide-content">
-                        <h1 class="slide-title">Découvrez nos Activités</h1>
-                        <p class="slide-description">Des ateliers, des conférences et bien plus encore pour enrichir
-                            votre expérience.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="slide-content">
-                        <h1 class="slide-title">Rencontrez vos Parrains</h1>
-                        <p class="slide-description">Un accompagnement personnalisé tout au long de votre cursus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-dots">
-                <button class="dot active" aria-label="Slide 1"></button>
-                <button class="dot" aria-label="Slide 2"></button>
-                <button class="dot" aria-label="Slide 3"></button>
-            </div>
-        </div>
-    </section>
-    <section id="activite" class="activites" aria-label="Activités Phare">
+    <section id="mpc" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
-                <h1>Nos Activités</h1>
-                <p>Découvrez notre sélection d’événements pour rythmer l'année avant et après la journée
-                    d’intégration.</p>
+                <h1>Miage Project Challenge 2025</h1>
+                <p>Découvrez nos finalistes </p>
             </header>
             <div class="grille-activites">
-                <!-- nov bleu -->
+
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech">
                     <div class="details-activite">
-                        <h2>Journée à thème</h2>
+                        <h2>Chez Moi</h2>
                         <h3>NOVEMBRE BLEU</h3>
                         <p>Organisation d'une journée pour soutenir la lutte contre le cancer de la prostate chez
                             l'Homme.</p>
                     </div>
                 </article>
-                <!-- Oct Rose -->
+
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/octRose.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
-                        <h2>Journée à Thème</h2>
+                        <h2>WellMind</h2>
                         <h3>OCTOBRE ROSE</h3>
                         <p>Organisation d'une journée pour soutenir la lutte contre le cancer du sein chez la Femme</p>
                     </div>
@@ -141,7 +106,15 @@
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
                     <div class="details-activite">
-                        <h2>Journée Black & White</h2>
+                        <h2>MonBus</h2>
+                        <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
+                        <p>Marquer l'histoire de MIAGE</p>
+                    </div>
+                </article>
+                <article class="carte-activite">
+                    <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
+                    <div class="details-activite">
+                        <h2>J'ai oublié</h2>
                         <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
@@ -149,7 +122,7 @@
             </div>
         </div>
     </section>
-    <section id="competition" class="activites" aria-label="Activités Phare">
+    <section id="kq" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
                 <h1>Nos Compétition</h1>
@@ -175,46 +148,7 @@
             </div>
         </div>
     </section>
-    <section class="partenaires" aria-label="Ils nous font confiance">
-        <div class="conteneur-partenaires">
-            <h2>Ils nous font confiance</h2>
-            <div class="container">
-                <div class="marquee">
-                    <div class="marquee-content" id="firstRow"></div>
-                </div>
-                <div class="gradient-overlay gradient-left"></div>
-                <div class="gradient-overlay gradient-right"></div>
-            </div>
-        </div>
-    </section>
-    <section id="equipe" class="team" aria-label="Nos Comités">
-        <h2>Notre Équipe</h2>
-        <div class="container">
-            <div class="testimonials-grid">
-                <div class="image-container" id="imageContainer"></div>
-                <div class="content-container">
-                    <div>
-                        <h3 class="name" id="name"></h3>
-                        <p class="designation" id="designation"></p>
-                        <p class="quote" id="quote"></p>
-                    </div>
-                    <div class="controls">
-                        <div class="controls-btn">
-                            <button class="control-button" id="prevButton">
-                                &larr;
-                            </button>
-                            <button class="control-button" id="nextButton">
-                                &rarr;
-                            </button>
-                        </div>
-                        <a href="/equipe">
-                            <button>Voir Plus</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
         <h2 class="titre-faq">Questions Fréquentes</h2>
         <div class="faq-item">
@@ -316,5 +250,50 @@
 </footer>
 <script type="module" src="backend/client/assets/js/accueil.js"></script>
 <script type="module" src="backend/client/assets/js/logo3D.js"></script>
+<script>
+    // Sélectionner tous les éléments nécessaires
+    const cartes = document.querySelectorAll('.carte-activite');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const voteButtons = document.querySelectorAll('.btn-voter');
+
+    // Ouvrir la modal correspondante lors du clic sur une carte
+    cartes.forEach(carte => {
+        carte.addEventListener('click', () => {
+            const id = carte.getAttribute('data-id');
+            const modal = document.getElementById(`modal-${id}`);
+            modal.style.display = 'block';
+        });
+    });
+
+    // Fermer la modal lors du clic sur le bouton de fermeture
+    closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            modal.style.display = 'none';
+        });
+    });
+
+    // Fermer la modal lors du clic en dehors de son contenu
+    window.addEventListener('click', (e) => {
+        modals.forEach(modal => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+    // Gérer les votes
+    voteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const competitionId = button.getAttribute('data-id');
+            // Ici, vous intégreriez l'appel à votre API pour enregistrer le vote
+            alert(`Merci d'avoir voté pour la compétition: ${competitionId}!`);
+            // Fermer la modal après le vote
+            const modal = button.closest('.modal');
+            modal.style.display = 'none';
+        });
+    });
+</script>
 </body>
 </html>
