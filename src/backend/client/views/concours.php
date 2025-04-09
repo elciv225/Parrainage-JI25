@@ -1,4 +1,5 @@
 <?php
+$utilisateur = $_SESSION['utilisateur'] ?? null;
 
 ?>
 
@@ -9,8 +10,7 @@
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
-    <link rel="stylesheet" href="backend/client/assets/css/accueil.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="backend/client/assets/css/concours.css">
     <title><?= $title ?? "Journée d'intégration" ?></title>
 </head>
 <body>
@@ -21,11 +21,7 @@
             <div class="texte-marque">JOURNÉE D'INTEGRATION</div>
         </a>
         <ul class="liens-navigation">
-            <li>
-                <div class="lien cache" data-tooltip="🔥">
-                    Parrainage
-                </div>
-            </li>
+            <li><a href="/" class="lien">Accueil</a></li>
             <li><a href="#mpc" class="lien">MPC</a></li>
             <li><a href="#kq" class="lien">King & Queen</a></li>
         </ul>
@@ -51,11 +47,7 @@
     </nav>
     <nav class="menu-mobile" aria-label="Menu mobile">
         <ul>
-            <li>
-                <div class="lien-mobile cache" data-tooltip="🔥">
-                    Parrainage
-                </div>
-            </li>
+            <li><a href="/" class="lien-mobile">Accueil</a></li>
             <li><a href="#mpc" class="lien-mobile">Activités</a></li>
             <li><a href="#kp" class="lien-mobile">Compétition</a></li>
             <li class="separateur"></li>
@@ -85,70 +77,70 @@
             </header>
             <div class="grille-activites">
 
-                <article class="carte-activite">
-                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech">
+                <article class="carte-mpc">
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech" class="carte-image-visible">
                     <div class="details-activite">
-                        <h2>Chez Moi</h2>
-                        <h3>NOVEMBRE BLEU</h3>
-                        <p>Organisation d'une journée pour soutenir la lutte contre le cancer de la prostate chez
-                            l'Homme.</p>
+                        <h2>MPC 25</h2>
+                        <h3>Nom Projet ...</h3>
+                        <p>Description projet ..............</p>
                     </div>
-                </article>
 
-                <article class="carte-activite">
-                    <img src="backend/client/assets/images/octRose.webp" alt="Compétition Hackathon">
-                    <div class="details-activite">
-                        <h2>WellMind</h2>
-                        <h3>OCTOBRE ROSE</h3>
-                        <p>Organisation d'une journée pour soutenir la lutte contre le cancer du sein chez la Femme</p>
-                    </div>
-                </article>
-                <article class="carte-activite">
-                    <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
-                    <div class="details-activite">
-                        <h2>MonBus</h2>
-                        <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
-                        <p>Marquer l'histoire de MIAGE</p>
-                    </div>
-                </article>
-                <article class="carte-activite">
-                    <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
-                    <div class="details-activite">
-                        <h2>J'ai oublié</h2>
-                        <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
-                        <p>Marquer l'histoire de MIAGE</p>
+                    <div class="overlay-details-content" style="display: none;">
+                        <div class="detail-image-col">
+                            <img src="backend/client/assets/images/novBleu_large.webp" alt="Conférence Innovation & Tech - Détail">
+                        </div>
+                        <div class="detail-info-col">
+                            <h2 class="detail-titre">MPC 25</h2>
+                            <h3 class="detail-soustitre">Nom Projet Complet et Détaillé</h3>
+                            <p class="detail-description">
+                                Ceci est la description complète et détaillée du projet MPC 25 qui sera affichée
+                                dans l'overlay. Elle peut être beaucoup plus longue que celle de la carte.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+                                Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+                            </p>
+                            <div class="detail-participants">
+                                <h4>Participants au projet</h4>
+                                <ul>
+                                    <li>Jean Dupont (Rôle)</li>
+                                    <li>Marie Martin (Rôle)</li>
+                                    <li>Luc Bernard (Rôle)</li>
+                                    <li>Autre Participant</li>
+                                </ul>
+                            </div>
+                            <button class="btn-voter">Voter pour ce projet</button>
+                        </div>
                     </div>
                 </article>
             </div>
+            <div class="overlay"></div>
         </div>
     </section>
     <section id="kq" class="activites" aria-label="Activités Phare">
         <div class="conteneur-activites">
             <header class="entete-section">
-                <h1>Nos Compétition</h1>
-                <p>Découvrez nos compétition pour marquer l'histoire de MIAGE.</p>
+                <h1>King & Queen</h1>
+                <p>Il est temps de marque l'histoire de cette édition de la JI pr votre élégance.</p>
             </header>
             <div class="grille-activites">
                 <article class="carte-activite">
-                    <img src="backend/client/assets/images/mpc25.webp" alt="Compétition Hackathon">
+                    <img src="backend/client/assets/images/fashionWeek.webp" alt="Compétition Hackathon">
                     <div class="details-activite">
-                        <h2>Concours informatique</h2>
-                        <h3>Miage Project Chalenge</h3>
+                        <h2>Concours d'élégance</h2>
+                        <h3>King</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/fashionWeek.webp" alt="Journée Black & White">
                     <div class="details-activite">
-                        <h2>Style</h2>
-                        <h3>Fashion Week</h3>
+                        <h2>Concours d'élégance</h2>
+                        <h3>Queen</h3>
                         <p>Marquer l'histoire de MIAGE</p>
                     </div>
                 </article>
             </div>
         </div>
     </section>
-
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
         <h2 class="titre-faq">Questions Fréquentes</h2>
         <div class="faq-item">
@@ -248,52 +240,6 @@
         </div>
     </div>
 </footer>
-<script type="module" src="backend/client/assets/js/accueil.js"></script>
-<script type="module" src="backend/client/assets/js/logo3D.js"></script>
-<script>
-    // Sélectionner tous les éléments nécessaires
-    const cartes = document.querySelectorAll('.carte-activite');
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('.close-modal');
-    const voteButtons = document.querySelectorAll('.btn-voter');
-
-    // Ouvrir la modal correspondante lors du clic sur une carte
-    cartes.forEach(carte => {
-        carte.addEventListener('click', () => {
-            const id = carte.getAttribute('data-id');
-            const modal = document.getElementById(`modal-${id}`);
-            modal.style.display = 'block';
-        });
-    });
-
-    // Fermer la modal lors du clic sur le bouton de fermeture
-    closeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modal = button.closest('.modal');
-            modal.style.display = 'none';
-        });
-    });
-
-    // Fermer la modal lors du clic en dehors de son contenu
-    window.addEventListener('click', (e) => {
-        modals.forEach(modal => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-
-    // Gérer les votes
-    voteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const competitionId = button.getAttribute('data-id');
-            // Ici, vous intégreriez l'appel à votre API pour enregistrer le vote
-            alert(`Merci d'avoir voté pour la compétition: ${competitionId}!`);
-            // Fermer la modal après le vote
-            const modal = button.closest('.modal');
-            modal.style.display = 'none';
-        });
-    });
-</script>
+<script type="module" src="backend/client/assets/js/concours.js"></script>
 </body>
 </html>

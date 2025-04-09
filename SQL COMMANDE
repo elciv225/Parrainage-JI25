@@ -1,0 +1,22 @@
+-- Se connecter
+docker exec -it mysql_db mysql -u miage -p parrainage
+-- Commande pour avoir la répartition des id_profil
+SELECT id_profil,
+COUNT(*) AS nb_utilisateurs,
+AVG(score_personnalite)
+AS moyenne_score
+FROM utilisateurs
+GROUP BY id_profil;
+
+-- Afficher la liste complète
+select nom, prenom, email, score_personnalite, id_profil from utilisateurs
+order by nom;
+
+-- Afficher la liste des L1
+c
+
+-- Afficher la liste des L3
+select nom, prenom, email, score_personnalite, id_profil from utilisateurs where niveau = 'L3' order by nom;
+
+-- Suppression de la table utilisateurs
+DELETE FROM utilisateurs WHERE email = 'Emesor8@gmail.com';
