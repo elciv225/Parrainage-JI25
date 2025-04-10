@@ -19,7 +19,10 @@ COPY ./src /var/www/html
 
 # Fixer les permissions (IMPORTANT)
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 755 /var/www/html \
+    && mkdir -p /var/www/html/backend/client/uploads/photos \
+    && chown -R www-data:www-data /var/www/html/backend/client/uploads \
+    && chmod -R 775 /var/www/html/backend/client/uploads
 
 # Exposer le port 80
 EXPOSE 80
