@@ -1,0 +1,382 @@
+
+/* --- Votre :root et configuration de base --- */
+@import url("https://use.typekit.net/bfu2oym.css");
+
+:root {
+    /* Configuration du thème */
+    color-scheme: light dark;
+
+    /* Couleurs de base */
+    --primary-color: #1A5E63;
+    --secondary-color: #FFC857;
+
+    /* Couleurs des composants - Mode clair */
+    --background-primary: #FFFFFF;
+    --background-secondary: #F8FAFB;
+    --background-tertiary: #ECF0F1;
+    --background-input: #BDC3C7;
+
+    /* Text */
+    --text-primary: #050E10;
+    --text-secondary: #0A1B20;
+    --text-disabled: #BDC3C7;
+
+    /* Boutons */
+    --button-primary: #1A5E63;
+    --button-primary-hover: #15484B;
+    --button-secondary: #FFC857;
+    --button-secondary-hover: #FCCF6C;
+    --button-disabled: #E0E6E8;
+
+    /* États */
+    --success: rgba(102, 187, 106, 0.55); /* Vert doux */
+    --warning: rgba(255, 193, 7, 0.55); /* Jaune épuré */
+    --error: rgba(239, 83, 80, 0.55); /* Rouge subtil */
+    --info: rgba(100, 181, 246, 0.55); /* Bleu clair */
+
+    /* Bordures */
+    --border-light: #87999A;
+    --border-medium: #6B7B7C;
+    --border-dark: #162122;
+
+    /* Degradés */
+    --gradient-hover: linear-gradient(to bottom,
+    rgba(240, 240, 240, 0.8), /* Couleur claire en mode clair */ rgba(220, 220, 220, 0.9) /* Couleur plus foncée en mode clair */
+    );
+
+    /* Overlays et shadows */
+    --overlay: rgba(44, 62, 80, 0.1);
+    --shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Inputs */
+    --input-border: #1A5E63;
+    --input-focus: rgba(26, 94, 99, 20%);
+
+    /* Liens */
+    --link-color: #2A8F96;
+    --link-hover: #1A5E63;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Couleurs de base */
+        --primary-color: #1A5E63; /* Variante lumineuse pour le contraste */
+        --secondary-color: #FFC857;
+
+        /* Couleurs des composants - Mode sombre */
+        --background-primary: #121212;
+        --background-secondary: #1E1E1E;
+        --background-tertiary: #2A2A2A;
+        --background-input: #2D2D2D;
+
+        /* Text */
+        --text-primary: #EAEAEA;
+        --text-secondary: #CFCFCF;
+        --text-disabled: #7F8C8D;
+
+        /* Boutons */
+        --button-primary: #1A5E63; /* Garder la même pour contraste, mais ajuster le texte */
+        --button-primary-hover: #15484B;
+        --button-secondary: #FFC857;
+        --button-secondary-hover: #F3BA44;
+        --button-disabled: #4F5B5C;
+
+        /* États */
+        --success: rgba(39, 174, 96, 0.4); /* Vert atténué */
+        --warning: rgba(243, 156, 18, 0.4); /* Jaune subtil */
+        --error: rgba(231, 76, 60, 0.4); /* Rouge modéré */
+        --info: rgba(52, 152, 219, 0.4); /* Bleu clair */
+
+        /* Bordures */
+        --border-light: #2C3E50;
+        --border-medium: #34495E;
+        --border-dark: #1A252F;
+
+        /* Degradés */
+        --gradient-hover: linear-gradient(to bottom,
+        rgba(30, 30, 30, 0.8), /* Couleur foncée en mode sombre */ rgba(15, 15, 15, 0.9) /* Couleur plus foncée en mode sombre */
+        );
+
+        /* Overlays et shadows */
+        --overlay: rgba(0, 0, 0, 0.5);
+        --shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+
+        /* Inputs */
+        --input-border: #1A5E63;
+        --input-focus: rgba(26, 94, 99, 20%);
+
+        /* Liens */
+        --link-color: #1A5E63; /* Ajuster pour le mode sombre si nécessaire */
+        --link-hover: #15484B; /* Ajuster pour le mode sombre si nécessaire */
+    }
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Ajout recommandé */
+    font-family: geologica-variable, sans-serif;
+    font-style: normal;
+    font-variation-settings: "CRSV" 0, "SHRP" 0, "slnt" 0, "wght" 400; /* Poids par défaut */
+}
+
+body {
+    display: flex;
+    /* flex-direction: column; */ /* Pas nécessaire si un seul item principal centré */
+    /* align-content: center; */ /* Pas nécessaire pour flex item */
+    /* justify-items: center; */ /* Pas nécessaire pour flex item */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    min-height: 100vh;
+    /* max-width: 100vw; */ /* Pas nécessaire en général */
+    background: var(--background-secondary);
+    color: var(--text-primary); /* Couleur de texte par défaut */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 20px; /* Ajout d'un padding pour éviter que le contenu colle aux bords sur petits écrans */
+}
+
+/* --- Styles spécifiques à la page 404 --- */
+
+.container-404 {
+    background-color: var(--background-primary);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    max-width: 600px; /* Limite la largeur pour une meilleure lisibilité */
+    width: 90%; /* Prend 90% de la largeur disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espace entre les éléments flex enfants */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.error-code {
+    font-size: clamp(6rem, 20vw, 12rem); /* Taille responsive */
+    font-variation-settings: "wght" 700; /* Plus gras */
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 10px; /* Espace après le code */
+    user-select: none; /* Empêche la sélection du texte */
+}
+
+.error-code .zero {
+    display: inline-block; /* Nécessaire pour transform */
+    color: var(--secondary-color);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease; /* Transition douce avec rebond */
+    cursor: default; /* Ou 'help' si on veut indiquer une interaction */
+}
+
+.error-code .zero:hover {
+    transform: scale(1.1) rotate(-5deg); /* Effet de grossissement et rotation au survol */
+    color: var(--button-secondary-hover); /* Légère variation de couleur au survol */
+}
+
+.error-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Taille responsive */
+    font-variation-settings: "wght" 600;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.error-description {
+    font-size: clamp(1rem, 3vw, 1.1rem); /* Taille responsive */
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 450px; /* Limite la largeur du paragraphe */
+    margin-bottom: 20px; /* Espace avant les actions */
+}
+
+.error-actions {
+    display: flex;
+    gap: 15px; /* Espace entre les boutons si plusieurs */
+    justify-content: center;
+    flex-wrap: wrap; /* Permet aux boutons de passer à la ligne sur petits écrans */
+}
+
+/* --- Styles généraux pour les boutons (basés sur vos variables) --- */
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    font-variation-settings: "wght" 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.button:hover {
+    transform: translateY(-2px); /* Léger soulèvement au survol */
+    box-shadow: var(--shadow-md);
+}
+
+.button:active {
+    transform: translateY(0px); /* Retour à la position initiale au clic */
+    box-shadow: var(--shadow-sm);
+}
+
+.button-primary {
+    background-color: var(--button-primary);
+    color: #FFFFFF; /* Texte blanc pour contraste */
+}
+
+.button-primary:hover {
+    background-color: var(--button-primary-hover);
+}
+
+.button-secondary {
+    background-color: var(--button-secondary);
+    color: var(--text-primary); /* Utiliser la couleur de texte primaire */
+}
+
+.button-secondary:hover {
+    background-color: var(--button-secondary-hover);
+}
+
+/* Ajustement couleur texte bouton secondaire en mode sombre si besoin */
+@media (prefers-color-scheme: dark) {
+    .button-secondary {
+        /* La couleur de texte primaire du mode sombre (--text-primary: #EAEAEA;)
+           devrait bien contraster avec --button-secondary (#FFC857).
+           Sinon, ajustez ici : */
+        /* color: #000000; */
+    }
+
+    .button-primary {
+        /* Assurez-vous que le texte blanc contraste bien avec --button-primary */
+        color: #FFFFFF;
+    }
+}
+/* --- Assurez-vous que ceci remplace .container-404 --- */
+.error-container {
+    background-color: var(--background-primary);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Styles communs (pas besoin de les dupliquer si déjà présents) --- */
+.error-code {
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-variation-settings: "wght" 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.error-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-variation-settings: "wght" 600;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.error-description {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* --- Interactivité spécifique (peut être combinée ou séparée) --- */
+/* Style commun pour les chiffres interactifs */
+.error-code .digit-zero,
+.error-code .digit-three {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
+    cursor: default;
+}
+
+/* Interaction pour le Zéro (comme dans la page 404) */
+.error-code .digit-zero {
+    color: var(--secondary-color);
+}
+.error-code .digit-zero:hover {
+    transform: scale(1.1) rotate(-5deg);
+    color: var(--button-secondary-hover);
+}
+
+/* Interaction pour le Trois (légèrement différente pour varier) */
+.error-code .digit-three {
+    /* Utiliser une couleur d'erreur, mais atténuée, pour le 403 ? */
+    color: var(--error); /* Ou gardez --primary-color si vous préférez */
+}
+.error-code .digit-three:hover {
+    transform: scale(1.15) rotate(8deg); /* Rotation et échelle différentes */
+    /* Option : changer la couleur au survol vers quelque chose de plus vif */
+    color: var(--secondary-color); /* Ou une autre couleur */
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.button:active {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+}
+
+.button-primary {
+    background-color: var(--button-primary);
+    color: #FFFFFF;
+}
+
+.button-primary:hover {
+    background-color: var(--button-primary-hover);
+}
+
+.button-secondary {
+    background-color: var(--button-secondary);
+    color: var(--text-primary);
+}
+
+.button-secondary:hover {
+    background-color: var(--button-secondary-hover);
+}
+
+/* Ajustements mode sombre (identiques à ceux de la page 404) */
+@media (prefers-color-scheme: dark) {
+    .button-secondary {
+        /* color: #000000;  Décommenter et ajuster si nécessaire */
+    }
+    .button-primary {
+        color: #FFFFFF;
+    }
+    /* Optionnel : ajuster la couleur du chiffre 3 en mode sombre si var(--error) est trop vive */
+    /*
+    .error-code .digit-three {
+        color: rgba(231, 76, 60, 0.6); // Version plus atténuée de --error
+    }
+    */
+}
