@@ -1,0 +1,9 @@
+src/frontend
+seConnecterAuServeur
+.idea
+src/backend/client/uploads/*
+.gitignore.backup
+.gitignore.prod
+SE CONNECTER SERVEUR
+SQL COMMANDE
+parrainage-ji25.pem

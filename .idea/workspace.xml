@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="783c1030-e0ef-47aa-a5ee-942d545d4561" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TODO" beforeDir="false" afterPath="$PROJECT_DIR$/SE CONNECTER SERVEUR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -301,7 +303,7 @@
       <workItem from="1744123854273" duration="10097000" />
       <workItem from="1744202889015" duration="2062000" />
       <workItem from="1744238610046" duration="14970000" />
-      <workItem from="1744313706634" duration="8119000" />
+      <workItem from="1744313706634" duration="9782000" />
     </task>
     <servers />
   </component>

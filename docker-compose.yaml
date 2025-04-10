@@ -1,4 +1,7 @@
+version: '3.8'
+
 services:
+  # --- STACK WEB ---
   php:
     build:
       context: .
@@ -34,7 +37,31 @@ services:
       PMA_USER: miage
       PMA_PASSWORD: JI25
     ports:
-      - "81:80"
+      - "8081:80"
+
+  # --- UPTIME KUMA ---
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      - uptime-kuma-data:/app/data
+
+  # --- PORTAINER ---
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
 
 volumes:
   mysql_data:
+  uptime-kuma-data:
+  portainer-data:
