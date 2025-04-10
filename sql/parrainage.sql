@@ -407,6 +407,123 @@ CREATE TABLE IF NOT EXISTS `utilisateurs`
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `votes_projet`
+--
+CREATE TABLE IF NOT EXISTS votes_projet
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL,
+    projet_id      INT UNSIGNED NOT NULL,
+    date_vote      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (utilisateur_id), -- un seul vote par utilisateur
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
+    FOREIGN KEY (projet_id) REFERENCES projets (id) ON DELETE CASCADE
+);
+--
+-- Structure de la table `projets`
+--
+CREATE TABLE IF NOT EXISTS projets
+(
+    id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    titre        VARCHAR(100) NOT NULL,
+    description  TEXT,
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Insertion des projets dans la table `projets`
+INSERT INTO projets (titre, description)
+VALUES
+    ('IA PROFIL', 'Les demandeurs d\'emploi ne sont plus des CV perdus, mais des profils analysés et proposés aux bonnes entreprises. Les employeurs ne recrutent plus au hasard : l\'IA filtre et trouve le talent idéal. Une expérience fluide et humaine, où chaque candidature compte car derrière elles se cache toujours une histoire.'),
+    ('ChezMoi', 'Dans une COTE D\'IVOIRE en pleine urbanisation et croissance démographique, trouver un logement adapté devient un défi pour beaucoup. Un logement est bien plus qu\'une simple construction. C\'est un havre de paix, un lieu de liens, de réconfort et de chaleur humaine. C\'est aussi un foyer où naissent des idées et des projets, où se construit l\'Avenir. ChezMoi a pour but de permettre à chacun de trouver un logement correspondant à ses critères et à son budget. ChezMoi est un site web et une future application où les agents immobiliers peuvent publier leurs offres, les rendant accessibles à tous. Avec ChezMoi, plus besoin de prospecter sans fin pour trouver l\'offre idéale. Tout ce dont vous avez besoin est à portée de clic.'),
+    ('WellMind', 'WellMind est une application web de soutien à la santé mentale offrant un chatbot thérapeutique disponible 24h/24. Face au taux alarmant de suicides, elle propose un accompagnement immédiat basé sur des approches scientifiques (TCC, pleine conscience), un suivi professionnel à distance et un système d\'intervention d\'urgence pour les personnes en crise. Son interface non stigmatisante rend les soins psychologiques accessibles à tous.'),
+    ('MonBus', 'MonBus est une application mobile dont le but est de pouvoir faciliter le quotidien des travailleurs, étudiants et lycéens/collégiens de côte d’ivoire qui empruntent les bus. MonBus est une application multitâche en ce sens où elle permet : En premier lieu la recherche et la localisation en temps réel de bus ou de lignes de bus disponibles dans un secteur et une zone précise, depuis l’endroit où l’on se trouve. Plus d’inquiétude lorsque vous vous trouvez dans une commune peu familière. La communication des informations comme l’arrivée du prochain bus et le temps d’estimation du trajet. Ainsi, plus besoin de courir après les bus. Le temps d’attente se voit aussi réduit. Le paiement de tickets de bus à travers vos portefeuilles numériques. Vous n’aurez plus à vous inquiéter de problèmes de monnaies. Rechargement de vos cartes de bus. En fin de compte, plus besoin de vous tracasser concernant vos prochains trajets en bus. MonBus est là pour répondre à vos préoccupations.');
+
+
+--
+-- Structure de la table `votes_roi`
+--
+CREATE TABLE IF NOT EXISTS votes_roi
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL, -- L'utilisateur qui vote
+    id_participant INT UNSIGNED NOT NULL, -- L'id du candidat roi (participant)
+    date_vote      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (utilisateur_id),              -- L'utilisateur peut voter une seule fois
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
+    FOREIGN KEY (id_participant) REFERENCES participants (id_participant) ON DELETE CASCADE
+);
+
+
+--
+-- Structure de la table `votes_reine`
+--
+CREATE TABLE IF NOT EXISTS votes_reine
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL, -- L'utilisateur qui vote
+    id_participant INT UNSIGNED NOT NULL, -- L'id du candidat reine (participant)
+    date_vote      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (utilisateur_id),              -- L'utilisateur peut voter une seule fois
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
+    FOREIGN KEY (id_participant) REFERENCES participants (id_participant) ON DELETE CASCADE
+);
+
+--
+-- Structure de la table `participants`
+--
+CREATE TABLE IF NOT EXISTS participants
+(
+    id_participant   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom             VARCHAR(50) NOT NULL, -- Nom du participant
+    prenom          VARCHAR(50) NOT NULL, -- Prénom du participant
+    role             ENUM ('roi', 'reine') NOT NULL, -- Rôle (Roi ou Reine)
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--
+-- Structure de la table `questions_posees`
+--
+CREATE TABLE IF NOT EXISTS questions_posees
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL,
+    question       TEXT         NOT NULL,
+    date_question  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE
+);
+
+--
+-- Structure de la table `repas`
+--
+CREATE TABLE IF NOT EXISTS repas
+(
+    id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom        VARCHAR(255) NOT NULL,    -- Nom du repas
+    description TEXT,                    -- Description du repas
+    statut     ENUM('disponible', 'indisponible') DEFAULT 'disponible',  -- Statut du repas
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date de création
+);
+
+
+--
+-- Structure de la table `commandes_repas`
+--
+
+CREATE TABLE IF NOT EXISTS commandes_repas
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL,  -- Utilisateur qui a commandé
+    repas_id       INT UNSIGNED NOT NULL,  -- Référence au repas commandé
+    quantite       INT UNSIGNED DEFAULT 1, -- Quantité de repas
+    statut         ENUM('en_attente', 'en_preparation', 'livre') DEFAULT 'en_attente', -- Statut de la commande
+    date_commande  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Date de la commande
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,  -- Lien vers l'utilisateur
+    FOREIGN KEY (repas_id) REFERENCES repas (id) ON DELETE CASCADE  -- Lien vers le repas
+);
+
+
+
+
+--
 -- Contraintes pour les tables déchargées
 --
 -- Contraintes pour la table `options_questions`

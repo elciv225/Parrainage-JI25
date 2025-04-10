@@ -10,6 +10,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
     <meta name="description"
           content="Journée d'Intégration - Un événement inoubliable pour rencontrer, échanger et apprendre.">
     <title>Journée d'Intégration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="backend/client/assets/css/concours.css">
     <title><?= $title ?? "Journée d'intégration" ?></title>
 </head>
@@ -76,38 +77,216 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                 <p>Découvrez nos finalistes </p>
             </header>
             <div class="grille-activites">
-
+                <!-- IA PROFIL -->
                 <article class="carte-mpc">
-                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech" class="carte-image-visible">
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech"
+                         class="carte-image-visible">
                     <div class="details-activite">
-                        <h2>MPC 25</h2>
-                        <h3>Nom Projet ...</h3>
-                        <p>Description projet ..............</p>
+                        <h3>IA PROFIL</h3>
+                        <p>Cliquez pour en voir plus</p>
                     </div>
 
                     <div class="overlay-details-content" style="display: none;">
                         <div class="detail-image-col">
-                            <img src="backend/client/assets/images/novBleu_large.webp" alt="Conférence Innovation & Tech - Détail">
+                            <img src="backend/client/assets/images/novBleu_large.webp"
+                                 alt="Image IA PROFIL">
                         </div>
                         <div class="detail-info-col">
-                            <h2 class="detail-titre">MPC 25</h2>
+                            <h2 class="detail-titre">IA PROFIL</h2>
                             <h3 class="detail-soustitre">Nom Projet Complet et Détaillé</h3>
                             <p class="detail-description">
-                                Ceci est la description complète et détaillée du projet MPC 25 qui sera affichée
-                                dans l'overlay. Elle peut être beaucoup plus longue que celle de la carte.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-                                Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+                                Les demandeurs d'emploi ne sont plus des CV perdus, mais
+                                des profils analysés et proposés aux bonnes entreprises. Les
+                                employeurs ne recrutent plus au hasard : l'IA filtre et trouve
+                                le talent idéal. Une expérience fluide et humaine, où chaque
+                                candidature compte car derrière elles se cache
+                                toujours une histoire.
                             </p>
                             <div class="detail-participants">
                                 <h4>Participants au projet</h4>
                                 <ul>
-                                    <li>Jean Dupont (Rôle)</li>
-                                    <li>Marie Martin (Rôle)</li>
-                                    <li>Luc Bernard (Rôle)</li>
-                                    <li>Autre Participant</li>
+                                    <li>SERME Mohamed Sidik</li>
+                                    <li>KONE Gningneri Jedidia</li>
+                                    <li>KOFFI Johann Christ</li>
+                                    <li>OYOU Kassi Nathan</li>
                                 </ul>
                             </div>
-                            <button class="btn-voter">Voter pour ce projet</button>
+                            <?php if ($utilisateur): ?>
+                                <form action="/vote/projet/1" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <button type="submit" class="btn-voter">Voter pour ce projet</button>
+                                </form>
+                            <?php else: ?>
+                                <a href="/authentification" class="btn-voter">Connectez vous avant de voter</a>
+                            <?php endif; ?>
+
+                        </div>
+                    </div>
+                </article>
+                <!-- ChezMoi -->
+                <article class="carte-mpc">
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech"
+                         class="carte-image-visible">
+                    <div class="details-activite">
+                        <h3>ChezMoi</h3>
+                        <p>Cliquez pour en voir plus</p>
+                    </div>
+                    <div class="overlay-details-content" style="display: none;">
+                        <div class="detail-image-col">
+                            <img src="backend/client/assets/images/novBleu_large.webp"
+                                 alt="Image ChezMoi">
+                        </div>
+                        <div class="detail-info-col">
+                            <h2 class="detail-titre">ChezMoi</h2>
+                            <h3 class="detail-soustitre">Slogan...</h3>
+                            <p class="detail-description">
+                                Dans une COTE D¾IVOIRE
+                                en pleine urbanisation et
+                                croissance
+                                démographique, trouver
+                                un logement adapté
+                                devient un défi pour
+                                beaucoup.
+                                Un logement est bien
+                                plus qu'une simple
+                                construction.
+                                C'est un havre de paix,
+                                un lieu de liens, de
+                                réconfort et de chaleur
+                                humaine.
+                                C'est aussi un foyer où
+                                naissent des idées et des
+                                projets, où se construit
+                                l'Avenir.
+                                ChezMoi a pour but de
+                                permettre à chacun de
+                                trouver un logement
+                                correspondant à ses
+                                critères et à son budget.
+                                ChezMoi est un site web
+                                et une future application
+                                où les agents immobiliers
+                                peuvent publier leurs
+                                offres, les rendant
+                                accessibles à tous.
+                                Avec ChezMoi, plus
+                                besoin de prospecter
+                                sans fin pour trouver
+                                l'offre idéale.
+                                Tout ce dont vous avez
+                                besoin est à portée de
+                                clic.
+                            </p>
+                            <div class="detail-participants">
+                                <h4>Participants au projet</h4>
+                                <ul>
+                                    <li>KOUASSI N'Gouan Yannick</li>
+                                    <li>KOUADIO Samuel</li>
+                                    <li>AYRA Christ</li>
+                                </ul>
+                            </div>
+                            <?php if ($utilisateur): ?>
+                                <form action="/vote/projet/2" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <button type="submit" class="btn-voter">Voter pour ce projet</button>
+                                </form>
+                            <?php else: ?>
+                                <a href="/authentification" class="btn-voter">Connectez vous avant de voter</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </article>
+                <!-- WellMind -->
+                <article class="carte-mpc">
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech"
+                         class="carte-image-visible">
+                    <div class="details-activite">
+                        <h3>WellMind</h3>
+                        <p>Cliquez pour en voir plus</p>
+                    </div>
+
+                    <div class="overlay-details-content" style="display: none;">
+                        <div class="detail-image-col">
+                            <img src="backend/client/assets/images/novBleu_large.webp"
+                                 alt="Image WellMind">
+                        </div>
+                        <div class="detail-info-col">
+                            <h2 class="detail-titre">WellMind</h2>
+                            <h3 class="detail-soustitre">Slogan...</h3>
+                            <p class="detail-description">
+                                WellMind est une application web de soutien à la santé mentale
+                                offrant un chatbot thérapeutique disponible 24h/24. Face au taux
+                                alarmant de suicides, elle propose un accompagnement immédiat basé
+                                sur des approches scientifiques (TCC, pleine conscience), un suivi
+                                professionnel à distance et un système d'intervention d'urgence pour
+                                les personnes en crise. Son interface non stigmatisante rend les soins
+                                psychologiques accessibles à tous.
+                            </p>
+                            <div class="detail-participants">
+                                <h4>Participants au projet</h4>
+                                <ul>
+                                    <li>SERY Priscille</li>
+                                    <li>SORO Emeric</li>
+                                </ul>
+                            </div>
+                            <?php if ($utilisateur): ?>
+                                <form action="/vote/projet/3" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <button type="submit" class="btn-voter">Voter pour ce projet</button>
+                                </form>
+                            <?php else: ?>
+                                <a href="/authentification" class="btn-voter">Connectez vous avant de voter</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </article>
+                <!-- MonBus -->
+                <article class="carte-mpc">
+                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech"
+                         class="carte-image-visible">
+                    <div class="details-activite">
+                        <h3>MonBus</h3>
+                        <p>Cliquez pour en voir plus</p>
+                    </div>
+
+                    <div class="overlay-details-content" style="display: none;">
+                        <div class="detail-image-col">
+                            <img src="backend/client/assets/images/novBleu_large.webp"
+                                 alt="Image MonBus">
+                        </div>
+                        <div class="detail-info-col">
+                            <h2 class="detail-titre">MonBus</h2>
+                            <h3 class="detail-soustitre">Slogan...</h3>
+                            <p class="detail-description">
+                                MonBus est une application mobile dont le but est de pouvoir faciliter le quotidien des travailleurs, étudiants et lycéens/collégiens de côte d’ivoire qui empruntent les bus. MonBus est une application multitâche en ce sens où elle permet :
+                                <br>
+                                - En premier lieu la recherche et la localisation en temps réel de bus ou de lignes de bus disponibles dans un secteur et une zone précise, depuis l’endroit où l’on se trouve. Plus d’inquiétude lorsque vous vous trouvez dans une commune peu familière.
+                                <br>
+                                - La communication des informations comme l’arrivée du prochain bus et le temps d’estimation du trajet. Ainsi, plus besoin de courir après les bus. Le temps d’attente se voit aussi réduit.
+                                <br>
+                                - Le paiement de tickets de bus à travers vos portefeuilles numériques. Vous n’aurez plus à vos inquiéter de problèmes de monnaies.
+                                <br>
+                                - Rechargement de vos cartes de bus.
+                                <br>
+                                En fin de compte, plus besoin de vous tracasser concernant vos prochains trajets en bus. MonBus est là pour répondre à vos préoccupations.
+                            </p>
+                            <div class="detail-participants">
+                                <h4>Participants au projet</h4>
+                                <ul>
+                                    <li>BAKAYOKO Segbe</li>
+                                    <li>GABALA Mylène </li>
+                                    <li>N'Guessan Priscille</li>
+                                </ul>
+                            </div>
+                            <?php if ($utilisateur): ?>
+                                <form action="/vote/projet/3" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <button type="submit" class="btn-voter">Voter pour ce projet</button>
+                                </form>
+                            <?php else: ?>
+                                <a href="/authentification" class="btn-voter">Connectez vous avant de voter</a>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                 </article>
@@ -143,51 +322,69 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
     </section>
     <section id="faq" class="faq" aria-label="Questions Fréquentes">
         <h2 class="titre-faq">Questions Fréquentes</h2>
-        <div class="faq-item">
+        <div class="faq-item" tabindex="0">
             <button class="faq-question" aria-expanded="false">
                 <span>Quand et où se tiendra la Journée d'Intégration ?</span>
                 <i class="faq-icone">+</i>
             </button>
             <div class="faq-reponse">
                 <p>
-                    La Journée d'Intégration se tiendra le 12 avril à la Caistab du Plateau. Restez connectés pour le
-                    programme détaillé !
+                    La Journée d'Intégration se tiendra le 12 avril 2025 à la Salle-Caistab d'Abidjan Plateau. Consultez
+                    notre
+                    <a href="/programme">programme détaillé</a> pour plus d'informations!
                 </p>
             </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" tabindex="0">
             <button class="faq-question" aria-expanded="false">
-                <span>Quels seront les temps forts de la Journée d'Intégration ?</span>
+                <span>Comment puis-je consulter le programme complet ?</span>
                 <i class="faq-icone">+</i>
             </button>
             <div class="faq-reponse">
                 <p>
-                    L’événement comprendra des panels de discussion, des conférences et le Miage Project Challenge, un
-                    concours mettant en avant les talents des étudiants en MIAGE.
+                    Vous pouvez consulter le <a href="/programme">programme complet</a> de la journée qui inclut
+                    toutes les activités prévues avec leurs horaires. Le programme est mis à jour en temps réel!
                 </p>
             </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" tabindex="0">
             <button class="faq-question" aria-expanded="false">
-                <span>Y a-t-il des frais de participation pour les étudiants ?</span>
+                <span>Comment commander de la nourriture pour l'événement ?</span>
                 <i class="faq-icone">+</i>
             </button>
             <div class="faq-reponse">
                 <p>
-                    Oui, les étudiants de L2, M1 et M2 doivent s’acquitter de leurs droits de participation à la vie
-                    estudiantine, d’un montant de 15 000 FCFA, avant de pouvoir assister à la Journée d’Intégration.
+                    Consultez notre <a href="/menu">menu</a> et commandez directement en ligne via notre
+                    plateforme de commande. Les commandes seront disponibles gratuitement lors de l'événement.
                 </p>
             </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" tabindex="0">
             <button class="faq-question" aria-expanded="false">
-                <span>Comment puis-je m’inscrire et obtenir plus d’informations ?</span>
+                <span>Comment voter pour les projets du MIAGE Project Challenge ?</span>
                 <i class="faq-icone">+</i>
             </button>
             <div class="faq-reponse">
                 <p>
-                    Suivez nos canaux de communication officiels pour vous inscrire et recevoir les dernières mises à
-                    jour sur l’événement. Vous pouvez également contacter l’équipe organisatrice pour toute question.
+                    Pour voter, connectez-vous à votre compte sur notre plateforme et accédez à la section
+                    <a href="/concours">Concours & Votes</a>. Vous pourrez voir tous les projets participants et voter
+                    pour
+                    votre favori. Chaque étudiant peut voter une seule fois par projet.
+                </p>
+            </div>
+        </div>
+        <div class="faq-item" tabindex="0">
+            <button class="faq-question" aria-expanded="false">
+                <span>Quels sont les plats disponibles lors de la journée ?</span>
+                <i class="faq-icone">+</i>
+            </button>
+            <div class="faq-reponse">
+                <p>
+                    Notre menu propose une variété de plats traditionnels ivoiriens incluant Attiéké, Tchep, Frites et
+                    Alloco,
+                    tous accompagnés au choix de poulet, poisson ou porc. Consultez le <a href="/menu">menu complet</a>
+                    pour
+                    découvrir toutes les options disponibles.
                 </p>
             </div>
         </div>
@@ -241,5 +438,44 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
     </div>
 </footer>
 <script type="module" src="backend/client/assets/js/concours.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('popup-message');
+        const message = document.getElementById('message');
+        const boutonFermer = document.getElementById('fermer-popup');
+
+        // Afficher la pop-up si un message de succès est défini dans $_SESSION
+        <?php if (isset($_SESSION['message_vote'])): ?>
+        popup.classList.remove('hidden');
+        message.textContent = "<?php echo $_SESSION['message_vote']; ?>";
+        <?php unset($_SESSION['message_vote']); ?>
+        <?php endif; ?>
+
+        // Afficher la pop-up si un message d'erreur est défini dans $_SESSION
+        <?php if (isset($_SESSION['erreur_vote'])): ?>
+        popup.classList.remove('hidden');
+        message.textContent = "<?php echo $_SESSION['erreur_vote']; ?>";
+        <?php unset($_SESSION['erreur_vote']); ?>
+        <?php endif; ?>
+
+        // Fermer la pop-up lorsqu'on clique sur le bouton "Fermer"
+        boutonFermer.addEventListener('click', () => {
+            popup.classList.add('hidden');
+        });
+
+        // Masquer automatiquement la pop-up après 5 secondes (5000 ms)
+        setTimeout(() => {
+            popup.classList.add('hidden');
+        }, 5000);
+
+        // Fermer la pop-up lorsqu'on clique en dehors de son contenu
+        window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.classList.add('hidden');
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

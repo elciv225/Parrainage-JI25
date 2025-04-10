@@ -61,7 +61,42 @@ Route::get('/authentification', function () {
 // Page des concours
 Route::get('/concours', function () {
     View::render('concours', [
-        'title' => 'Journée d\'Integration 2025 - Concours'
+        'title' => 'Journée d\'Integration 2025 - Concours',
+        'utilisateur' => $_SESSION['utilisateur'] ?? null
+    ]);
+});
+
+// Page des repas
+Route::get('/repas', function () {
+    View::render('repas', [
+        'title' => 'Journée d\'Integration 2025 - Repas',
+        'utilisateur' => $_SESSION['utilisateur'] ?? null
+    ]);
+});
+
+// Page pour accéder aux pages admin manager eliel
+Route::get('/eliel', function () {
+    View::render('manager_dashboard', [
+        'title' => 'Journée d\'Integration 2025 - Eliel Admin - Tableau de Bord',
+    ]);
+});
+
+// Page pour ajouter tout ce qui est concours et autre
+Route::get('eliel/repas', function () {
+    View::render('manager_repas', [
+        'title' => 'Journée d\'Integration 2025 - Eliel Admin - Repas',
+    ]);
+});
+// Page pour ajouter tout ce qui est concours et autre
+Route::get('eliel/concours', function () {
+    View::render('manager_participants', [
+        'title' => 'Journée d\'Integration 2025 - Eliel Admin - Concours',
+    ]);
+});
+// Page pour ajouter tout ce qui est concours et autre
+Route::get('eliel/questions', function () {
+    View::render('manager_questions', [
+        'title' => 'Journée d\'Integration 2025 - Eliel Admin - Questions',
     ]);
 });
 

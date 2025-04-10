@@ -161,4 +161,138 @@ class UtilisateurManager
         return $utilisateurs; // Return the array of Utilisateur objects
     }
 
+
+    /**
+     * Vérifie si l'utilisateur a déjà voté pour un projet
+     */
+    public function aVoteProjet(int $id_utilisateur): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM parrainage.votes_projet WHERE utilisateur_id = ?");
+        $stmt->execute([$id_utilisateur]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    /**
+     * Vote pour un projet
+     *
+     * @param int $id_utilisateur
+     * @param int $id_projet
+     * @return bool true si le vote a réussi, false sinon
+     */
+    public function voteProjet(int $id_utilisateur, int $id_projet): bool
+    {
+        if ($this->aVoteProjet($id_utilisateur)) {
+            return false; // déjà voté
+        }
+
+        $stmt = $this->pdo->prepare("INSERT INTO parrainage.votes_projet (utilisateur_id, projet_id) VALUES (?, ?)");
+        return $stmt->execute([$id_utilisateur, $id_projet]);
+    }
+
+    /**
+     * Vérifie si l'utilisateur a déjà voté pour le roi
+     */
+    public function aVoteRoi(int $id_utilisateur): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM parrainage.votes_roi WHERE utilisateur_id = ? LIMIT 1");
+        $stmt->execute([$id_utilisateur]);
+        return $stmt->fetchColumn() > 0;
+    }
+    /**
+     * Vote pour le roi
+     *
+     * @param int $id_utilisateur
+     * @param int $id_roi
+     * @return bool true si le vote a réussi, false sinon
+     */
+    public function voteRoi(int $id_utilisateur, int $id_participant): bool
+    {
+        if ($this->aVoteRoi($id_utilisateur)) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare("INSERT INTO parrainage.votes_roi (utilisateur_id, id_participant) VALUES (?, ?)");
+        return $stmt->execute([$id_utilisateur, $id_participant]);
+    }
+
+    /**
+     * Vérifie si l'utilisateur a déjà voté pour la reine
+     */
+    public function aVoteReine(int $id_utilisateur): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM parrainage.votes_reine WHERE utilisateur_id = ? LIMIT 1");
+        $stmt->execute([$id_utilisateur]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    /**
+     * Vote pour la reine
+     *
+     * @param int $id_utilisateur
+     * @param int $id_participant
+     * @return bool true si le vote a réussi, false sinon
+     */
+    public function voteReine(int $id_utilisateur, int $id_participant): bool
+    {
+        if ($this->aVoteReine($id_utilisateur)) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare("INSERT INTO parrainage.votes_reine (utilisateur_id, id_participant) VALUES (?, ?)");
+        return $stmt->execute([$id_utilisateur, $id_participant]);
+    }
+
+    /**
+     *  Enregistre une question posée
+     * @param int $id_utilisateur
+     * @param string $question
+     * @return bool true si la question a été posée avec succès, false sinon
+     */
+    public function poserQuestion(int $id_utilisateur, string $question): bool
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO parrainage.questions_posees (utilisateur_id, question) VALUES (?, ?)");
+        return $stmt->execute([$id_utilisateur, $question]);
+    }
+
+    /**
+     * Commandé un repas
+     * @param int $id_utilisateur
+     * @param string $repas Le nom du repas
+     * @param int $quantite La quantité de repas
+     * @return bool true si l'utilisateur a déjà commandé un repas, false sinon
+     */
+    public function commanderRepas(int $id_utilisateur, int $id_repas, int $quantite = 1): bool
+    {
+        // Vérifier si l'utilisateur a déjà une commande en cours
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM parrainage.commandes_repas WHERE utilisateur_id = ? AND statut = 'en_attente'");
+        $stmt->execute([$id_utilisateur]);
+        if ($stmt->fetchColumn() > 0) {
+            return false;  // L'utilisateur a déjà une commande en attente
+        }
+
+        // Ajouter la commande
+        $stmt = $this->pdo->prepare("INSERT INTO parrainage.commandes_repas (utilisateur_id, repas_id, quantite) VALUES (?, ?, ?)");
+        return $stmt->execute([$id_utilisateur, $id_repas, $quantite]);
+    }
+
+
+    /**
+     * Modifie une commande existante
+     *
+     * @param int $id_commande L'identifiant de la commande à modifier
+     * @param string $nouveau_repas Le nom du nouveau repas
+     * @param int $nouvelle_quantite La nouvelle quantité
+     * @return bool true si la mise à jour réussit
+     */
+    public function modifierCommande(int $id_commande, string $nouveau_repas, int $nouvelle_quantite): bool
+    {
+        $stmt = $this->pdo->prepare("
+        UPDATE parrainage.commandes_repas
+        SET repas = ?, quantite = ?
+        WHERE id = ?
+    ");
+        return $stmt->execute([$nouveau_repas, $nouvelle_quantite, $id_commande]);
+    }
+
+
 }
