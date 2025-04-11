@@ -407,19 +407,6 @@ CREATE TABLE IF NOT EXISTS `utilisateurs`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `votes_projet`
---
-CREATE TABLE IF NOT EXISTS votes_projet
-(
-    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    utilisateur_id INT UNSIGNED NOT NULL,
-    projet_id      INT UNSIGNED NOT NULL,
-    date_vote      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (utilisateur_id), -- un seul vote par utilisateur
-    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
-    FOREIGN KEY (projet_id) REFERENCES projets (id) ON DELETE CASCADE
-);
---
 -- Structure de la table `projets`
 --
 CREATE TABLE IF NOT EXISTS projets
@@ -437,6 +424,32 @@ VALUES
     ('WellMind', 'WellMind est une application web de soutien à la santé mentale offrant un chatbot thérapeutique disponible 24h/24. Face au taux alarmant de suicides, elle propose un accompagnement immédiat basé sur des approches scientifiques (TCC, pleine conscience), un suivi professionnel à distance et un système d\'intervention d\'urgence pour les personnes en crise. Son interface non stigmatisante rend les soins psychologiques accessibles à tous.'),
     ('MonBus', 'MonBus est une application mobile dont le but est de pouvoir faciliter le quotidien des travailleurs, étudiants et lycéens/collégiens de côte d’ivoire qui empruntent les bus. MonBus est une application multitâche en ce sens où elle permet : En premier lieu la recherche et la localisation en temps réel de bus ou de lignes de bus disponibles dans un secteur et une zone précise, depuis l’endroit où l’on se trouve. Plus d’inquiétude lorsque vous vous trouvez dans une commune peu familière. La communication des informations comme l’arrivée du prochain bus et le temps d’estimation du trajet. Ainsi, plus besoin de courir après les bus. Le temps d’attente se voit aussi réduit. Le paiement de tickets de bus à travers vos portefeuilles numériques. Vous n’aurez plus à vous inquiéter de problèmes de monnaies. Rechargement de vos cartes de bus. En fin de compte, plus besoin de vous tracasser concernant vos prochains trajets en bus. MonBus est là pour répondre à vos préoccupations.');
 
+--
+-- Structure de la table `participants`
+--
+CREATE TABLE IF NOT EXISTS participants
+(
+    id_participant   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom             VARCHAR(50) NOT NULL, -- Nom du participant
+    prenom          VARCHAR(50) NOT NULL, -- Prénom du participant
+    role             ENUM ('roi', 'reine') NOT NULL, -- Rôle (Roi ou Reine)
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Structure de la table `votes_projet`
+--
+CREATE TABLE IF NOT EXISTS votes_projet
+(
+    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT UNSIGNED NOT NULL,
+    projet_id      INT UNSIGNED NOT NULL,
+    date_vote      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (utilisateur_id), -- un seul vote par utilisateur
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
+    FOREIGN KEY (projet_id) REFERENCES projets (id) ON DELETE CASCADE
+);
 
 --
 -- Structure de la table `votes_roi`
@@ -465,18 +478,6 @@ CREATE TABLE IF NOT EXISTS votes_reine
     UNIQUE (utilisateur_id),              -- L'utilisateur peut voter une seule fois
     FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,
     FOREIGN KEY (id_participant) REFERENCES participants (id_participant) ON DELETE CASCADE
-);
-
---
--- Structure de la table `participants`
---
-CREATE TABLE IF NOT EXISTS participants
-(
-    id_participant   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nom             VARCHAR(50) NOT NULL, -- Nom du participant
-    prenom          VARCHAR(50) NOT NULL, -- Prénom du participant
-    role             ENUM ('roi', 'reine') NOT NULL, -- Rôle (Roi ou Reine)
-    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --
@@ -519,8 +520,6 @@ CREATE TABLE IF NOT EXISTS commandes_repas
     FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs (utilisateur_id) ON DELETE CASCADE,  -- Lien vers l'utilisateur
     FOREIGN KEY (repas_id) REFERENCES repas (id) ON DELETE CASCADE  -- Lien vers le repas
 );
-
-
 
 
 --
