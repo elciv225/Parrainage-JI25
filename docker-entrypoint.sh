@@ -1,23 +1,28 @@
 #!/bin/bash
 
-# Démarre Apache temporairement pour Certbot
-service apache2 start
-
-# Générer le certificat si absent
+# Vérifier si certificat déjà existant
 if [ ! -f "/etc/letsencrypt/live/ji-miage.com/fullchain.pem" ]; then
-  echo "🔐 Génération du certificat SSL Let's Encrypt..."
-  certbot --apache --non-interactive --agree-tos \
-    --email admin@ji-miage.com \
-    -d ji-miage.com -d www.ji-miage.com
+    echo "🔐 Génération du certificat SSL Let's Encrypt..."
+
+    # Lancer Apache en tâche de fond pour que Certbot puisse utiliser le challenge
+    apache2ctl start
+
+    # Lancer certbot
+    certbot --apache --non-interactive --agree-tos \
+      --email admin@ji-miage.com \
+      -d ji-miage.com -d www.ji-miage.com
+
+    # Stop Apache pour le relancer proprement en foreground
+    apache2ctl stop
 else
-  echo "✅ Certificat SSL déjà présent."
+    echo "✅ Certificat SSL déjà présent"
 fi
 
-# Créer une tâche cron pour renouveler
+# Configurer renouvellement auto
 echo "0 3 * * * certbot renew --quiet --post-hook 'service apache2 reload'" > /etc/cron.d/certbot-renew
 chmod 0644 /etc/cron.d/certbot-renew
 crontab /etc/cron.d/certbot-renew
 service cron start
 
-# Démarre Apache en avant-plan
+# Lancer Apache en avant-plan
 exec apache2-foreground
