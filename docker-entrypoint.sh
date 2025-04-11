@@ -7,7 +7,42 @@ echo "ServerName ji-miage.com" >> /etc/apache2/apache2.conf
 # Activer les modules nécessaires
 a2enmod rewrite ssl headers
 
-# VHost HTTP → redirige vers HTTPS (configuration simplifiée)
+# VHost HTTP simple (sans redirection pour l'instant)
+cat > /etc/apache2/sites-available/000-default.conf <<EOF
+<VirtualHost *:80>
+    ServerName ji-miage.com
+    ServerAdmin admin@ji-miage.com
+    DocumentRoot /var/www/html
+
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+
+    <Directory /var/www/html>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+EOF
+
+# Démarrer Apache temporairement pour Certbot
+apache2ctl start
+
+# Générer le certificat si non existant
+if [ ! -f "/etc/letsencrypt/live/ji-miage.com/fullchain.pem" ]; then
+  echo "🔐 Génération du certificat SSL..."
+  certbot --apache --non-interactive --agree-tos \
+    --email admin@ji-miage.com \
+    -d ji-miage.com \
+    --redirect
+else
+  echo "✅ Certificat SSL déjà présent"
+fi
+
+# Arrêter Apache temporairement
+apache2ctl stop
+
+# Maintenant que nous avons le certificat, configurons la redirection HTTP->HTTPS
 cat > /etc/apache2/sites-available/000-default.conf <<EOF
 <VirtualHost *:80>
     ServerName ji-miage.com
@@ -24,8 +59,9 @@ cat > /etc/apache2/sites-available/000-default.conf <<EOF
 </VirtualHost>
 EOF
 
-# Configuration HTTPS statique plutôt que de laisser Certbot la générer
-cat > /etc/apache2/sites-available/default-ssl.conf <<EOF
+# Configuration HTTPS - uniquement si le certificat existe
+if [ -f "/etc/letsencrypt/live/ji-miage.com/fullchain.pem" ]; then
+    cat > /etc/apache2/sites-available/default-ssl.conf <<EOF
 <IfModule mod_ssl.c>
     <VirtualHost *:443>
         ServerName ji-miage.com
@@ -52,30 +88,9 @@ cat > /etc/apache2/sites-available/default-ssl.conf <<EOF
 </IfModule>
 EOF
 
-# Activer le site SSL
-a2ensite default-ssl
-
-# Démarrer Apache temporairement pour Certbot
-apache2ctl start
-
-# Générer le certificat si non existant
-if [ ! -f "/etc/letsencrypt/live/ji-miage.com/fullchain.pem" ]; then
-  echo "🔐 Génération du certificat SSL..."
-  certbot --apache --non-interactive --agree-tos \
-    --email admin@ji-miage.com \
-    -d ji-miage.com \
-    --keep-until-expiring \
-    --redirect
-else
-  echo "✅ Certificat SSL déjà présent"
+    # Activer le site SSL
+    a2ensite default-ssl
 fi
-
-# Supprimer les configurations générées par Certbot pour éviter les doublons
-# et garder uniquement nos configurations personnalisées
-rm -f /etc/apache2/sites-enabled/000-default-le-ssl.conf
-
-# Stop temporaire Apache
-apache2ctl stop
 
 # Cron pour renouvellement automatique
 echo "0 3 * * * certbot renew --quiet --post-hook 'service apache2 reload'" > /etc/cron.d/certbot-renew
