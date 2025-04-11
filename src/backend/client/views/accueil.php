@@ -141,9 +141,9 @@
                 <article class="carte-activite">
                     <img src="backend/client/assets/images/blackWhite.webp" alt="Journée Black & White">
                     <div class="details-activite">
-                        <h2>Journée Black & White</h2>
-                        <h3>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</h3>
-                        <p>Marquer l'histoire de MIAGE</p>
+                        <h2>Journée à thème</h2>
+                        <h3>Journée Black & White</h3>
+                        <p>On a juste voulu mettre un peu de style avec un dress code noir et blanc.</p>
                     </div>
                 </article>
             </div>

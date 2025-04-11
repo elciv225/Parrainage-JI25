@@ -16,10 +16,14 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 # Copier le code de l'application
 COPY ./src /var/www/html
 
-# Préparer les dossiers upload
+# Créer tous les dossiers d'upload nécessaires avec les bonnes permissions
 RUN mkdir -p /var/www/html/backend/client/uploads/photos \
-  && chown -R www-data:www-data /var/www/html \
-  && chmod -R 775 /var/www/html/backend/client/uploads
+    && mkdir -p /var/www/html/client/uploads/photos \
+    && chown -R www-data:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 755 {} \; \
+    && find /var/www/html -type f -exec chmod 644 {} \; \
+    && chmod -R 775 /var/www/html/backend/client/uploads \
+    && chmod -R 775 /var/www/html/client/uploads
 
 # Copier le script d'entrée
 COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
