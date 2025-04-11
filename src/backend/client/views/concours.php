@@ -437,45 +437,14 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
         </div>
     </div>
 </footer>
+<!-- Popup de message d'erreur/succès -->
+<div id="popup-erreur" class="popup hidden">
+    <div class="popup-content error-container">
+        <h2 class="error-title" id="popup-title">Attention</h2>
+        <p class="error-description" id="message-erreur">Votre message</p>
+        <button id="fermer-popup" class="button button-primary">Fermer</button>
+    </div>
+</div>
 <script type="module" src="backend/client/assets/js/concours.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('popup-message');
-        const message = document.getElementById('message');
-        const boutonFermer = document.getElementById('fermer-popup');
-
-        // Afficher la pop-up si un message de succès est défini dans $_SESSION
-        <?php if (isset($_SESSION['message_vote'])): ?>
-        popup.classList.remove('hidden');
-        message.textContent = "<?php echo $_SESSION['message_vote']; ?>";
-        <?php unset($_SESSION['message_vote']); ?>
-        <?php endif; ?>
-
-        // Afficher la pop-up si un message d'erreur est défini dans $_SESSION
-        <?php if (isset($_SESSION['erreur_vote'])): ?>
-        popup.classList.remove('hidden');
-        message.textContent = "<?php echo $_SESSION['erreur_vote']; ?>";
-        <?php unset($_SESSION['erreur_vote']); ?>
-        <?php endif; ?>
-
-        // Fermer la pop-up lorsqu'on clique sur le bouton "Fermer"
-        boutonFermer.addEventListener('click', () => {
-            popup.classList.add('hidden');
-        });
-
-        // Masquer automatiquement la pop-up après 5 secondes (5000 ms)
-        setTimeout(() => {
-            popup.classList.add('hidden');
-        }, 5000);
-
-        // Fermer la pop-up lorsqu'on clique en dehors de son contenu
-        window.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                popup.classList.add('hidden');
-            }
-        });
-    });
-
-</script>
 </body>
 </html>

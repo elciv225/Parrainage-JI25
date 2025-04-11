@@ -16,11 +16,6 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 # Copier les fichiers sources
 COPY ./src /var/www/html
 
-# Créer le dossier d'uploads avec les bons droits
-RUN mkdir -p /var/www/html/client/uploads/photos \
- && chown -R www-data:www-data /var/www/html/client/uploads \
- && chmod -R 755 /var/www/html/client/uploads
-
 # Copier le script d’entrée
 COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

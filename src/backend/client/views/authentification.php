@@ -10,7 +10,7 @@
 <div class="principal-container">
     <div class="section-droite">
         <div class="inscription" id="inscription">
-            <form method="post">
+            <form method="post" action="/inscription">
                 <div class="header-form">
                     <h3>Inscrivez-vous</h3>
                     <h6>Vous avez déja un compte ? <a class="link" href="#connexion">Cliquez ici pour vous connecter</a>
@@ -192,57 +192,14 @@
         </div>
     </div>
 </div>
+<!-- Popup de message d'erreur/succès -->
 <div id="popup-erreur" class="popup hidden">
-    <div class="popup-content">
-        <p id="message-erreur"></p>
-        <button id="fermer-popup">Fermer</button>
+    <div class="popup-content error-container">
+        <h2 class="error-title" id="popup-title">Attention</h2>
+        <p class="error-description" id="message-erreur">Votre message</p>
+        <button id="fermer-popup" class="button button-primary">Fermer</button>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('popup-erreur');
-        const messageErreur = document.getElementById('message-erreur');
-        const boutonFermer = document.getElementById('fermer-popup');
-
-        // Afficher la pop-up si une erreur est définie dans $_SESSION
-        <?php if (isset($_SESSION['erreur_connexion'])): ?>
-        popup.classList.remove('hidden');
-        messageErreur.textContent = "<?php echo $_SESSION['erreur_connexion']; ?>";
-        <?php unset($_SESSION['erreur_connexion']); ?>
-        <?php endif; ?>
-
-        // Fermer la pop-up lorsqu'on clique sur le bouton "Fermer"
-        boutonFermer.addEventListener('click', () => {
-            popup.classList.add('hidden');
-        });
-
-        // Masquer automatiquement la pop-up après 5 secondes (5000 ms)
-        setTimeout(() => {
-            popup.classList.add('hidden');
-        }, 5000);
-
-        // Fermer la pop-up lorsqu'on clique en dehors de son contenu
-        window.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                popup.classList.add('hidden');
-            }
-        });
-
-
-        // Gestion du chargement de la page pendant la soumision du formulaire
-        const form = document.querySelector('#ajout-photo form');
-        const loader = document.querySelector('.loader-container');
-        form.addEventListener("submit", function () {
-            // Réactive le loader
-            loader.classList.remove("hide");
-            loader.style.display = "flex";
-            // Désactive uniquement les boutons (PAS les inputs hidden ou nécessaires au POST)
-            form.querySelectorAll("button").forEach(el => el.disabled = true);
-            rm.style.pointerEvents = "none";
-            form.style.opacity = "0.6";
-        });
-    });
-</script>
 <script type="module" src="backend/client/assets/js/authentification.js"></script>
 </body>
 </html>
