@@ -227,6 +227,20 @@
                 popup.classList.add('hidden');
             }
         });
+
+
+        // Gestion du chargement de la page pendant la soumision du formulaire
+        const form = document.querySelector('#ajout-photo form');
+        const loader = document.querySelector('.loader-container');
+        form.addEventListener("submit", function () {
+            // Réactive le loader
+            loader.classList.remove("hide");
+            loader.style.display = "flex";
+            // Désactive uniquement les boutons (PAS les inputs hidden ou nécessaires au POST)
+            form.querySelectorAll("button").forEach(el => el.disabled = true);
+            rm.style.pointerEvents = "none";
+            form.style.opacity = "0.6";
+        });
     });
 </script>
 <script type="module" src="backend/client/assets/js/authentification.js"></script>
