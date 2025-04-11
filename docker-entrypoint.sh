@@ -12,18 +12,23 @@ cat > /etc/apache2/sites-available/000-default.conf <<EOF
 </VirtualHost>
 EOF
 
-# === Dossier de certificat persisté (monté via ./certs:/etc/ssl/custom) ===
+# === Dossier SSL monté (externe via ./certs:/etc/ssl/custom) ===
 mkdir -p /etc/ssl/custom
 
-# === Démarrer temporairement Apache pour le challenge webroot ===
+# === Démarrage temporaire d'Apache pour le challenge ACME ===
 apache2ctl start
 
-# === Génération du certificat SSL uniquement si absent ===
+# === Générer certificat via acme.sh S'IL N'EXISTE PAS ===
 if [ ! -f "/etc/ssl/custom/fullchain.pem" ] || [ ! -f "/etc/ssl/custom/ji-miage.com.key" ]; then
   echo "🔐 Certificat SSL manquant — génération avec acme.sh..."
+
+  # Forcer Let's Encrypt au lieu de ZeroSSL
+  acme.sh --set-default-ca --server letsencrypt
+
+  # Génération via webroot
   acme.sh --issue --webroot /var/www/html -d ji-miage.com
 
-  echo "📦 Installation du certificat dans /etc/ssl/custom"
+  echo "📦 Installation dans /etc/ssl/custom"
   acme.sh --install-cert -d ji-miage.com \
     --cert-file /etc/ssl/custom/ji-miage.com.crt \
     --key-file /etc/ssl/custom/ji-miage.com.key \
@@ -33,10 +38,10 @@ else
   echo "✅ Certificat déjà présent, pas de nouvelle demande."
 fi
 
-# === Arrêter Apache avant la config finale ===
+# Stop temporairement Apache
 apache2ctl stop
 
-# === Configuration HTTPS avec les certificats générés ===
+# === Configuration HTTPS Apache ===
 cat > /etc/apache2/sites-available/default-ssl.conf <<EOF
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
@@ -59,9 +64,9 @@ cat > /etc/apache2/sites-available/default-ssl.conf <<EOF
 </IfModule>
 EOF
 
-# === Activer le site HTTPS et démarrer cron pour futurs renouvellements ===
+# Activer le site SSL
 a2ensite default-ssl
 service cron start
 
-# === Lancer Apache en mode foreground ===
+# Lancer Apache
 exec apache2-foreground
