@@ -9,19 +9,19 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-install mysqli pdo_mysql \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Installer acme.sh proprement (clone dans /tmp, installe dans /opt)
-RUN git clone https://github.com/acmesh-official/acme.sh /tmp/acme.sh \
-  && /tmp/acme.sh/acme.sh --install --home /opt/acme.sh \
-     --accountemail elielassy06@gmail.com \
-  && rm -rf /tmp/acme.sh
+# Installer acme.sh via le script officiel
+RUN curl https://get.acme.sh | sh -s email=elielassy06@gmail.com
+
+# Ajouter acme.sh au PATH (important pour l'entrypoint)
+ENV PATH="/root/.acme.sh:${PATH}"
 
 # Activer .htaccess dans Apache
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Copier les fichiers du projet
+# Copier les fichiers du site
 COPY ./src /var/www/html
 
-# Copier le script de démarrage
+# Entrypoint
 COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
