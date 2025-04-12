@@ -111,7 +111,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form class="form-vote" method="POST">
+                                <form class="form-vote" id="voteP1" method="post">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
                                     <input type="hidden" name="idProjet" value="1">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
@@ -139,42 +139,25 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                         <div class="detail-info-col">
                             <h2 class="detail-titre">ChezMoi</h2>
                             <p class="detail-description">
-                                Dans une COTE D¾IVOIRE
-                                en pleine urbanisation et
-                                croissance
-                                démographique, trouver
-                                un logement adapté
-                                devient un défi pour
-                                beaucoup.
-                                Un logement est bien
-                                plus qu'une simple
-                                construction.
-                                C'est un havre de paix,
-                                un lieu de liens, de
-                                réconfort et de chaleur
-                                humaine.
-                                C'est aussi un foyer où
-                                naissent des idées et des
-                                projets, où se construit
-                                l'Avenir.
-                                ChezMoi a pour but de
-                                permettre à chacun de
+                                En COTE D¾IVOIRE,
                                 trouver un logement
-                                correspondant à ses
-                                critères et à son budget.
+                                adapté est un défi.
+                                Un logement est plus
+                                qu'une simple
+                                construction.
+                                C'est un havre de paix et
+                                un lieu de chaleur
+                                humaine.
+                                ChezMoi permet de
+                                trouver un logement
+                                selon vos critères et
+                                budget.
                                 ChezMoi est un site web
-                                et une future application
-                                où les agents immobiliers
-                                peuvent publier leurs
-                                offres, les rendant
-                                accessibles à tous.
+                                et une application pour
+                                les offres immobilières.
                                 Avec ChezMoi, plus
-                                besoin de prospecter
-                                sans fin pour trouver
-                                l'offre idéale.
-                                Tout ce dont vous avez
-                                besoin est à portée de
-                                clic.
+                                besoin de prospection
+                                sans fin.
                             </p>
                             <div class="detail-participants">
                                 <h4>Participants au projet</h4>
@@ -185,8 +168,9 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form class="form-vote" action="/vote/projet/2" method="POST">
+                                <form class="form-vote" method="post">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <input type="hidden" name="idProjet" value="2">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
                             <?php else: ?>
@@ -197,7 +181,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                 </article>
                 <!-- WellMind -->
                 <article class="carte-mpc">
-                    <img src="backend/client/assets/images/novBleu.webp" alt="Conférence Innovation & Tech"
+                    <img src="backend/client/assets/images/well.webp" alt="Conférence Innovation & Tech"
                          class="carte-image-visible">
                     <div class="details-activite">
                         <h3>WellMind</h3>
@@ -206,12 +190,12 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
 
                     <div class="overlay-details-content" style="display: none;">
                         <div class="detail-image-col">
-                            <img src="backend/client/assets/images/novBleu_large.webp"
+                            <img src="backend/client/assets/images/well.webp"
                                  alt="Image WellMind">
                         </div>
                         <div class="detail-info-col">
                             <h2 class="detail-titre">WellMind</h2>
-                            <h3 class="detail-soustitre">Slogan...</h3>
+                            <h3 class="detail-soustitre">WELLMIND-votre bien être , notre priorité</h3>
                             <p class="detail-description">
                                 WellMind est une application web de soutien à la santé mentale
                                 offrant un chatbot thérapeutique disponible 24h/24. Face au taux
@@ -229,8 +213,9 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form class="form-vote" action="/vote/projet/3" method="POST">
+                                <form class="form-vote" method="post">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <input type="hidden" name="idProjet" value="3">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
                             <?php else: ?>
@@ -257,29 +242,38 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                             <h2 class="detail-titre">MonBus</h2>
                             <h3 class="detail-soustitre">Slogan...</h3>
                             <p class="detail-description">
-                                MonBus est une application mobile dont le but est de pouvoir faciliter le quotidien des travailleurs, étudiants et lycéens/collégiens de côte d’ivoire qui empruntent les bus. MonBus est une application multitâche en ce sens où elle permet :
+                                MonBus est une application mobile dont le but est de pouvoir faciliter le quotidien des
+                                travailleurs, étudiants et lycéens/collégiens de côte d’ivoire qui empruntent les bus.
+                                MonBus est une application multitâche en ce sens où elle permet :
                                 <br>
-                                - En premier lieu la recherche et la localisation en temps réel de bus ou de lignes de bus disponibles dans un secteur et une zone précise, depuis l’endroit où l’on se trouve. Plus d’inquiétude lorsque vous vous trouvez dans une commune peu familière.
+                                - En premier lieu la recherche et la localisation en temps réel de bus ou de lignes de
+                                bus disponibles dans un secteur et une zone précise, depuis l’endroit où l’on se trouve.
+                                Plus d’inquiétude lorsque vous vous trouvez dans une commune peu familière.
                                 <br>
-                                - La communication des informations comme l’arrivée du prochain bus et le temps d’estimation du trajet. Ainsi, plus besoin de courir après les bus. Le temps d’attente se voit aussi réduit.
+                                - La communication des informations comme l’arrivée du prochain bus et le temps
+                                d’estimation du trajet. Ainsi, plus besoin de courir après les bus. Le temps d’attente
+                                se voit aussi réduit.
                                 <br>
-                                - Le paiement de tickets de bus à travers vos portefeuilles numériques. Vous n’aurez plus à vos inquiéter de problèmes de monnaies.
+                                - Le paiement de tickets de bus à travers vos portefeuilles numériques. Vous n’aurez
+                                plus à vos inquiéter de problèmes de monnaies.
                                 <br>
                                 - Rechargement de vos cartes de bus.
                                 <br>
-                                En fin de compte, plus besoin de vous tracasser concernant vos prochains trajets en bus. MonBus est là pour répondre à vos préoccupations.
+                                En fin de compte, plus besoin de vous tracasser concernant vos prochains trajets en bus.
+                                MonBus est là pour répondre à vos préoccupations.
                             </p>
                             <div class="detail-participants">
                                 <h4>Participants au projet</h4>
                                 <ul>
                                     <li>BAKAYOKO Segbe</li>
-                                    <li>GABALA Mylène </li>
+                                    <li>GABALA Mylène</li>
                                     <li>N'Guessan Priscille</li>
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form action="/vote/projet/3" method="POST">
+                                <form class="form-vote" method="post">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <input type="hidden" name="idProjet" value="4">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
                             <?php else: ?>

@@ -22,7 +22,7 @@ Route::get('/deconnexion', function (){
 // Traitemennt des votes pour le mpc
 Route::post('/vote/projet', function () {
     Concours::voteProjet();
-}, 'vote_projet');
+}, 'traitement_vote_projet');
 
 Route::post('/vote/roi', function () {
     Concours::voteRoi();
