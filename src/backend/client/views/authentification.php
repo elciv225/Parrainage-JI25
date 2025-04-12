@@ -45,6 +45,8 @@
                             <option value="L3">Licence 3</option>
                             <option value="M1">Master 1</option>
                             <option value="M2">Master 2</option>
+                            <option value="AL">Alumni</option>
+                            <option value="PR">Professeur</option>
                         </select>
                         <label for="inscription-niveau">Niveau</label>
                     </div>

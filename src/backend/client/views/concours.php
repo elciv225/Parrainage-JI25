@@ -93,7 +93,6 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                         </div>
                         <div class="detail-info-col">
                             <h2 class="detail-titre">IA PROFIL</h2>
-                            <h3 class="detail-soustitre">Nom Projet Complet et Détaillé</h3>
                             <p class="detail-description">
                                 Les demandeurs d'emploi ne sont plus des CV perdus, mais
                                 des profils analysés et proposés aux bonnes entreprises. Les
@@ -112,8 +111,9 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form action="/vote/projet/1" method="POST">
+                                <form class="form-vote" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
+                                    <input type="hidden" name="idProjet" value="1">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
                             <?php else: ?>
@@ -138,7 +138,6 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                         </div>
                         <div class="detail-info-col">
                             <h2 class="detail-titre">ChezMoi</h2>
-                            <h3 class="detail-soustitre">Slogan...</h3>
                             <p class="detail-description">
                                 Dans une COTE D¾IVOIRE
                                 en pleine urbanisation et
@@ -186,7 +185,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form action="/vote/projet/2" method="POST">
+                                <form class="form-vote" action="/vote/projet/2" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
@@ -230,7 +229,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
                                 </ul>
                             </div>
                             <?php if ($utilisateur): ?>
-                                <form action="/vote/projet/3" method="POST">
+                                <form class="form-vote" action="/vote/projet/3" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $utilisateur['id'] ?? '' ?>">
                                     <button type="submit" class="btn-voter">Voter pour ce projet</button>
                                 </form>
@@ -437,7 +436,6 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
         </div>
     </div>
 </footer>
-<!-- Popup de message d'erreur/succès -->
 <div id="popup-erreur" class="popup hidden">
     <div class="popup-content error-container">
         <h2 class="error-title" id="popup-title">Attention</h2>
@@ -445,6 +443,7 @@ $utilisateur = $_SESSION['utilisateur'] ?? null;
         <button id="fermer-popup" class="button button-primary">Fermer</button>
     </div>
 </div>
+
 <script type="module" src="backend/client/assets/js/concours.js"></script>
 </body>
 </html>

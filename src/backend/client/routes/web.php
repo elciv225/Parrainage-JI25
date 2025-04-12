@@ -65,6 +65,13 @@ Route::get('/concours', function () {
         'utilisateur' => $_SESSION['utilisateur'] ?? null
     ]);
 });
+// Page des question
+Route::get('/question', function () {
+    View::render('question', [
+        'title' => 'Journée d\'Integration 2025 - Concours',
+        'utilisateur' => $_SESSION['utilisateur'] ?? null
+    ]);
+});
 
 // Page des repas
 Route::get('/repas', function () {

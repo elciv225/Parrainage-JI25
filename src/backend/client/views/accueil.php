@@ -57,6 +57,8 @@
                     Parrainage
                 </div>
             </li>
+            <li><a href="/question" class="lien-mobile">Question</a></li>
+            <li><a href="/concours" class="lien-mobile">Concours</a></li>
             <li><a href="#activite" class="lien-mobile">Activités</a></li>
             <li><a href="#competition" class="lien-mobile">Compétition</a></li>
             <li><a href="#equipe" class="lien-mobile">Nôtre équipe</a></li>

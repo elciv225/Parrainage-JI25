@@ -20,18 +20,18 @@ Route::get('/deconnexion', function (){
 },'traitement_deconnexion');
 
 // Traitemennt des votes pour le mpc
-Route::post('/vote/projet/:id', function ($id){
-    Concours::voteProjet($id);
-},'traitement_vote');
+Route::post('/vote/projet', function () {
+    Concours::voteProjet();
+}, 'vote_projet');
 
-// Traitemennt des votes pour le roi
-Route::post('/vote/roi/:id', function ($id){
-    Concours::voteRoi($id);
-},'traitement_vote_roi');
-// Traitemennt des votes pour la reine
-Route::post('/vote/reine/:id', function ($id){
-    Concours::voteReine($id);
-},'traitement_vote_reine');
+Route::post('/vote/roi', function () {
+    Concours::voteRoi();
+}, 'vote_roi');
+
+Route::post('/vote/reine', function () {
+    Concours::voteReine();
+}, 'vote_reine');
+
 
 // Traitement pour poser des questions
 Route::post('/poser/question', function (){

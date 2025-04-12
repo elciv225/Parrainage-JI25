@@ -1,7 +1,8 @@
 <?php
 
 namespace controllers;
-
+use PDO;
+use PDOException;
 use models\Utilisateur;
 use models\UtilisateurManager;
 use config\Database;
@@ -99,4 +100,54 @@ class Authentification
             'date_creation'     => $utilisateur->getDateCreation(),
         ];
     }
+
+    public static function poserQuestion(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+
+                if (!isset($_SESSION['utilisateur'])) {
+                    self::sendJson(false, "Vous devez être connecté pour poser une question.");
+                }
+
+                $questionTexte = trim($_POST['question'] ?? '');
+
+                if (empty($questionTexte)) {
+                    self::sendJson(false, "La question ne peut pas être vide.");
+                }
+
+                $pdo = Database::getConnection();
+                $stmt = $pdo->prepare('INSERT INTO questions_posees (utilisateur_id, question) VALUES (:utilisateur_id, :question)');
+                $stmt->bindValue(':utilisateur_id', $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
+                $stmt->bindValue(':question', $questionTexte, PDO::PARAM_STR);
+
+                $resultat = $stmt->execute();
+
+                if ($resultat) {
+                    self::sendJson(true, "Votre question a été posée avec succès", "/");
+                } else {
+                    self::sendJson(false, "Erreur lors de la soumission de la question.");
+                }
+            } catch (\Throwable $e) {
+                // Cela catch TOUT (PDOException, Error, Exception, etc.)
+                self::sendJson(false, "Erreur serveur : " . $e->getMessage());
+            }
+        }
+    }
+
+    private static function sendJson(bool $success, string $message, string $redirect = ''): void
+    {
+        header('Content-Type: application/json');
+        echo json_encode([
+            "success" => $success,
+            "message" => $message,
+            "redirect" => $redirect ?: null
+        ]);
+        exit;
+    }
+
+
 }
